@@ -7,6 +7,12 @@ from config import *
 from helpers import *
 
 
+# Set variables for account info
+F_NAME = tk.StringVar()
+L_NAME = tk.StringVar()
+EMAIL = tk.StringVar()
+
+
 class App(tk.Tk):
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
@@ -84,23 +90,20 @@ class SignUpPage(tk.Frame):
         lb_repasswd.grid(column=0, row=5, pady=(0, 10), padx=(0, 5))
 
         #----- Entry widgets -----#
-        self.entry_firstname = tk.Entry(self, width=30, borderwidth=2, relief=tk.GROOVE, fg=FG_1, bg=BG_2, font=NORMAL_FONT,)
-        self.entry_firstname.grid(column=1, row=1, columnspan=2, pady=(0, 10))
+        entry_firstname = tk.Entry(self, width=30, borderwidth=2, relief=tk.GROOVE, fg=FG_1, bg=BG_2, font=NORMAL_FONT, textvariable=F_NAME)
+        entry_firstname.grid(column=1, row=1, columnspan=2, pady=(0, 10))
 
-        self.entry_lastname = tk.Entry(self, width=30, borderwidth=2, relief=tk.GROOVE, fg=FG_1, bg=BG_2, font=NORMAL_FONT,)
-        self.entry_lastname.grid(column=1, row=2, columnspan=2, pady=(0, 10))
+        entry_lastname = tk.Entry(self, width=30, borderwidth=2, relief=tk.GROOVE, fg=FG_1, bg=BG_2, font=NORMAL_FONT, textvariable=L_NAME)
+        entry_lastname.grid(column=1, row=2, columnspan=2, pady=(0, 10))
 
-        self.entry_email = tk.Entry(self, width=30, borderwidth=2, relief=tk.GROOVE, fg=FG_1, bg=BG_2, font=NORMAL_FONT,)
-        self.entry_email.grid(column=1, row=3, columnspan=2, pady=(0, 10))
+        entry_email = tk.Entry(self, width=30, borderwidth=2, relief=tk.GROOVE, fg=FG_1, bg=BG_2, font=NORMAL_FONT, textvariable=EMAIL)
+        entry_email.grid(column=1, row=3, columnspan=2, pady=(0, 10))
 
         self.entry_passwd = tk.Entry(self, width=30, borderwidth=2, relief=tk.GROOVE, fg=FG_1, bg=BG_2, font=NORMAL_FONT, show="*",)
         self.entry_passwd.grid(column=1, row=4, columnspan=2, pady=(20, 10))
 
         self.entry_repasswd = tk.Entry(self, width=30, borderwidth=2, relief=tk.GROOVE, fg=FG_1, bg=BG_2, font=NORMAL_FONT, show="*",)
         self.entry_repasswd.grid(column=1, row=5, columnspan=2, pady=(0, 10))
-
-        self.entries = (self.entry_firstname.get(), self.entry_lastname.get(), self.entry_email.get(),
-                   self.entry_passwd.get(), self.entry_repasswd.get())
 
         #----- Create button widgets -----#
         btn_create_account = tk.Button(self, text="Create Account", font=NORMAL_FONT, fg=FG_1, bg=BG_2, command=lambda: controller.show_frame(MainPage) if self.valid_credentials() else None,)
@@ -110,13 +113,13 @@ class SignUpPage(tk.Frame):
         btn_cancel.grid(column=0, row=6, pady=(10, 0), padx=(0, 5), sticky="NESW")
 
     def valid_credentials(self) -> bool:
-        entries = (self.entry_firstname, self.entry_lastname, self.entry_email,
+        entries = (F_NAME, L_NAME, EMAIL,
                    self.entry_passwd, self.entry_repasswd)
 
         if self.input_not_empty():
-            input_firstname = hash_str(self.entry_firstname.get().encode("utf-8"))
-            input_lastname = hash_str(self.entry_lastname.get().encode("utf-8"))
-            input_email = self.entry_email.get().encode("utf-8")
+            input_firstname = hash_str(F_NAME.get().encode("utf-8"))
+            input_lastname = hash_str(L_NAME.get().encode("utf-8"))
+            input_email = EMAIL.get().encode("utf-8")
             input_passwd = self.entry_passwd.get()
             input_rpasswd = self.entry_repasswd.get()
 
@@ -147,7 +150,7 @@ class SignUpPage(tk.Frame):
             messagebox.showwarning(title="Invalid Credentials", message="Empty input!")
 
     def input_not_empty(self) -> bool:
-        entries = (self.entry_firstname.get(), self.entry_lastname.get(), self.entry_email.get(),
+        entries = (F_NAME.get(), L_NAME.get(), EMAIL.get(),
                    self.entry_passwd.get(), self.entry_repasswd.get())
 
         for e in entries:
