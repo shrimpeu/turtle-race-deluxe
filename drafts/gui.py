@@ -205,10 +205,10 @@ class MainPage(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent, padx=20, pady=20)
 
-        canvas = tk.Canvas(self, width=760, height=300)
-        canvas.grid(column=0, row=0, columnspan=8, pady=(0, 20))
+        self.canvas = tk.Canvas(self, width=760, height=300)
+        self.canvas.grid(column=0, row=0, columnspan=8, pady=(0, 20))
 
-        draw = turtle.RawTurtle(canvas)
+        self.set_turtles()    
 
         #----- 1st Column -----#
         lb_RO = tk.Label(self, text=" R-O ", height=1, font=NORMAL_FONT, relief=tk.RAISED)
@@ -341,9 +341,6 @@ class MainPage(tk.Frame):
         lb_user_name.grid(column=7, row=1, padx=(5, 5), pady=(0, 5), sticky="NESW")
 
     def compute_bets(self) -> int:
-        """
-        Add all the bets from user input
-        """
         total_bet = 0
         for b in self.all_bets:
             bet = b.get()
@@ -351,6 +348,9 @@ class MainPage(tk.Frame):
         return total_bet
 
     def valid_bet(self) -> bool:
+        pass
+
+    def set_turtles(self) -> None:
         pass
 
 
