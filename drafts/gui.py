@@ -41,7 +41,7 @@ class App(tk.Tk):
 
         self.show_frame(StartPage)
 
-    def show_frame(self, cont):  # cont = controller
+    def show_frame(self, cont: type) -> None:  # cont = controller
         frame = self.frames[cont]
         frame.tkraise()
 
