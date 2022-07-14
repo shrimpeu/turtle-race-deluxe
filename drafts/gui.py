@@ -103,7 +103,7 @@ class SignUpPage(tk.Frame):
                    self.entry_passwd.get(), self.entry_repasswd.get())
 
         #----- Create button widgets -----#
-        btn_create_account = tk.Button(self, text="Create Account", font=NORMAL_FONT, fg=FG_1, bg=BG_2, command=lambda: controller.show_frame(MainPage) if self.valid_credentials() else None,)
+        btn_create_account = tk.Button(self, text="Create Account", font=NORMAL_FONT, fg=FG_1, bg=BG_2, command=lambda: controller.show_frame(StartPage) if self.valid_credentials() else None,)
         btn_create_account.grid(column=1, row=6, columnspan=2, pady=(10, 0), sticky="NESW")
 
         btn_cancel = tk.Button(self, text="Cancel", font=NORMAL_FONT, fg=FG_1, bg=BG_2, command=lambda: controller.show_frame(StartPage),)
@@ -139,6 +139,7 @@ class SignUpPage(tk.Frame):
                     for e in entries:
                         e.delete(0, tk.END)
 
+                    messagebox.showinfo(title="Account Created", message="Account created successfully. Try to sign in.")
                     return True
                 else:
                     messagebox.showwarning(title="Invalid Input", message="Password do not match.")
