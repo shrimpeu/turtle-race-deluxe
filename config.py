@@ -2,6 +2,8 @@ TITLE = """Welcome to
 TURTLE RACE
 """
 
+APP_LOGO = "assets/app_logo.ico"
+
 # Styles
 LARGE_FONT = ("Poppins", 20)
 NORMAL_FONT = ("Poppins", 12)
