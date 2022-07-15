@@ -11,6 +11,9 @@ from helpers import *
 class App(tk.Tk):
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
+
+        tk.Tk.iconbitmap(self, default=APP_LOGO)
+
         self.root = tk.Frame(self)
         self.root.pack(side="top", fill="both", expand=True)
 
