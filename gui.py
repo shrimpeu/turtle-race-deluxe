@@ -1,5 +1,6 @@
 import tkinter as tk
 import turtle
+import time
 
 from tkinter import messagebox
 
@@ -414,16 +415,31 @@ class DepositPage(tk.Toplevel):
         self.balance_str = balance_str
 
         lb_title = tk.Label(self, text="Deposit (Paypal)", font=LARGE_FONT, anchor="center")
-        lb_title.grid(column=0, row=0, columnspan=3, padx=20, pady=20, sticky="nesw")
+        lb_title.grid(column=0, row=0, columnspan=2, padx=20, pady=20, sticky="nesw")
 
         lb_amount = tk.Label(self, text="Amount (min: Php 100)", font=NORMAL_FONT, anchor="center")
-        lb_amount.grid(column=0, row=1, columnspan=3, padx=20, pady=(20, 10), sticky="nesw")
+        lb_amount.grid(column=0, row=1, columnspan=2, padx=20, pady=(20, 10), sticky="nesw")
 
         self.entry_amount = tk.Entry(self, width=30, font=NORMAL_FONT, borderwidth=2,)
         self.entry_amount.grid(column=0, row=2, padx=20, pady=(0, 20), sticky="NESW",)
 
+        lb_amount = tk.Label(self, text="Sign in to Paypal", font=NORMAL_FONT, anchor="center")
+        lb_amount.grid(column=0, row=3, padx=20, pady=(20, 10), sticky="nesw")
+
+        lb_paypal_email = tk.Label(self, text="Email", font=NORMAL_FONT, anchor="w")
+        lb_paypal_email.grid(column=0, row=4, columnspan=2, padx=20, pady=(0, 5), sticky="nesw")
+
+        self.entry_paypal_email = tk.Entry(self, width=30, font=NORMAL_FONT, borderwidth=2,)
+        self.entry_paypal_email.grid(column=0, row=5, padx=20, pady=(0, 10), sticky="NESW",)
+
+        lb_paypal_pw = tk.Label(self, text="Password", font=NORMAL_FONT, anchor="w")
+        lb_paypal_pw.grid(column=0, row=6, columnspan=2, padx=20, pady=(0, 5), sticky="nesw")
+
+        self.entry_paypal_pw = tk.Entry(self, width=30, font=NORMAL_FONT, borderwidth=2,)
+        self.entry_paypal_pw.grid(column=0, row=7, padx=20, pady=(0, 10), sticky="NESW",)
+
         btn_signup = tk.Button(self, text="Confirm Payment", font=NORMAL_FONT, command=self.confirm_payment)
-        btn_signup.grid(column=0, row=3, columnspan=3, padx=20, pady=(10, 20), sticky="nesw")
+        btn_signup.grid(column=0, row=8, padx=20, pady=(10, 20), sticky="nesw")
 
     def confirm_payment(self):
         entry_amount = int(self.entry_amount.get())
