@@ -221,16 +221,8 @@ class MainPage(tk.Frame):
         self.yturtle = turtle.RawTurtle(turtle_section)
         self.oturtle = turtle.RawTurtle(turtle_section)
 
-        # self.turtles = {
-        #     self.rturtle: ["red", "R", 100],
-        #     self.gturtle: ["green", "G", 50],
-        #     self.bturtle: ["blue", "B"],
-        #     self.yturtle: ["yellow", "Y"],
-        #     self.oturtle: ["orange", "O"]
-        # }
-
-        self.turtles = [[self.rturtle, "red"], [self.gturtle, "green"], [self.bturtle, "blue"],
-                        [self.yturtle, "yellow"], [self.oturtle, "orange"]]
+        self.turtles = [[self.rturtle, "red", "R"], [self.gturtle, "green", "G"], [self.bturtle, "blue", "B"],
+                        [self.yturtle, "yellow", "Y"], [self.oturtle, "orange", "O"]]
         self.turtle_ypos = [50, 0, -50, -100, -150]
 
         # Set turtles in their position
