@@ -498,11 +498,26 @@ class WithdrawPage(tk.Toplevel):
     
     def confirm_withdraw(self):
         entry_amount = int(self.entry_amount.get())
-        if entry_amount >= 300 and self.balance >= 300:
-            self.balance -= entry_amount
-            update_balance(self.email, self.balance)
-            self.balance_str.set(f"Balance: Php {self.balance}")
-            self.destroy()
+        if entry_amount >= 300:
+            if self.balance >= 300:
+                if self.paypal_input_not_empty():
+                    self.balance -= entry_amount
+                    update_balance(self.email, self.balance)
+                    self.balance_str.set(f"Balance: Php {self.balance}")
+                    self.destroy()
+                else:
+                    messagebox.showwarning(title="Invalid Input", message="Empty Input!")
+                    self.lift()
+            else:
+                messagebox.showwarning(title="Invalid Input", message="Insufficient Balance!")
+                self.lift()
         else:
             messagebox.showwarning(title="Invalid Input", message="Amount is below the minimum payout required.")
             self.lift()
+
+    def paypal_input_not_empty(self):
+        entries = (self.entry_paypal_email.get(), self.entry_paypal_pw.get())
+        for e in entries:
+            if len(e) == 0:
+                return False
+        return True
