@@ -120,20 +120,9 @@ class SignUpPage(tk.Frame):
             else:
                 input_email = hash_str(input_email)
                 if input_passwd == input_rpasswd:
-                    input_passwd = hash_str(input_passwd.encode("utf-8"))
-
-                    EXISTING_ACCOUNTS[input_email] = {
-                            "first_name": input_firstname,
-                            "last_name": input_lastname,
-                            "pword": input_passwd,
-                            "balance": 0
-                            }
-                    write_json(EXISTING_ACCOUNTS)
-
+                    add_new_account(input_email, input_firstname, input_lastname, input_passwd)
                     for e in entries:
                         e.delete(0, tk.END)
-
-                    messagebox.showinfo(title="Account Created", message="Account successfully created!")    
                     return True
                 else:
                     messagebox.showwarning(title="Invalid Input", message="Password do not match.")
