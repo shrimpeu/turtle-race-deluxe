@@ -2,6 +2,8 @@ import bcrypt
 import json
 import os
 
+from tkinter import messagebox
+
 
 USER_DATA_FILE = f"{os.path.dirname(__file__)}/user_data.json"
 
@@ -42,3 +44,25 @@ def update_balance(email: str, new_balance: int) -> None:
 
     with open("user_data.json", "w") as jsonFile:
         json.dump(data, jsonFile, indent=4, separators=(",", ": "), sort_keys=True)
+
+def input_not_empty(root, entries):
+    for e in entries:
+        if len(e) == 0:
+            messagebox.showwarning(title="Invalid Input", message="Empty Input!")
+            root.lift()
+            return False
+    return True
+
+def valid_amount(root, method, input_amount, current_bal):
+    if method == "withdraw":
+        if input_amount >= 300 and current_bal >= 300:
+            return True
+        messagebox.showwarning(title="Invalid Input", message="Insufficient Balance / Amount input is below minimum.")
+        root.lift()
+        return False
+    else:
+        if input_amount >= 100:
+            return True
+        messagebox.showwarning(title="Invalid Input", message="Insufficient Balance / Amount input is below minimum.")
+        root.lift()
+        return False

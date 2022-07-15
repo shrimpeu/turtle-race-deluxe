@@ -446,16 +446,16 @@ class DepositPage(tk.Toplevel):
         btn_signup = tk.Button(self, text="Confirm Payment", font=NORMAL_FONT, command=self.confirm_payment)
         btn_signup.grid(column=0, row=8, padx=20, pady=(10, 20), sticky="nesw")
 
+
     def confirm_payment(self):
+        entries = (self.entry_paypal_email.get(), self.entry_paypal_pw)
         entry_amount = int(self.entry_amount.get())
-        if entry_amount >= 100:
+        if valid_amount(self, "deposit", entry_amount, self.balance) and \
+            input_not_empty(self, entries):
             self.balance += entry_amount
             update_balance(self.email, self.balance)
             self.balance_str.set(f"Balance: Php {self.balance}")
             self.destroy()
-        else:
-            messagebox.showwarning(title="Invalid Input", message="Amount is below the minimum payment required.")
-            self.lift()
 
 
 class WithdrawPage(tk.Toplevel):
@@ -497,27 +497,11 @@ class WithdrawPage(tk.Toplevel):
         btn_signup.grid(column=0, row=9, padx=20, pady=(0, 20), sticky="nesw")
     
     def confirm_withdraw(self):
+        entries = (self.entry_paypal_email.get(), self.entry_paypal_pw)
         entry_amount = int(self.entry_amount.get())
-        if entry_amount >= 300:
-            if self.balance >= 300:
-                if self.paypal_input_not_empty():
-                    self.balance -= entry_amount
-                    update_balance(self.email, self.balance)
-                    self.balance_str.set(f"Balance: Php {self.balance}")
-                    self.destroy()
-                else:
-                    messagebox.showwarning(title="Invalid Input", message="Empty Input!")
-                    self.lift()
-            else:
-                messagebox.showwarning(title="Invalid Input", message="Insufficient Balance!")
-                self.lift()
-        else:
-            messagebox.showwarning(title="Invalid Input", message="Amount is below the minimum payout required.")
-            self.lift()
-
-    def paypal_input_not_empty(self):
-        entries = (self.entry_paypal_email.get(), self.entry_paypal_pw.get())
-        for e in entries:
-            if len(e) == 0:
-                return False
-        return True
+        if valid_amount(self, "withdraw", entry_amount, self.balance) and \
+            input_not_empty(self, entries):
+            self.balance -= entry_amount
+            update_balance(self.email, self.balance)
+            self.balance_str.set(f"Balance: Php {self.balance}")
+            self.destroy()
