@@ -37,6 +37,20 @@ def get_existing_email(input_email: str) -> str:
             return existing_email.decode("utf-8").replace("'", '"')
 
 
+def add_new_account(email: str, first_name: str, last_name: str, passwd: str) -> None:
+    passwd = hash_str(passwd.encode("utf-8"))
+
+    EXISTING_ACCOUNTS[email] = {
+            "first_name": first_name,
+            "last_name": last_name,
+            "pword": passwd,
+            "balance": 0
+            }
+    write_json(EXISTING_ACCOUNTS)
+
+    messagebox.showinfo(title="Account Created", message="Account successfully created!")    
+
+
 def update_balance(email: str, new_balance: int) -> None:
     with open("user_data.json", "r") as jsonFile:
         data = json.load(jsonFile)
