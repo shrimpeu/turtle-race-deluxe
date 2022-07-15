@@ -230,7 +230,7 @@ class MainPage(tk.Frame):
         lb_total_bet.grid(column=6, row=1, padx=(5, 0), pady=(0, 5), sticky="NESW")
 
         self.balance_str = tk.StringVar()
-        self.balance_str.set(f"Balance: {self.balance}")
+        self.balance_str.set(f"Balance: Php {self.balance}")
 
         lb_user_balance = tk.Label(self, textvariable=self.balance_str, height=1, font=NORMAL_FONT, anchor="center", relief=tk.SUNKEN)
         lb_user_balance.grid(column=6, row=2, columnspan=2, padx=(5, 0), pady=(0, 5), sticky="NESW")
