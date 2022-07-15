@@ -1,8 +1,8 @@
 {
-    "$2b$12$SG9tKpSXBMJCHN4m9Dr9UeFM/uX2L0lnngBYtN/u6Mqyu5F/.58gq": {
-        "balance": 0,
-        "first_name": "$2b$12$s4Q2BAS5bq.OO6JtER.3YuTAf0e.2CCHqFChqi9UA8/EjpX9ibjrW",
-        "last_name": "$2b$12$AfhIkyVHYC2.4jka8vK30eQzQ1jdrYPWGL2SmpSlT6B139S0Gng32",
-        "pword": "$2b$12$OJ7tMlGEPrXnnOWLEgPo1.IDtiYEegHvc7cAeCJ8zAr8f9MS2gGiS"
+    "$2b$12$BcqOABIQYslBPyCE3c9l9ewjVjG39J/X.x3cfK6LNW/OJY0UlnY2C": {
+        "balance": 200,
+        "first_name": "Sample",
+        "last_name": "Account",
+        "pword": "$2b$12$VvNB/klBN8BOdYoTtoBIl.nb4.TMK6Pwnhlf7SwPM323diEcoSRx2"
     }
 }
