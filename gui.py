@@ -452,7 +452,7 @@ class DepositPage(tk.Toplevel):
 
 
     def confirm_payment(self):
-        entries = (self.entry_paypal_email.get(), self.entry_paypal_pw)
+        entries = (self.entry_paypal_email.get(), self.entry_paypal_pw.get())
         entry_amount = int(self.entry_amount.get())
         if valid_amount(self, "deposit", entry_amount, self.balance) and \
             input_not_empty(self, entries):
@@ -476,32 +476,29 @@ class WithdrawPage(tk.Toplevel):
         lb_amount = tk.Label(self, text="Amount (min: Php 300)", font=NORMAL_FONT, anchor="center")
         lb_amount.grid(column=0, row=1, columnspan=2, padx=20, pady=(20, 0), sticky="nesw")
 
-        lb_amount = tk.Label(self, text=f"Your current balance: Php {self.balance}", font=NORMAL_FONT, anchor="center")
-        lb_amount.grid(column=0, row=2, columnspan=2, padx=20, pady=(5, 10), sticky="nesw")
-
         self.entry_amount = tk.Entry(self, width=30, font=NORMAL_FONT, borderwidth=2,)
-        self.entry_amount.grid(column=0, row=3, padx=20, pady=(0, 20), sticky="NESW",)
+        self.entry_amount.grid(column=0, row=2, padx=20, pady=(5, 20), sticky="NESW",)
 
         lb_amount = tk.Label(self, text="Sign in to Paypal", font=NORMAL_FONT, anchor="center")
-        lb_amount.grid(column=0, row=4, padx=20, pady=(20, 10), sticky="nesw")
+        lb_amount.grid(column=0, row=3, padx=20, pady=(20, 10), sticky="nesw")
 
         lb_paypal_email = tk.Label(self, text="Email", font=NORMAL_FONT, anchor="w")
-        lb_paypal_email.grid(column=0, row=5, columnspan=2, padx=20, pady=(0, 5), sticky="nesw")
+        lb_paypal_email.grid(column=0, row=4, columnspan=2, padx=20, pady=(0, 5), sticky="nesw")
 
         self.entry_paypal_email = tk.Entry(self, width=30, font=NORMAL_FONT, borderwidth=2,)
-        self.entry_paypal_email.grid(column=0, row=6, padx=20, pady=(0, 10), sticky="NESW",)
+        self.entry_paypal_email.grid(column=0, row=5, padx=20, pady=(0, 10), sticky="NESW",)
 
         lb_paypal_pw = tk.Label(self, text="Password", font=NORMAL_FONT, anchor="w")
-        lb_paypal_pw.grid(column=0, row=7, columnspan=2, padx=20, pady=(0, 5), sticky="nesw")
+        lb_paypal_pw.grid(column=0, row=6, columnspan=2, padx=20, pady=(0, 5), sticky="nesw")
 
         self.entry_paypal_pw = tk.Entry(self, width=30, font=NORMAL_FONT, borderwidth=2,)
-        self.entry_paypal_pw.grid(column=0, row=8, padx=20, pady=(0, 20), sticky="NESW",)
+        self.entry_paypal_pw.grid(column=0, row=7, padx=20, pady=(0, 20), sticky="NESW",)
 
         btn_signup = tk.Button(self, text="Confirm", font=NORMAL_FONT, command=self.confirm_withdraw)
-        btn_signup.grid(column=0, row=9, padx=20, pady=(0, 20), sticky="nesw")
+        btn_signup.grid(column=0, row=8, padx=20, pady=(0, 20), sticky="nesw")
     
     def confirm_withdraw(self):
-        entries = (self.entry_paypal_email.get(), self.entry_paypal_pw)
+        entries = (self.entry_paypal_email.get(), self.entry_paypal_pw.get())
         entry_amount = int(self.entry_amount.get())
         if valid_amount(self, "withdraw", entry_amount, self.balance) and \
             input_not_empty(self, entries):
