@@ -233,16 +233,16 @@ class MainPage(tk.Frame):
         self.total_bet_str = tk.StringVar()
         self.total_bet_str.set(f"Total Bet: {self.total_bet}")
 
-        lb_total_bet = tk.Label(self, textvariable=self.total_bet_str, heigh=1, font=NORMAL_FONT, anchor="w")
+        lb_total_bet = tk.Label(self, textvariable=self.total_bet_str, height=1, font=NORMAL_FONT, anchor="w")
         lb_total_bet.grid(column=6, row=1, padx=(5, 5), pady=(0, 5), sticky="NESW")
 
         self.balance_str = tk.StringVar()
         self.balance_str.set(f"Balance: {self.balance}")
 
-        lb_user_balance = tk.Label(self, textvariable=self.balance_str, heigh=1, font=NORMAL_FONT, anchor="w",)
+        lb_user_balance = tk.Label(self, textvariable=self.balance_str, height=1, font=NORMAL_FONT, anchor="w",)
         lb_user_balance.grid(column=6, row=2, padx=(5, 5), pady=(0, 5), sticky="NESW")
 
-        lb_user_name = tk.Label(self, text=f"Name: {f_name[:30]}. {l_name[:1]}.", heigh=1, font=NORMAL_FONT, anchor="w",)
+        lb_user_name = tk.Label(self, text=f"Name: {f_name[:30]}. {l_name[:1]}.", height=1, font=NORMAL_FONT, anchor="w",)
         lb_user_name.grid(column=7, row=1, padx=(5, 5), pady=(0, 5), sticky="NESW")
 
         #----- 1st Column -----#
@@ -271,16 +271,16 @@ class MainPage(tk.Frame):
         self.input_bet_YO = tk.IntVar()
         self.input_bet_YO.set(0)
 
-        entry_bet_RO = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_RO)
+        entry_bet_RO = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_RO,)
         entry_bet_RO.grid(column=1, row=1, pady=(0, 5), sticky="NESW")
 
-        entry_bet_GO = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_GO)
+        entry_bet_GO = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_GO,)
         entry_bet_GO.grid(column=1, row=2, pady=(0, 5), sticky="NESW")
 
-        entry_bet_BO = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_BO)
+        entry_bet_BO = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_BO,)
         entry_bet_BO.grid(column=1, row=3, pady=(0, 5), sticky="NESW")
 
-        entry_bet_YO = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_YO)
+        entry_bet_YO = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_YO,)
         entry_bet_YO.grid(column=1, row=4, sticky="NESW")
 
         #----- 3rd Column -----#
@@ -309,16 +309,16 @@ class MainPage(tk.Frame):
         self.input_bet_GB = tk.IntVar()
         self.input_bet_GB.set(0)
 
-        entry_bet_RY = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_RY)
+        entry_bet_RY = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_RY,)
         entry_bet_RY.grid(column=3, row=1, pady=(0, 5), sticky="NESW")
 
-        entry_bet_GY = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_GY)
+        entry_bet_GY = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_GY,)
         entry_bet_GY.grid(column=3, row=2, pady=(0, 5), sticky="NESW")
 
-        entry_bet_BY = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_BY)
+        entry_bet_BY = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_BY,)
         entry_bet_BY.grid(column=3, row=3, pady=(0, 5), sticky="NESW")
 
-        entry_bet_GB = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_GB)
+        entry_bet_GB = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_GB,)
         entry_bet_GB.grid(column=3, row=4, sticky="NESW")
 
         #----- 5th Column -----#
@@ -335,10 +335,10 @@ class MainPage(tk.Frame):
         self.input_bet_RG = tk.IntVar()
         self.input_bet_RG.set(0)
 
-        entry_bet_RB = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_RB)
+        entry_bet_RB = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_RB,)
         entry_bet_RB.grid(column=5, row=1, pady=(0, 5), sticky="NESW")
 
-        entry_bet_RG = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_RG)
+        entry_bet_RG = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_RG,)
         entry_bet_RG.grid(column=5, row=2, pady=(0, 5), sticky="NESW")
 
         #----- USER INPUT LIST -----#
@@ -350,19 +350,19 @@ class MainPage(tk.Frame):
         #----- Buttons -----#
 
         # Game start button
-        btn_start = tk.Button(self, text="Start Game", font=NORMAL_FONT, command=self.compute_bets,)
+        btn_start = tk.Button(self, text="Start Game", font=NORMAL_FONT, command=self.compute_bets, height=1)
         btn_start.grid(column=4, row=3, columnspan=2, padx=(5, 0), pady=(0, 5), sticky="NESW",)
         # Reset bet button
-        btn_reset_bet = tk.Button(self, text="Reset Bet", font=NORMAL_FONT, command=self.reset_bet,)
+        btn_reset_bet = tk.Button(self, text="Reset Bet", font=NORMAL_FONT, command=self.reset_bet, height=1)
         btn_reset_bet.grid(column=4, row=4, columnspan=2, padx=(5, 0), sticky="NESW")
         # Deposite Button
-        btn_deposit = tk.Button(self, text="Deposit", font=NORMAL_FONT, command=self.show_DepositPage,)
+        btn_deposit = tk.Button(self, text="Deposit", font=NORMAL_FONT, command=self.show_DepositPage, height=1)
         btn_deposit.grid(column=6, row=3, columnspan=2, padx=(5, 0), pady=(0, 5), sticky="NESW",)
         # Withdraw Button
-        btn_withdraw = tk.Button(self, text="Withdraw", font=NORMAL_FONT, command=lambda: controller.show_frame(StartPage),)
+        btn_withdraw = tk.Button(self, text="Withdraw", font=NORMAL_FONT, command=lambda: controller.show_frame(StartPage), height=1)
         btn_withdraw.grid(column=7, row=4, padx=(5, 0), sticky="NESW")
         # Log out Button
-        btn_logout = tk.Button(self, text="Log out", font=NORMAL_FONT, command=lambda: controller.show_frame(StartPage),)
+        btn_logout = tk.Button(self, text="Log out", font=NORMAL_FONT, command=lambda: controller.show_frame(StartPage), height=1)
         btn_logout.grid(column=6, row=4, padx=(5, 0), sticky="NESW")
 
     def set_turtles(self):
