@@ -233,17 +233,17 @@ class MainPage(tk.Frame):
         self.total_bet_str = tk.StringVar()
         self.total_bet_str.set(f"Total Bet: {self.total_bet}")
 
-        lb_total_bet = tk.Label(self, textvariable=self.total_bet_str, height=1, font=NORMAL_FONT, anchor="w")
-        lb_total_bet.grid(column=6, row=1, padx=(5, 5), pady=(0, 5), sticky="NESW")
+        lb_total_bet = tk.Label(self, textvariable=self.total_bet_str, height=1, font=NORMAL_FONT, anchor="w", relief=tk.RAISED)
+        lb_total_bet.grid(column=6, row=1, padx=(5, 0), pady=(0, 5), sticky="NESW")
 
         self.balance_str = tk.StringVar()
         self.balance_str.set(f"Balance: {self.balance}")
 
-        lb_user_balance = tk.Label(self, textvariable=self.balance_str, height=1, font=NORMAL_FONT, anchor="w",)
-        lb_user_balance.grid(column=6, row=2, padx=(5, 5), pady=(0, 5), sticky="NESW")
+        lb_user_balance = tk.Label(self, textvariable=self.balance_str, height=1, font=NORMAL_FONT, anchor="center", relief=tk.RAISED)
+        lb_user_balance.grid(column=6, row=2, columnspan=2, padx=(5, 0), pady=(0, 5), sticky="NESW")
 
-        lb_user_name = tk.Label(self, text=f"Name: {f_name[:30]}. {l_name[:1]}.", height=1, font=NORMAL_FONT, anchor="w",)
-        lb_user_name.grid(column=7, row=1, padx=(5, 5), pady=(0, 5), sticky="NESW")
+        lb_user_name = tk.Label(self, text=f"Name: {f_name[:30]}. {l_name[:1]}.", height=1, font=NORMAL_FONT, anchor="w", relief=tk.RAISED)
+        lb_user_name.grid(column=7, row=1, padx=(5, 0), pady=(0, 5), sticky="NESW")
 
         #----- 1st Column -----#
         lb_RO = tk.Label(self, text=" R-O ", height=1, font=NORMAL_FONT, relief=tk.RAISED)
