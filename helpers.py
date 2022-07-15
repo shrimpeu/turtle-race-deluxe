@@ -35,8 +35,6 @@ def get_existing_email(input_email: str) -> str:
             return existing_email.decode("utf-8").replace("'", '"')
 
 def update_balance(email: str, new_balance: int) -> None:
-    print(email)
-    print(new_balance)
     with open("user_data.json", "r") as jsonFile:
         data = json.load(jsonFile)
 
