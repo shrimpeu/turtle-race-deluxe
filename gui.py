@@ -374,6 +374,9 @@ class MainPage(tk.Frame):
             t[0].goto(x=-300, y=self.turtle_ypos[self.turtles.index(t)])
             t[0].pendown()
 
+    def set_finish_line(self):
+        pass
+
     def start_race(self):
         pass
 
