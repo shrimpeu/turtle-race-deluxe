@@ -374,6 +374,9 @@ class MainPage(tk.Frame):
             t[0].goto(x=-300, y=self.turtle_ypos[self.turtles.index(t)])
             t[0].pendown()
 
+    def start_race(self):
+        pass
+
     def compute_bets(self) -> int:
         for bet in self.all_bets:
             bet = bet.get()
