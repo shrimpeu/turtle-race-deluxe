@@ -360,7 +360,7 @@ class MainPage(tk.Frame):
         btn_deposit = tk.Button(self, text="Deposit", font=NORMAL_FONT, command=self.show_DepositPage, height=1)
         btn_deposit.grid(column=6, row=3, columnspan=2, padx=(5, 0), pady=(0, 5), sticky="NESW",)
         # Withdraw Button
-        btn_withdraw = tk.Button(self, text="Withdraw", font=NORMAL_FONT, command=lambda: controller.show_frame(StartPage), height=1)
+        btn_withdraw = tk.Button(self, text="Withdraw", font=NORMAL_FONT, command=self.show_WithdrawPage, height=1)
         btn_withdraw.grid(column=7, row=4, padx=(5, 0), sticky="NESW")
         # Log out Button
         btn_logout = tk.Button(self, text="Log out", font=NORMAL_FONT, command=lambda: controller.show_frame(StartPage), height=1)
@@ -394,12 +394,17 @@ class MainPage(tk.Frame):
             self.total_bet_str.set(f"Total Bet: {self.total_bet}")
             self.reset_bet()
 
-
     def show_DepositPage(self):
         deposit_page = DepositPage(self.email, self.balance, self.balance_str)
         deposit_page.title("Deposit thru Paypal")
         deposit_page.resizable(width=False, height=False)
         deposit_page.mainloop()
+
+    def show_WithdrawPage(self):
+        withdraw_page = WithdrawPage(self.email, self.balance, self.balance_str)
+        withdraw_page.title("Withdraw")
+        withdraw_page.resizable(width=False, height=False)
+        withdraw_page.mainloop()
 
     def reset_bet(self):
         for bet in self.all_bets:
@@ -450,4 +455,54 @@ class DepositPage(tk.Toplevel):
             self.destroy()
         else:
             messagebox.showwarning(title="Invalid Input", message="Amount is below the minimum payment required.")
+            self.lift()
+
+
+class WithdrawPage(tk.Toplevel):
+    def __init__(self, email, balance, balance_str, *args, **kwargs):
+        tk.Toplevel.__init__(self, *args, **kwargs)
+
+        self.email = email
+        self.balance = balance
+        self.balance_str = balance_str
+
+        lb_title = tk.Label(self, text="Withdraw (Paypal)", font=LARGE_FONT, anchor="center")
+        lb_title.grid(column=0, row=0, columnspan=2, padx=20, pady=20, sticky="nesw")
+
+        lb_amount = tk.Label(self, text="Amount (min: Php 300)", font=NORMAL_FONT, anchor="center")
+        lb_amount.grid(column=0, row=1, columnspan=2, padx=20, pady=(20, 0), sticky="nesw")
+
+        lb_amount = tk.Label(self, text=f"Your current balance: Php {self.balance}", font=NORMAL_FONT, anchor="center")
+        lb_amount.grid(column=0, row=2, columnspan=2, padx=20, pady=(5, 10), sticky="nesw")
+
+        self.entry_amount = tk.Entry(self, width=30, font=NORMAL_FONT, borderwidth=2,)
+        self.entry_amount.grid(column=0, row=3, padx=20, pady=(0, 20), sticky="NESW",)
+
+        lb_amount = tk.Label(self, text="Sign in to Paypal", font=NORMAL_FONT, anchor="center")
+        lb_amount.grid(column=0, row=4, padx=20, pady=(20, 10), sticky="nesw")
+
+        lb_paypal_email = tk.Label(self, text="Email", font=NORMAL_FONT, anchor="w")
+        lb_paypal_email.grid(column=0, row=5, columnspan=2, padx=20, pady=(0, 5), sticky="nesw")
+
+        self.entry_paypal_email = tk.Entry(self, width=30, font=NORMAL_FONT, borderwidth=2,)
+        self.entry_paypal_email.grid(column=0, row=6, padx=20, pady=(0, 10), sticky="NESW",)
+
+        lb_paypal_pw = tk.Label(self, text="Password", font=NORMAL_FONT, anchor="w")
+        lb_paypal_pw.grid(column=0, row=7, columnspan=2, padx=20, pady=(0, 5), sticky="nesw")
+
+        self.entry_paypal_pw = tk.Entry(self, width=30, font=NORMAL_FONT, borderwidth=2,)
+        self.entry_paypal_pw.grid(column=0, row=8, padx=20, pady=(0, 20), sticky="NESW",)
+
+        btn_signup = tk.Button(self, text="Confirm", font=NORMAL_FONT, command=self.confirm_withdraw)
+        btn_signup.grid(column=0, row=9, padx=20, pady=(0, 20), sticky="nesw")
+    
+    def confirm_withdraw(self):
+        entry_amount = int(self.entry_amount.get())
+        if entry_amount >= 300 and self.balance >= 300:
+            self.balance -= entry_amount
+            update_balance(self.email, self.balance)
+            self.balance_str.set(f"Balance: Php {self.balance}")
+            self.destroy()
+        else:
+            messagebox.showwarning(title="Invalid Input", message="Amount is below the minimum payout required.")
             self.lift()
