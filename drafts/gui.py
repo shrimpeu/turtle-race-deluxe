@@ -10,30 +10,18 @@ from helpers import *
 class App(tk.Tk):
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
-        root = tk.Frame(self)
-        root.pack(side="top", fill="both", expand=True)
+        self.root = tk.Frame(self)
+        self.root.pack(side="top", fill="both", expand=True)
 
         # 0 = minimum
         # Weight = priority
-        root.grid_rowconfigure(0, weight=1)
-        root.grid_columnconfigure(0, weight=1)
-
-        pages = (
-            StartPage,
-            SignUpPage,
-            SignInPage,
-            MainPage,
-            DepositPage,
-            GCashDepositPage,
-            PaymayaDepositPage,
-            PaypalDepositPage,
-            WithdrawPage,
-        )
+        self.root.grid_rowconfigure(0, weight=1)
+        self.root.grid_columnconfigure(0, weight=1)
 
         self.frames = {}
 
-        for F in pages:
-            frame = F(root, self)
+        for F in {StartPage, SignInPage, SignUpPage}:
+            frame = F(self.root, self)
 
             self.frames[F] = frame
 
@@ -41,8 +29,13 @@ class App(tk.Tk):
 
         self.show_frame(StartPage)
 
-    def show_frame(self, cont: type) -> None:  # cont = controller
+    def show_frame(self, cont):  # cont = controller
         frame = self.frames[cont]
+        frame.tkraise()
+
+    def show_main_page(self, email=None):
+        frame = MainPage(self.root, self, email)
+        frame.grid(row=0, column=0, sticky="nsew")
         frame.tkraise()
 
 
@@ -114,8 +107,8 @@ class SignUpPage(tk.Frame):
                    self.entry_passwd, self.entry_repasswd)
 
         if self.input_not_empty():
-            input_firstname = hash_str(self.entry_firstname.get().encode("utf-8"))
-            input_lastname = hash_str(self.entry_lastname.get().encode("utf-8"))
+            input_firstname = self.entry_firstname.get()
+            input_lastname = self.entry_lastname.get()
             input_email = self.entry_email.get().encode("utf-8")
             input_passwd = self.entry_passwd.get()
             input_rpasswd = self.entry_repasswd.get()
@@ -139,7 +132,7 @@ class SignUpPage(tk.Frame):
                     for e in entries:
                         e.delete(0, tk.END)
 
-                    messagebox.showinfo(title="Account Created", message="Account created successfully. Try to sign in.")
+                    messagebox.showinfo(title="Account Created", message="Account successfully created!")    
                     return True
                 else:
                     messagebox.showwarning(title="Invalid Input", message="Password do not match.")
@@ -161,6 +154,8 @@ class SignInPage(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent, padx=20, pady=20, bg=BG_1, relief=tk.SUNKEN)
 
+        self.email = tk.StringVar()
+
         #----- Label widgets -----#
         lb_title = tk.Label(self, text="Sign in", width=20, height=1, font=LARGE_FONT, bg=BG_1, fg=FG_1, anchor="center",)
         lb_title.grid(column=0, row=0, columnspan=3, pady=(0, 20), padx=(10, 10))
@@ -172,14 +167,14 @@ class SignInPage(tk.Frame):
         lb_passwd.grid(column=0, row=2, pady=(0, 10), padx=(0, 5))
 
         #----- Entry widgets -----#
-        self.entry_email = tk.Entry(self, width=30, borderwidth=2, relief=tk.GROOVE, fg=FG_1, bg=BG_2, font=NORMAL_FONT,)
+        self.entry_email = tk.Entry(self, width=30, borderwidth=2, relief=tk.GROOVE, fg=FG_1, bg=BG_2, font=NORMAL_FONT, textvariable=self.email)
         self.entry_email.grid(column=1, row=1, columnspan=2, pady=(0, 10))
 
         self.entry_passwd = tk.Entry(self, width=30, borderwidth=2, relief=tk.GROOVE, fg=FG_1, bg=BG_2, font=NORMAL_FONT, show="*",)
         self.entry_passwd.grid(column=1, row=2, columnspan=2, pady=(0, 10))
 
         #----- Button widgets -----#
-        btn_signin = tk.Button(self, text="Sign in", font=NORMAL_FONT, fg=FG_1, bg=BG_2, command=lambda: controller.show_frame(MainPage) if self.valid_credentials() else None,)
+        btn_signin = tk.Button(self, text="Sign in", font=NORMAL_FONT, fg=FG_1, bg=BG_2, command=lambda: controller.show_main_page(self.email.get()) if self.valid_credentials() else None,)
         btn_signin.grid(column=1, row=3, columnspan=2, pady=(10, 0), sticky="NESW")
 
         btn_cancel = tk.Button(self, text="Cancel", font=NORMAL_FONT, fg=FG_1, bg=BG_2, command=lambda: controller.show_frame(StartPage),)
@@ -193,8 +188,6 @@ class SignInPage(tk.Frame):
             input_email = get_existing_email(input_email)
             email_passwd = EXISTING_ACCOUNTS[input_email]["pword"].encode("utf-8")
             if bcrypt.checkpw(input_passwd, email_passwd):
-                self.entry_email.delete(0, tk.END)
-                self.entry_passwd.delete(0, tk.END)
                 return True
             else:
                 messagebox.showwarning(title="Invalid Credentials", message="Invalid password.")
@@ -203,13 +196,62 @@ class SignInPage(tk.Frame):
 
 
 class MainPage(tk.Frame):
-    def __init__(self, parent, controller):
+    def __init__(self, parent, controller, email):
         tk.Frame.__init__(self, parent, padx=20, pady=20)
 
-        self.canvas = tk.Canvas(self, width=760, height=300)
+        # Get info from email that has been logged in
+        for e in EXISTING_ACCOUNTS:
+            if bcrypt.checkpw(email.encode("utf-8"), e.encode("utf-8")):
+                f_name = EXISTING_ACCOUNTS[e]["first_name"]
+                l_name = EXISTING_ACCOUNTS[e]["last_name"]
+                self.balance = EXISTING_ACCOUNTS[e]["balance"]
+                self.email = e
+
+        # Set canvas for turtle section
+        self.canvas = tk.Canvas(self, width=760, height=400, bg="black")
         self.canvas.grid(column=0, row=0, columnspan=8, pady=(0, 20))
 
-        self.set_turtles()    
+        turtle_section = turtle.TurtleScreen(self.canvas)
+        turtle_section.bgcolor("black")
+
+        # Initialize turtles
+        self.rturtle = turtle.RawTurtle(turtle_section)
+        self.gturtle = turtle.RawTurtle(turtle_section)
+        self.bturtle = turtle.RawTurtle(turtle_section)
+        self.yturtle = turtle.RawTurtle(turtle_section)
+        self.oturtle = turtle.RawTurtle(turtle_section)
+
+        # self.turtles = {
+        #     self.rturtle: ["red", "R", 100],
+        #     self.gturtle: ["green", "G", 50],
+        #     self.bturtle: ["blue", "B"],
+        #     self.yturtle: ["yellow", "Y"],
+        #     self.oturtle: ["orange", "O"]
+        # }
+
+        self.turtles = [[self.rturtle, "red"], [self.gturtle, "green"], [self.bturtle, "blue"],
+                        [self.yturtle, "yellow"], [self.oturtle, "orange"]]
+        self.turtle_ypos = [50, 0, -50, -100, -150]
+
+        # Set turtles in their position
+        self.set_turtles()
+
+        #----- Labels - Account info -----#
+        self.total_bet = 0
+        self.total_bet_str = tk.StringVar()
+        self.total_bet_str.set(f"Total Bet: {self.total_bet}")
+
+        lb_total_bet = tk.Label(self, textvariable=self.total_bet_str, heigh=1, font=NORMAL_FONT, anchor="w")
+        lb_total_bet.grid(column=6, row=1, padx=(5, 5), pady=(0, 5), sticky="NESW")
+
+        self.balance_str = tk.StringVar()
+        self.balance_str.set(f"Balance: {self.balance}")
+
+        lb_user_balance = tk.Label(self, textvariable=self.balance_str, heigh=1, font=NORMAL_FONT, anchor="w",)
+        lb_user_balance.grid(column=6, row=2, padx=(5, 5), pady=(0, 5), sticky="NESW")
+
+        lb_user_name = tk.Label(self, text=f"Name: {f_name[:30]}. {l_name[:1]}.", heigh=1, font=NORMAL_FONT, anchor="w",)
+        lb_user_name.grid(column=7, row=1, padx=(5, 5), pady=(0, 5), sticky="NESW")
 
         #----- 1st Column -----#
         lb_RO = tk.Label(self, text=" R-O ", height=1, font=NORMAL_FONT, relief=tk.RAISED)
@@ -294,7 +336,7 @@ class MainPage(tk.Frame):
         lb_RG = tk.Label(self, text=" R-G ", height=1, font=NORMAL_FONT, relief=tk.RAISED)
         lb_RG.grid(column=4, row=2, padx=(5, 5), pady=(0, 5), sticky="NESW")
 
-        # 6th column
+        #----- 6th column -----#
         self.input_bet_RB = tk.IntVar()
         self.input_bet_RB.set(0)
 
@@ -316,118 +358,82 @@ class MainPage(tk.Frame):
         #----- Buttons -----#
 
         # Game start button
-        btn_start = tk.Button(self, text="Start Game", font=NORMAL_FONT, command=self.compute_bets)
+        btn_start = tk.Button(self, text="Start Game", font=NORMAL_FONT, command=self.compute_bets,)
         btn_start.grid(column=4, row=3, columnspan=2, padx=(5, 0), pady=(0, 5), sticky="NESW",)
         # Reset bet button
-        btn_reset_bet = tk.Button(self, text="Reset Bet", font=NORMAL_FONT)
+        btn_reset_bet = tk.Button(self, text="Reset Bet", font=NORMAL_FONT, command=self.reset_bet,)
         btn_reset_bet.grid(column=4, row=4, columnspan=2, padx=(5, 0), sticky="NESW")
         # Deposite Button
-        btn_deposit = tk.Button(self, text="Deposit", font=NORMAL_FONT, command=lambda: controller.show_frame(DepositPage),)
+        btn_deposit = tk.Button(self, text="Deposit", font=NORMAL_FONT, command=self.show_DepositPage,)
         btn_deposit.grid(column=6, row=3, columnspan=2, padx=(5, 0), pady=(0, 5), sticky="NESW",)
         # Withdraw Button
-        btn_withdraw = tk.Button(self, text="Withdraw", font=NORMAL_FONT, command=lambda: controller.show_frame(WithdrawPage))
+        btn_withdraw = tk.Button(self, text="Withdraw", font=NORMAL_FONT, command=lambda: controller.show_frame(StartPage),)
         btn_withdraw.grid(column=7, row=4, padx=(5, 0), sticky="NESW")
         # Log out Button
         btn_logout = tk.Button(self, text="Log out", font=NORMAL_FONT, command=lambda: controller.show_frame(StartPage),)
         btn_logout.grid(column=6, row=4, padx=(5, 0), sticky="NESW")
 
-        #----- Labels - Account info -----#
-        lb_total_bet = tk.Label(self, text="Total bet: 12345", heigh=1, font=NORMAL_FONT, anchor="w")
-        lb_total_bet.grid(column=6, row=1, padx=(5, 5), pady=(0, 5), sticky="NESW")
-
-        lb_user_balance = tk.Label(self, text="Balance: Php 12345", heigh=1, font=NORMAL_FONT, anchor="w",)
-        lb_user_balance.grid(column=6, row=2, padx=(5, 5), pady=(0, 5), sticky="NESW")
-
-        lb_user_name = tk.Label(self, text="Name: Juan Dela Cruz", heigh=1, font=NORMAL_FONT, anchor="w",)
-        lb_user_name.grid(column=7, row=1, padx=(5, 5), pady=(0, 5), sticky="NESW")
+    def set_turtles(self):
+        for t in self.turtles:
+            t[0].shape("turtle")
+            t[0].shapesize(2)
+            t[0].color(t[1])
+            t[0].penup()
+            t[0].goto(x=-300, y=self.turtle_ypos[self.turtles.index(t)])
+            t[0].pendown()
 
     def compute_bets(self) -> int:
-        total_bet = 0
-        for b in self.all_bets:
-            bet = b.get()
-            total_bet += bet
-        return total_bet
+        for bet in self.all_bets:
+            bet = bet.get()
+            self.total_bet += bet
 
-    def valid_bet(self) -> bool:
-        pass
-
-    def set_turtles(self) -> None:
-        pass
-
-
-class DepositPage(tk.Frame):
-    def __init__(self, parent, controller):
-        tk.Frame.__init__(self, parent, padx=20, pady=20, bg=BG_1, relief=tk.SUNKEN)
-
-        payment_option = ["GCash", "Paymaya", "Paypal"]
-
-        #----- Title -----#
-        lb_title = tk.Label(self, text="Deposit", width=20, height=1, font=LARGE_FONT, bg=BG_1, fg=FG_1, anchor="center",)
-        lb_title.grid(column=0, row=0, columnspan=2, pady=(0, 20), padx=(10, 10))
-
-        #----- Amount input section -----#
-        lb_amount = tk.Label(self, text="Amount (min. Php 100)", height=1, font=NORMAL_FONT, fg=FG_1, bg=BG_1, anchor="center")
-        lb_amount.grid(column=0, row=1, columnspan=2, pady=(0, 10), padx=(10, 10))
-
-        entry_amount = tk.Entry(self, width=10, borderwidth=2, relief=tk.GROOVE, fg=FG_1, bg=BG_2, font=NORMAL_FONT,)
-        entry_amount.grid(column=0, row=2, columnspan=2, pady=(0, 20), padx=(10, 10), sticky="NESW")
-
-        #----- Payment method section -----#
-        lb_payment_opt = tk.Label(self, text="Payment Method", height=1, font=NORMAL_FONT, fg=FG_1, bg=BG_1, anchor="center")
-        lb_payment_opt.grid(column=0, row=3, columnspan=2, pady=(0, 5), padx=(10, 10))
-
-        btn_gcash = tk.Button(self, text="GCash", font=NORMAL_FONT, fg=FG_1, bg=BG_1, command=lambda: controller.show_frame(GCashDepositPage))
-        btn_gcash.grid(column=0, row=4, columnspan=2, pady=(5, 5), padx=(10, 10), sticky="NESW")
-
-        btn_paymaya = tk.Button(self, text="Paymaya", font=NORMAL_FONT, fg=FG_1, bg=BG_1, command=lambda: controller.show_frame(PaymayaDepositPage))
-        btn_paymaya.grid(column=0, row=5, columnspan=2, pady=(5, 5), padx=(10, 10), sticky="NESW")
-
-        btn_paypal = tk.Button(self, text="Paypal", font=NORMAL_FONT, fg=FG_1, bg=BG_1, command=lambda: controller.show_frame(PaypalDepositPage))
-        btn_paypal.grid(column=0, row=6, columnspan=2, pady=(5, 5), padx=(10, 10), sticky="NESW")
-
-        btn_cancel = tk.Button(self, text="Cancel", font=NORMAL_FONT, fg=FG_1, bg=BG_2, command=lambda: controller.show_frame(MainPage))
-        btn_cancel.grid(column=0, row=7, columnspan=2, pady=(10, 10), padx=(10, 10), sticky="NESW")
+        if self.total_bet > self.balance:
+            messagebox.showwarning(title="Invalid Input", message="Insufficient balance.")
+            self.total_bet = 0
+            return None
+        else:
+            self.total_bet_str.set(f"Total Bet: {self.total_bet}")
+            self.reset_bet()
 
 
-class GCashDepositPage(tk.Frame):
-    def __init__(self, parent, controller):
-        tk.Frame.__init__(self, parent, padx=20, pady=20, bg=BG_1, relief=tk.SUNKEN)
+    def show_DepositPage(self):
+        deposit_page = DepositPage(self.email, self.balance, self.balance_str)
+        deposit_page.title("Deposit thru Paypal")
+        deposit_page.resizable(width=False, height=False)
+        deposit_page.mainloop()
 
-        lb_title = tk.Label(self, text="Pay with GCash", width=20, height=1, font=LARGE_FONT, bg=BG_1, fg=FG_1, anchor="center",)
-        lb_title.grid(column=0, row=0, columnspan=3, pady=(0, 20), padx=(10, 10))
-
-        btn_cancel = tk.Button(self, text="Cancel", font=NORMAL_FONT, fg=FG_1, bg=BG_2, command=lambda: controller.show_frame(DepositPage))
-        btn_cancel.grid(column=0, row=1, columnspan=2, pady=(10, 10), padx=(10, 10), sticky="NESW")
-
-
-class PaypalDepositPage(tk.Frame):
-    def __init__(self, parent, controller):
-        tk.Frame.__init__(self, parent, padx=20, pady=20, bg=BG_1, relief=tk.SUNKEN)
-
-        lb_title = tk.Label(self, text="Pay with Paypal", width=20, height=1, font=LARGE_FONT, bg=BG_1, fg=FG_1, anchor="center",)
-        lb_title.grid(column=0, row=0, columnspan=3, pady=(0, 20), padx=(10, 10))
-
-        btn_cancel = tk.Button(self, text="Cancel", font=NORMAL_FONT, fg=FG_1, bg=BG_2, command=lambda: controller.show_frame(DepositPage))
-        btn_cancel.grid(column=0, row=1, columnspan=2, pady=(10, 10), padx=(10, 10), sticky="NESW")
+    def reset_bet(self):
+        for bet in self.all_bets:
+            bet.set(0)
 
 
-class PaymayaDepositPage(tk.Frame):
-    def __init__(self, parent, controller):
-        tk.Frame.__init__(self, parent, padx=20, pady=20, bg=BG_1, relief=tk.SUNKEN)
+class DepositPage(tk.Toplevel):
+    def __init__(self, email, balance, balance_str, *args, **kwargs):
+        tk.Toplevel.__init__(self, *args, **kwargs)
 
-        lb_title = tk.Label(self, text="Pay with Paymaya", width=20, height=1, font=LARGE_FONT, bg=BG_1, fg=FG_1, anchor="center",)
-        lb_title.grid(column=0, row=0, columnspan=3, pady=(0, 20), padx=(10, 10))
+        self.email = email
+        self.balance = balance
+        self.balance_str = balance_str
 
-        btn_cancel = tk.Button(self, text="Cancel", font=NORMAL_FONT, fg=FG_1, bg=BG_2, command=lambda: controller.show_frame(DepositPage))
-        btn_cancel.grid(column=0, row=1, columnspan=2, pady=(10, 10), padx=(10, 10), sticky="NESW")
+        lb_title = tk.Label(self, text="Deposit (Paypal)", font=LARGE_FONT, anchor="center")
+        lb_title.grid(column=0, row=0, columnspan=3, padx=20, pady=20, sticky="nesw")
 
+        lb_amount = tk.Label(self, text="Amount (min: Php 100)", font=NORMAL_FONT, anchor="center")
+        lb_amount.grid(column=0, row=1, columnspan=3, padx=20, pady=(20, 10), sticky="nesw")
 
-class WithdrawPage(tk.Frame):
-    def __init__(self, parent, controller):
-        tk.Frame.__init__(self, parent, padx=20, pady=20, bg=BG_1, relief=tk.SUNKEN)
+        self.entry_amount = tk.Entry(self, width=30, font=NORMAL_FONT, borderwidth=2,)
+        self.entry_amount.grid(column=0, row=2, padx=20, pady=(0, 20), sticky="NESW",)
 
-        lb_title = tk.Label(self, text="Withdraw", width=20, height=1, font=LARGE_FONT, bg=BG_1, fg=FG_1, anchor="center",)
-        lb_title.grid(column=0, row=0, columnspan=3, pady=(0, 20), padx=(10, 10))
+        btn_signup = tk.Button(self, text="Confirm Payment", font=NORMAL_FONT, command=self.confirm_payment)
+        btn_signup.grid(column=0, row=3, columnspan=3, padx=20, pady=(10, 20), sticky="nesw")
 
-        btn_cancel = tk.Button(self, text="Cancel", font=NORMAL_FONT, fg=FG_1, bg=BG_2, command=lambda: controller.show_frame(MainPage))
-        btn_cancel.grid(column=0, row=1, columnspan=2, pady=(10, 10), padx=(10, 10), sticky="NESW")
+    def confirm_payment(self):
+        entry_amount = int(self.entry_amount.get())
+        if entry_amount >= 100:
+            self.balance += entry_amount
+            update_balance(self.email, self.balance)
+            self.balance_str.set(f"Balance: Php {self.balance}")
+            self.destroy()
+        else:
+            messagebox.showwarning(title="Invalid Input", message="Amount is below the minimum payment required.")
+            self.lift()
