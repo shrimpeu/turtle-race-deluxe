@@ -19,6 +19,8 @@ class App(tk.Tk):
         self.root.grid_rowconfigure(0, weight=1)
         self.root.grid_columnconfigure(0, weight=1)
 
+        self.geometry("804x606")
+
         self.frames = {}
 
         for F in {StartPage, SignInPage, SignUpPage}:
@@ -42,24 +44,28 @@ class App(tk.Tk):
 
 class StartPage(tk.Frame):
     def __init__(self, parent, controller):
-        tk.Frame.__init__(self, parent, padx=20, pady=20, bg=BG_1)
+        tk.Frame.__init__(self, parent, padx=120, pady=20, bg=BG_1)
 
-        lb_title = tk.Label(self, text=TITLE, font=LARGE_FONT, fg=FG_1, bg=BG_1)
-        lb_title.pack(padx=20, pady=20)
+        self.logo = tk.PhotoImage(file="assets/logo.gif")
+        self.lb_logo = tk.Label(self, image=self.logo, bg=BG_1)
+        self.lb_logo.pack(padx=100, pady=(30, 10))
 
-        btn_signup = tk.Button(self, text="Sign up", font=NORMAL_FONT, fg=FG_1, bg=BG_2, command=lambda: controller.show_frame(SignUpPage),)
+        lb_title = tk.Label(self, text=TITLE, font=SUBTITLE_FONT, fg=TITLE_FG, bg=BG_1)
+        lb_title.pack(padx=100, pady=30)
+
+        btn_signup = tk.Button(self, text="Sign up", font=NORMAL_FONT, fg=BUTTON_FG, bg=BUTTON_BG, command=lambda: controller.show_frame(SignUpPage),)
         btn_signup.pack(padx=40, pady=5, fill="both")
 
-        btn_signin = tk.Button(self, text="Sign In", font=NORMAL_FONT, fg=FG_1, bg=BG_2, command=lambda: controller.show_frame(SignInPage),)
+        btn_signin = tk.Button(self, text="Sign In", font=NORMAL_FONT, fg=BUTTON_FG, bg=BUTTON_BG, command=lambda: controller.show_frame(SignInPage),)
         btn_signin.pack(padx=40, pady=5, fill="both")
 
 
 class SignUpPage(tk.Frame):
     def __init__(self, parent, controller):
-        tk.Frame.__init__(self, parent, padx=20, pady=20, bg=BG_1, relief=tk.SUNKEN)
+        tk.Frame.__init__(self, parent, padx=100, pady=120, bg=BG_1, relief=tk.SUNKEN)
 
         #----- Label widgets -----#
-        lb_title = tk.Label(self, text="Sign up", width=20, height=1, font=LARGE_FONT, bg=BG_1, fg=FG_1, anchor="center",)
+        lb_title = tk.Label(self, text="Sign up", width=20, height=1, font=SUBTITLE_FONT, bg=BG_1, fg=TITLE_FG, anchor="center",)
         lb_title.grid(column=0, row=0, columnspan=3, pady=(0, 20), padx=(10, 10))
 
         lb_firstname = tk.Label(self, text="First name:", width=20, height=1, font=NORMAL_FONT, bg=BG_1, fg=FG_1, anchor="e",)
@@ -78,29 +84,29 @@ class SignUpPage(tk.Frame):
         lb_repasswd.grid(column=0, row=5, pady=(0, 10), padx=(0, 5))
 
         #----- Entry widgets -----#
-        self.entry_firstname = tk.Entry(self, width=30, borderwidth=2, relief=tk.GROOVE, fg=FG_1, bg=BG_2, font=NORMAL_FONT,)
+        self.entry_firstname = tk.Entry(self, width=30, borderwidth=2, relief=tk.GROOVE, fg=ENTRY_FG, bg=ENTRY_BG, font=NORMAL_FONT, highlightthickness=2, highlightcolor=BORDER_FILL, highlightbackground=BORDER_FILL)
         self.entry_firstname.grid(column=1, row=1, columnspan=2, pady=(0, 10))
 
-        self.entry_lastname = tk.Entry(self, width=30, borderwidth=2, relief=tk.GROOVE, fg=FG_1, bg=BG_2, font=NORMAL_FONT,)
+        self.entry_lastname = tk.Entry(self, width=30, borderwidth=2, relief=tk.GROOVE, fg=ENTRY_FG, bg=ENTRY_BG, font=NORMAL_FONT, highlightthickness=2, highlightcolor=BORDER_FILL, highlightbackground=BORDER_FILL)
         self.entry_lastname.grid(column=1, row=2, columnspan=2, pady=(0, 10))
 
-        self.entry_email = tk.Entry(self, width=30, borderwidth=2, relief=tk.GROOVE, fg=FG_1, bg=BG_2, font=NORMAL_FONT,)
+        self.entry_email = tk.Entry(self, width=30, borderwidth=2, relief=tk.GROOVE, fg=ENTRY_FG, bg=ENTRY_BG, font=NORMAL_FONT, highlightthickness=2, highlightcolor=BORDER_FILL, highlightbackground=BORDER_FILL)
         self.entry_email.grid(column=1, row=3, columnspan=2, pady=(0, 10))
 
-        self.entry_passwd = tk.Entry(self, width=30, borderwidth=2, relief=tk.GROOVE, fg=FG_1, bg=BG_2, font=NORMAL_FONT, show="*",)
+        self.entry_passwd = tk.Entry(self, width=30, borderwidth=2, relief=tk.GROOVE, fg=ENTRY_FG, bg=ENTRY_BG, font=NORMAL_FONT, show="*", highlightthickness=2, highlightcolor=BORDER_FILL, highlightbackground=BORDER_FILL)
         self.entry_passwd.grid(column=1, row=4, columnspan=2, pady=(20, 10))
 
-        self.entry_repasswd = tk.Entry(self, width=30, borderwidth=2, relief=tk.GROOVE, fg=FG_1, bg=BG_2, font=NORMAL_FONT, show="*",)
+        self.entry_repasswd = tk.Entry(self, width=30, borderwidth=2, relief=tk.GROOVE, fg=ENTRY_FG, bg=ENTRY_BG, font=NORMAL_FONT, show="*", highlightthickness=2, highlightcolor=BORDER_FILL, highlightbackground=BORDER_FILL)
         self.entry_repasswd.grid(column=1, row=5, columnspan=2, pady=(0, 10))
 
         self.entries = (self.entry_firstname.get(), self.entry_lastname.get(), self.entry_email.get(),
                    self.entry_passwd.get(), self.entry_repasswd.get())
 
         #----- Create button widgets -----#
-        btn_create_account = tk.Button(self, text="Create Account", font=NORMAL_FONT, fg=FG_1, bg=BG_2, command=lambda: controller.show_frame(StartPage) if self.valid_credentials() else None,)
+        btn_create_account = tk.Button(self, text="Create Account", font=NORMAL_FONT, fg=BUTTON_FG, bg=BUTTON_BG, command=lambda: controller.show_frame(StartPage) if self.valid_credentials() else None,)
         btn_create_account.grid(column=1, row=6, columnspan=2, pady=(10, 0), sticky="NESW")
 
-        btn_cancel = tk.Button(self, text="Cancel", font=NORMAL_FONT, fg=FG_1, bg=BG_2, command=lambda: controller.show_frame(StartPage),)
+        btn_cancel = tk.Button(self, text="Cancel", font=NORMAL_FONT, fg=BUTTON_FG, bg=BUTTON_BG, command=lambda: controller.show_frame(StartPage),)
         btn_cancel.grid(column=0, row=6, pady=(10, 0), padx=(0, 5), sticky="NESW")
 
     def valid_credentials(self) -> bool:
@@ -142,12 +148,12 @@ class SignUpPage(tk.Frame):
 
 class SignInPage(tk.Frame):
     def __init__(self, parent, controller):
-        tk.Frame.__init__(self, parent, padx=20, pady=20, bg=BG_1, relief=tk.SUNKEN)
+        tk.Frame.__init__(self, parent, padx=100, pady=100, bg=BG_1, relief=tk.SUNKEN)
 
         self.email = tk.StringVar()
 
         #----- Label widgets -----#
-        lb_title = tk.Label(self, text="Sign in", width=20, height=1, font=LARGE_FONT, bg=BG_1, fg=FG_1, anchor="center",)
+        lb_title = tk.Label(self, text="Sign in", width=20, height=2, font=SUBTITLE_FONT, bg=BG_1, fg=TITLE_FG, anchor="center",)
         lb_title.grid(column=0, row=0, columnspan=3, pady=(0, 20), padx=(10, 10))
 
         lb_email = tk.Label(self, text="Email: ", width=20, height=1, font=NORMAL_FONT, bg=BG_1, fg=FG_1, anchor="e",)
@@ -157,17 +163,17 @@ class SignInPage(tk.Frame):
         lb_passwd.grid(column=0, row=2, pady=(0, 10), padx=(0, 5))
 
         #----- Entry widgets -----#
-        self.entry_email = tk.Entry(self, width=30, borderwidth=2, relief=tk.GROOVE, fg=FG_1, bg=BG_2, font=NORMAL_FONT, textvariable=self.email)
+        self.entry_email = tk.Entry(self, width=30, borderwidth=2, relief=tk.GROOVE, fg=ENTRY_FG, bg=ENTRY_BG, font=NORMAL_FONT, textvariable=self.email, highlightthickness=2, highlightcolor=BORDER_FILL, highlightbackground=BORDER_FILL)
         self.entry_email.grid(column=1, row=1, columnspan=2, pady=(0, 10))
 
-        self.entry_passwd = tk.Entry(self, width=30, borderwidth=2, relief=tk.GROOVE, fg=FG_1, bg=BG_2, font=NORMAL_FONT, show="*",)
+        self.entry_passwd = tk.Entry(self, width=30, borderwidth=2, relief=tk.GROOVE, fg=ENTRY_FG, bg=ENTRY_BG, font=NORMAL_FONT, show="*", highlightthickness=2, highlightcolor=BORDER_FILL, highlightbackground=BORDER_FILL)
         self.entry_passwd.grid(column=1, row=2, columnspan=2, pady=(0, 10))
 
         #----- Button widgets -----#
-        btn_signin = tk.Button(self, text="Sign in", font=NORMAL_FONT, fg=FG_1, bg=BG_2, command=lambda: controller.show_main_page(self.email.get()) if self.valid_credentials() else None,)
+        btn_signin = tk.Button(self, text="Sign in", font=NORMAL_FONT, fg=BUTTON_FG, bg=BUTTON_BG, command=lambda: controller.show_main_page(self.email.get()) if self.valid_credentials() else None,)
         btn_signin.grid(column=1, row=3, columnspan=2, pady=(10, 0), sticky="NESW")
 
-        btn_cancel = tk.Button(self, text="Cancel", font=NORMAL_FONT, fg=FG_1, bg=BG_2, command=lambda: controller.show_frame(StartPage),)
+        btn_cancel = tk.Button(self, text="Cancel", font=NORMAL_FONT, fg=BUTTON_FG, bg=BUTTON_BG, command=lambda: controller.show_frame(StartPage),)
         btn_cancel.grid(column=0, row=3, pady=(10, 0), padx=(0, 5), sticky="NESW")
 
     def valid_credentials(self) -> bool:
@@ -187,7 +193,7 @@ class SignInPage(tk.Frame):
 
 class MainPage(tk.Frame):
     def __init__(self, parent, controller, email):
-        tk.Frame.__init__(self, parent, padx=20, pady=20)
+        tk.Frame.__init__(self, parent, padx=20, pady=20, bg=BG_1)
 
         # Get info from email that has been logged in
         for e in EXISTING_ACCOUNTS:
@@ -223,29 +229,29 @@ class MainPage(tk.Frame):
         self.total_bet_str = tk.StringVar()
         self.total_bet_str.set(f"Total Bet: {self.total_bet}")
 
-        lb_total_bet = tk.Label(self, textvariable=self.total_bet_str, height=1, font=NORMAL_FONT, anchor="w", relief=tk.SUNKEN)
+        lb_total_bet = tk.Label(self, textvariable=self.total_bet_str, height=1, font=NORMAL_FONT, anchor="w", relief=tk.SUNKEN, fg=TITLE_FG, bg=BUTTON_BG)
         lb_total_bet.grid(column=6, row=1, padx=(5, 0), pady=(0, 5), sticky="NESW")
 
         self.balance_str = tk.StringVar()
         self.balance_str.set(f"Balance: Php {self.balance}")
 
-        lb_user_balance = tk.Label(self, textvariable=self.balance_str, height=1, font=NORMAL_FONT, anchor="center", relief=tk.SUNKEN)
+        lb_user_balance = tk.Label(self, textvariable=self.balance_str, height=1, font=NORMAL_FONT, anchor="center", relief=tk.SUNKEN, fg=TITLE_FG, bg=BUTTON_BG)
         lb_user_balance.grid(column=6, row=2, columnspan=2, padx=(5, 0), pady=(0, 5), sticky="NESW")
 
-        lb_user_name = tk.Label(self, text=f"Name: {f_name[:30]}. {l_name[:1]}.", height=1, font=NORMAL_FONT, anchor="w", relief=tk.SUNKEN)
+        lb_user_name = tk.Label(self, text=f"Name: {f_name[:30]}. {l_name[:1]}.", height=1, font=NORMAL_FONT, anchor="w", relief=tk.SUNKEN, fg=TITLE_FG, bg=BUTTON_BG)
         lb_user_name.grid(column=7, row=1, padx=(5, 0), pady=(0, 5), sticky="NESW")
 
         #----- 1st Column -----#
-        lb_RO = tk.Label(self, text=" R-O ", height=1, font=NORMAL_FONT, relief=tk.SUNKEN)
+        lb_RO = tk.Label(self, text=" R-O ", height=1, font=NORMAL_FONT, relief=tk.SUNKEN, fg=BUTTON_BG, bg=TITLE_FG)
         lb_RO.grid(column=0, row=1, padx=(0, 5), pady=(0, 5), sticky="NESW")
 
-        lb_GO = tk.Label(self, text=" G-O ", height=1, font=NORMAL_FONT, relief=tk.SUNKEN)
+        lb_GO = tk.Label(self, text=" G-O ", height=1, font=NORMAL_FONT, relief=tk.SUNKEN, fg=BUTTON_BG, bg=TITLE_FG)
         lb_GO.grid(column=0, row=2, padx=(0, 5), pady=(0, 5), sticky="NESW")
 
-        lb_BO = tk.Label(self, text=" B-O ", height=1, font=NORMAL_FONT, relief=tk.SUNKEN)
+        lb_BO = tk.Label(self, text=" B-O ", height=1, font=NORMAL_FONT, relief=tk.SUNKEN, fg=BUTTON_BG, bg=TITLE_FG)
         lb_BO.grid(column=0, row=3, padx=(0, 5), pady=(0, 5), sticky="NESW")
 
-        lb_YO = tk.Label(self, text=" Y-O ", height=1, font=NORMAL_FONT, relief=tk.SUNKEN)
+        lb_YO = tk.Label(self, text=" Y-O ", height=1, font=NORMAL_FONT, relief=tk.SUNKEN, fg=BUTTON_BG, bg=TITLE_FG)
         lb_YO.grid(column=0, row=4, padx=(0, 5), sticky="NESW")
 
         #----- 2nd column -----#
@@ -274,16 +280,16 @@ class MainPage(tk.Frame):
         entry_bet_YO.grid(column=1, row=4, sticky="NESW")
 
         #----- 3rd Column -----#
-        lb_RY = tk.Label(self, text=" R-Y ", height=1, font=NORMAL_FONT, relief=tk.SUNKEN)
+        lb_RY = tk.Label(self, text=" R-Y ", height=1, font=NORMAL_FONT, relief=tk.SUNKEN, fg=BUTTON_BG, bg=TITLE_FG)
         lb_RY.grid(column=2, row=1, padx=(5, 5), pady=(0, 5), sticky="NESW")
 
-        lb_GY = tk.Label(self, text=" G-Y ", height=1, font=NORMAL_FONT, relief=tk.SUNKEN)
+        lb_GY = tk.Label(self, text=" G-Y ", height=1, font=NORMAL_FONT, relief=tk.SUNKEN, fg=BUTTON_BG, bg=TITLE_FG)
         lb_GY.grid(column=2, row=2, padx=(5, 5), pady=(0, 5), sticky="NESW")
 
-        lb_BY = tk.Label(self, text=" B-Y ", height=1, font=NORMAL_FONT, relief=tk.SUNKEN)
+        lb_BY = tk.Label(self, text=" B-Y ", height=1, font=NORMAL_FONT, relief=tk.SUNKEN, fg=BUTTON_BG, bg=TITLE_FG)
         lb_BY.grid(column=2, row=3, padx=(5, 5), pady=(0, 5), sticky="NESW")
 
-        lb_GB = tk.Label(self, text=" G-B ", height=1, font=NORMAL_FONT, relief=tk.SUNKEN)
+        lb_GB = tk.Label(self, text=" G-B ", height=1, font=NORMAL_FONT, relief=tk.SUNKEN, fg=BUTTON_BG, bg=TITLE_FG)
         lb_GB.grid(column=2, row=4, padx=(5, 5), sticky="NESW")
 
         #----- 4th column -----#
@@ -312,10 +318,10 @@ class MainPage(tk.Frame):
         entry_bet_GB.grid(column=3, row=4, sticky="NESW")
 
         #----- 5th Column -----#
-        lb_RB = tk.Label(self, text=" R-B ", height=1, font=NORMAL_FONT, relief=tk.SUNKEN)
+        lb_RB = tk.Label(self, text=" R-B ", height=1, font=NORMAL_FONT, relief=tk.SUNKEN, fg=BUTTON_BG, bg=TITLE_FG)
         lb_RB.grid(column=4, row=1, padx=(5, 5), pady=(0, 5), sticky="NESW")
 
-        lb_RG = tk.Label(self, text=" R-G ", height=1, font=NORMAL_FONT, relief=tk.SUNKEN)
+        lb_RG = tk.Label(self, text=" R-G ", height=1, font=NORMAL_FONT, relief=tk.SUNKEN, fg=BUTTON_BG, bg=TITLE_FG)
         lb_RG.grid(column=4, row=2, padx=(5, 5), pady=(0, 5), sticky="NESW")
 
         #----- 6th column -----#
@@ -340,19 +346,19 @@ class MainPage(tk.Frame):
         #----- Buttons -----#
 
         # Game start button
-        btn_start = tk.Button(self, text="Start Game", font=NORMAL_FONT, command=self.compute_bets, height=1)
+        btn_start = tk.Button(self, text="Start Game", font=NORMAL_FONT, command=self.compute_bets, height=1, fg=TITLE_FG, bg="white")
         btn_start.grid(column=4, row=3, columnspan=2, padx=(5, 0), pady=(0, 5), sticky="NESW",)
         # Reset bet button
-        btn_reset_bet = tk.Button(self, text="Reset Bet", font=NORMAL_FONT, command=self.reset_bet, height=1)
+        btn_reset_bet = tk.Button(self, text="Reset Bet", font=NORMAL_FONT, command=self.reset_bet, height=1, fg=TITLE_FG, bg="white")
         btn_reset_bet.grid(column=4, row=4, columnspan=2, padx=(5, 0), sticky="NESW")
         # Deposite Button
-        btn_deposit = tk.Button(self, text="Deposit", font=NORMAL_FONT, command=self.show_DepositPage, height=1)
+        btn_deposit = tk.Button(self, text="Deposit", font=NORMAL_FONT, command=self.show_DepositPage, height=1, fg=TITLE_FG, bg="white")
         btn_deposit.grid(column=6, row=3, columnspan=2, padx=(5, 0), pady=(0, 5), sticky="NESW",)
         # Withdraw Button
-        btn_withdraw = tk.Button(self, text="Withdraw", font=NORMAL_FONT, command=self.show_WithdrawPage, height=1)
+        btn_withdraw = tk.Button(self, text="Withdraw", font=NORMAL_FONT, command=self.show_WithdrawPage, height=1, fg=TITLE_FG, bg="white")
         btn_withdraw.grid(column=7, row=4, padx=(5, 0), sticky="NESW")
         # Log out Button
-        btn_logout = tk.Button(self, text="Log out", font=NORMAL_FONT, command=lambda: controller.show_frame(StartPage), height=1)
+        btn_logout = tk.Button(self, text="Log out", font=NORMAL_FONT, command=lambda: controller.show_frame(StartPage), height=1, fg="red", bg="white")
         btn_logout.grid(column=6, row=4, padx=(5, 0), sticky="NESW")
 
     def set_turtles(self):
@@ -373,6 +379,8 @@ class MainPage(tk.Frame):
     def compute_bets(self) -> int:
         for bet in self.all_bets:
             bet = bet.get()
+            if bet == "":
+                bet = 0
             self.total_bet += bet
 
         if self.total_bet > self.balance:
@@ -388,13 +396,13 @@ class MainPage(tk.Frame):
             self.reset_bet()
 
     def show_DepositPage(self):
-        deposit_page = DepositPage(self.email, self.balance, self.balance_str)
+        deposit_page = DepositPage(self.email,  self.balance_str)
         deposit_page.title("Deposit thru Paypal")
         deposit_page.resizable(width=False, height=False)
         deposit_page.mainloop()
 
     def show_WithdrawPage(self):
-        withdraw_page = WithdrawPage(self.email, self.balance, self.balance_str)
+        withdraw_page = WithdrawPage(self.email, self.balance_str)
         withdraw_page.title("Withdraw")
         withdraw_page.resizable(width=False, height=False)
         withdraw_page.mainloop()
@@ -405,93 +413,101 @@ class MainPage(tk.Frame):
 
 
 class DepositPage(tk.Toplevel):
-    def __init__(self, email, balance, balance_str, *args, **kwargs):
-        tk.Toplevel.__init__(self, *args, **kwargs)
+    def __init__(self, email, balance_str, *args, **kwargs):
+        tk.Toplevel.__init__(self, bg=BG_1 ,*args, **kwargs)
 
         self.email = email
-        self.balance = balance
         self.balance_str = balance_str
 
-        lb_title = tk.Label(self, text="Deposit (Paypal)", font=LARGE_FONT, anchor="center")
-        lb_title.grid(column=0, row=0, columnspan=2, padx=20, pady=20, sticky="nesw")
+        self.logo = tk.PhotoImage(file="assets/paypal.gif")
+        self.lb_logo = tk.Label(self, image=self.logo, bg=BG_1)
+        self.lb_logo.pack(padx=20, pady=30)
 
-        lb_amount = tk.Label(self, text="Amount (min: Php 100)", font=NORMAL_FONT, anchor="center")
-        lb_amount.grid(column=0, row=1, columnspan=2, padx=20, pady=(20, 10), sticky="nesw")
+        lb_title = tk.Label(self, text="Deposit", font=SUBTITLE_FONT, anchor="center", fg=TITLE_FG, bg=BG_1)
+        lb_title.pack(padx=20, pady=10)
 
-        self.entry_amount = tk.Entry(self, width=30, font=NORMAL_FONT, borderwidth=2,)
-        self.entry_amount.grid(column=0, row=2, padx=20, pady=(0, 20), sticky="NESW",)
+        lb_amount = tk.Label(self, text="Amount (min: Php 100)", font=NORMAL_FONT, anchor="center", bg=BG_1)
+        lb_amount.pack(padx=20, pady=(0, 5))
 
-        lb_amount = tk.Label(self, text="Sign in to Paypal", font=NORMAL_FONT, anchor="center")
-        lb_amount.grid(column=0, row=3, padx=20, pady=(20, 10), sticky="nesw")
+        self.entry_amount = tk.Entry(self, width=30, font=NORMAL_FONT, borderwidth=2, highlightthickness=2, highlightcolor=BORDER_FILL, highlightbackground=BORDER_FILL)
+        self.entry_amount.pack(padx=20)
 
-        lb_paypal_email = tk.Label(self, text="Email", font=NORMAL_FONT, anchor="w")
-        lb_paypal_email.grid(column=0, row=4, columnspan=2, padx=20, pady=(0, 5), sticky="nesw")
+        lb_signinp_title = tk.Label(self, text="Sign in to Paypal", font=NORMAL_FONT, anchor="center", fg=TITLE_FG , bg=BG_1)
+        lb_signinp_title.pack(padx=20, pady=(30, 5))
 
-        self.entry_paypal_email = tk.Entry(self, width=30, font=NORMAL_FONT, borderwidth=2,)
-        self.entry_paypal_email.grid(column=0, row=5, padx=20, pady=(0, 10), sticky="NESW",)
+        lb_paypal_email = tk.Label(self, text="Email", font=NORMAL_FONT, anchor="w", bg=BG_1)
+        lb_paypal_email.pack(padx=20, pady=(5, 5))
 
-        lb_paypal_pw = tk.Label(self, text="Password", font=NORMAL_FONT, anchor="w")
-        lb_paypal_pw.grid(column=0, row=6, columnspan=2, padx=20, pady=(0, 5), sticky="nesw")
+        self.entry_paypal_email = tk.Entry(self, width=30, font=NORMAL_FONT, borderwidth=2, highlightthickness=2, highlightcolor=BORDER_FILL, highlightbackground=BORDER_FILL)
+        self.entry_paypal_email.pack(padx=20, pady=(0, 10))
 
-        self.entry_paypal_pw = tk.Entry(self, width=30, font=NORMAL_FONT, borderwidth=2,)
-        self.entry_paypal_pw.grid(column=0, row=7, padx=20, pady=(0, 10), sticky="NESW",)
+        lb_paypal_pw = tk.Label(self, text="Password", font=NORMAL_FONT, anchor="w", bg=BG_1)
+        lb_paypal_pw.pack(padx=20, pady=(0, 5))
 
-        btn_signup = tk.Button(self, text="Confirm Payment", font=NORMAL_FONT, command=self.confirm_payment)
-        btn_signup.grid(column=0, row=8, padx=20, pady=(10, 20), sticky="nesw")
+        self.entry_paypal_pw = tk.Entry(self, width=30, font=NORMAL_FONT, borderwidth=2, highlightthickness=2, highlightcolor=BORDER_FILL, highlightbackground=BORDER_FILL, show="*")
+        self.entry_paypal_pw.pack(padx=20, pady=(0, 20))
+
+        btn_confirm = tk.Button(self, text="Confirm", font=NORMAL_FONT, command=self.confirm_deposit, fg=TITLE_FG, bg="white")
+        btn_confirm.pack(padx=20, pady=(0, 20), fill="both")
 
 
-    def confirm_payment(self):
+    def confirm_deposit(self):
+        balance = curr_balance(self.email)
         entries = (self.entry_paypal_email.get(), self.entry_paypal_pw.get())
         entry_amount = int(self.entry_amount.get())
-        if valid_amount(self, "deposit", entry_amount, self.balance) and \
+        if valid_amount(self, "deposit", entry_amount, balance) and \
             input_not_empty(self, entries):
-            self.balance += entry_amount
-            update_balance(self.email, self.balance)
-            self.balance_str.set(f"Balance: Php {self.balance}")
+            balance += entry_amount
+            update_balance(self.email, balance)
+            self.balance_str.set(f"Balance: Php {balance}")
             self.destroy()
 
 
 class WithdrawPage(tk.Toplevel):
-    def __init__(self, email, balance, balance_str, *args, **kwargs):
-        tk.Toplevel.__init__(self, *args, **kwargs)
+    def __init__(self, email, balance_str, *args, **kwargs):
+        tk.Toplevel.__init__(self, bg=BG_1,*args, **kwargs)
 
         self.email = email
-        self.balance = balance
         self.balance_str = balance_str
 
-        lb_title = tk.Label(self, text="Withdraw (Paypal)", font=LARGE_FONT, anchor="center")
-        lb_title.grid(column=0, row=0, columnspan=2, padx=20, pady=20, sticky="nesw")
+        self.logo = tk.PhotoImage(file="assets/paypal.gif")
+        self.lb_logo = tk.Label(self, image=self.logo, bg=BG_1)
+        self.lb_logo.pack(padx=20, pady=30)
 
-        lb_amount = tk.Label(self, text="Amount (min: Php 300)", font=NORMAL_FONT, anchor="center")
-        lb_amount.grid(column=0, row=1, columnspan=2, padx=20, pady=(20, 0), sticky="nesw")
+        lb_title = tk.Label(self, text="Withdraw", font=SUBTITLE_FONT, anchor="center", fg=TITLE_FG, bg=BG_1)
+        lb_title.pack(padx=20, pady=10)
 
-        self.entry_amount = tk.Entry(self, width=30, font=NORMAL_FONT, borderwidth=2,)
-        self.entry_amount.grid(column=0, row=2, padx=20, pady=(5, 20), sticky="NESW",)
+        lb_amount = tk.Label(self, text="Amount (min: Php 300)", font=NORMAL_FONT, anchor="center", bg=BG_1)
+        lb_amount.pack(padx=20, pady=(0, 5))
 
-        lb_amount = tk.Label(self, text="Sign in to Paypal", font=NORMAL_FONT, anchor="center")
-        lb_amount.grid(column=0, row=3, padx=20, pady=(20, 10), sticky="nesw")
+        self.entry_amount = tk.Entry(self, width=30, font=NORMAL_FONT, borderwidth=2, highlightthickness=2, highlightcolor=BORDER_FILL, highlightbackground=BORDER_FILL)
+        self.entry_amount.pack(padx=20)
 
-        lb_paypal_email = tk.Label(self, text="Email", font=NORMAL_FONT, anchor="w")
-        lb_paypal_email.grid(column=0, row=4, columnspan=2, padx=20, pady=(0, 5), sticky="nesw")
+        lb_signinp_title = tk.Label(self, text="Sign in to Paypal", font=NORMAL_FONT, anchor="center", fg=TITLE_FG , bg=BG_1)
+        lb_signinp_title.pack(padx=20, pady=(30, 5))
 
-        self.entry_paypal_email = tk.Entry(self, width=30, font=NORMAL_FONT, borderwidth=2,)
-        self.entry_paypal_email.grid(column=0, row=5, padx=20, pady=(0, 10), sticky="NESW",)
+        lb_paypal_email = tk.Label(self, text="Email", font=NORMAL_FONT, anchor="w", bg=BG_1)
+        lb_paypal_email.pack(padx=20, pady=(5, 5))
 
-        lb_paypal_pw = tk.Label(self, text="Password", font=NORMAL_FONT, anchor="w")
-        lb_paypal_pw.grid(column=0, row=6, columnspan=2, padx=20, pady=(0, 5), sticky="nesw")
+        self.entry_paypal_email = tk.Entry(self, width=30, font=NORMAL_FONT, borderwidth=2, highlightthickness=2, highlightcolor=BORDER_FILL, highlightbackground=BORDER_FILL)
+        self.entry_paypal_email.pack(padx=20, pady=(0, 10))
 
-        self.entry_paypal_pw = tk.Entry(self, width=30, font=NORMAL_FONT, borderwidth=2,)
-        self.entry_paypal_pw.grid(column=0, row=7, padx=20, pady=(0, 20), sticky="NESW",)
+        lb_paypal_pw = tk.Label(self, text="Password", font=NORMAL_FONT, anchor="w", bg=BG_1)
+        lb_paypal_pw.pack(padx=20, pady=(0, 5))
 
-        btn_signup = tk.Button(self, text="Confirm", font=NORMAL_FONT, command=self.confirm_withdraw)
-        btn_signup.grid(column=0, row=8, padx=20, pady=(0, 20), sticky="nesw")
+        self.entry_paypal_pw = tk.Entry(self, width=30, font=NORMAL_FONT, borderwidth=2, highlightthickness=2, highlightcolor=BORDER_FILL, highlightbackground=BORDER_FILL, show="*")
+        self.entry_paypal_pw.pack(padx=20, pady=(0, 20))
+
+        btn_confirm = tk.Button(self, text="Confirm", font=NORMAL_FONT, command=self.confirm_withdraw, fg=TITLE_FG, bg="white")
+        btn_confirm.pack(padx=20, pady=(0, 20), fill="both")
     
     def confirm_withdraw(self):
+        balance = curr_balance(self.email)
         entries = (self.entry_paypal_email.get(), self.entry_paypal_pw.get())
         entry_amount = int(self.entry_amount.get())
-        if valid_amount(self, "withdraw", entry_amount, self.balance) and \
+        if valid_amount(self, "withdraw", entry_amount, balance) and \
             input_not_empty(self, entries):
-            self.balance -= entry_amount
-            update_balance(self.email, self.balance)
-            self.balance_str.set(f"Balance: Php {self.balance}")
+            balance -= entry_amount
+            update_balance(self.email, balance)
+            self.balance_str.set(f"Balance: Php {balance}")
             self.destroy()
