@@ -1,6 +1,5 @@
 import tkinter as tk
 import turtle
-import time
 
 from tkinter import messagebox
 
@@ -17,8 +16,6 @@ class App(tk.Tk):
         self.root = tk.Frame(self)
         self.root.pack(side="top", fill="both", expand=True)
 
-        # 0 = minimum
-        # Weight = priority
         self.root.grid_rowconfigure(0, weight=1)
         self.root.grid_columnconfigure(0, weight=1)
 
@@ -33,7 +30,7 @@ class App(tk.Tk):
 
         self.show_frame(StartPage)
 
-    def show_frame(self, cont):  # cont = controller
+    def show_frame(self, cont):
         frame = self.frames[cont]
         frame.tkraise()
 
