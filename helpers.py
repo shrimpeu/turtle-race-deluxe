@@ -86,5 +86,11 @@ def valid_amount(root: type, method: str, input_amount: int, current_bal: int) -
             return False
 
 
-def valid_passwd():
-    pass
+def curr_balance(email: str) -> int:
+    with open(USER_DATA_FILE, "r") as f:
+        data = json.load(f)
+    return data[email]["balance"]
+
+
+def valid_passwd(passwd: str) -> bool:
+    return True if len(passwd) >= 8 else False
