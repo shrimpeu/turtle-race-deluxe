@@ -6,32 +6,32 @@
 
 The whole source code of this program can be copied to your local machine by cloning the git repository:
 
-```
+```bash
 git clone https://www.github.com/DatSudo/turtle-race-deluxe.git
 ```
 
 Before running the program, the required modules must be installed first:
 
-```
+```bash
 pip install -r requirements.txt
 
 # If the above command is not working, try
 
 pip3 install -r requirements.txt
 ```
-> **Note:**
-> If you're on Windows, you must install `windows-curses` module for `bcrypt` to work.
-> 
-> ```pip install windows-curses```
+___
+**Note:**
+If you're on Windows, you must install `windows-curses` module for `bcrypt` to work.
+
+```bash
+pip install windows-curses
+```
+___
 
 To start the game, try these following commands:
 
-```
+```bash
 python -m main # or
 python3 -m main # or
 py -m main
 ```
-
-## Documentation
-
-For documentation, you can access it on this [page](https://datsudo.github.io/turtle-race-deluxe/).
