@@ -207,15 +207,15 @@ class MainPage(tk.Frame):
         self.canvas = tk.Canvas(self, width=760, height=400, bg="black")
         self.canvas.grid(column=0, row=0, columnspan=8, pady=(0, 20))
 
-        turtle_section = turtle.TurtleScreen(self.canvas)
-        turtle_section.bgcolor("black")
+        self.turtle_section = turtle.TurtleScreen(self.canvas)
+        self.turtle_section.bgpic("assets/turtle_bg.gif")
 
         # Initialize turtles
-        self.rturtle = turtle.RawTurtle(turtle_section)
-        self.gturtle = turtle.RawTurtle(turtle_section)
-        self.bturtle = turtle.RawTurtle(turtle_section)
-        self.yturtle = turtle.RawTurtle(turtle_section)
-        self.oturtle = turtle.RawTurtle(turtle_section)
+        self.rturtle = turtle.RawTurtle(self.turtle_section)
+        self.gturtle = turtle.RawTurtle(self.turtle_section)
+        self.bturtle = turtle.RawTurtle(self.turtle_section)
+        self.yturtle = turtle.RawTurtle(self.turtle_section)
+        self.oturtle = turtle.RawTurtle(self.turtle_section)
 
         self.turtles = [[self.rturtle, "red", "R"], [self.gturtle, "green", "G"], [self.bturtle, "blue", "B"],
                         [self.yturtle, "yellow", "Y"], [self.oturtle, "orange", "O"]]
@@ -346,7 +346,7 @@ class MainPage(tk.Frame):
         #----- Buttons -----#
 
         # Game start button
-        btn_start = tk.Button(self, text="Start Game", font=NORMAL_FONT, command=self.compute_bets, height=1, fg=TITLE_FG, bg="white")
+        btn_start = tk.Button(self, text="Start Game", font=NORMAL_FONT, command=self.start_race, height=1, fg=TITLE_FG, bg="white")
         btn_start.grid(column=4, row=3, columnspan=2, padx=(5, 0), pady=(0, 5), sticky="NESW",)
         # Reset bet button
         btn_reset_bet = tk.Button(self, text="Reset Bet", font=NORMAL_FONT, command=self.reset_bet, height=1, fg=TITLE_FG, bg="white")
@@ -363,9 +363,9 @@ class MainPage(tk.Frame):
 
     def set_turtles(self):
         for t in self.turtles:
-            t[0].shape("turtle")
+            self.turtle_section.addshape(f"assets/t_{t[1]}.gif")
+            t[0].shape(f"assets/t_{t[1]}.gif")
             t[0].shapesize(2)
-            t[0].color(t[1])
             t[0].penup()
             t[0].goto(x=-300, y=self.turtle_ypos[self.turtles.index(t)])
             t[0].pendown()
@@ -374,7 +374,7 @@ class MainPage(tk.Frame):
         pass
 
     def start_race(self):
-        pass
+        self.compute_bets()
 
     def compute_bets(self) -> int:
         for bet in self.all_bets:
