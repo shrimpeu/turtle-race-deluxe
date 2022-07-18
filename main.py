@@ -2,6 +2,7 @@ from gui import App
 
 
 def main():
+    """The main function of the program"""
     app = App()
 
     app.title("Turtle Race")

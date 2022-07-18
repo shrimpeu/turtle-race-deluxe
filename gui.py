@@ -1,9 +1,12 @@
+# Built-in modules
 import tkinter as tk
 import turtle
 import random
 
+# Specific methods from built-in modules
 from tkinter import messagebox
 
+# Custom modules
 from config import *
 from helpers import *
 
@@ -13,7 +16,7 @@ class App(tk.Tk):
     The main root of the app interface. The class that controls the interface/pages.
 
     Attributes:
-        self.root (tk.Frame): instance of main frame
+        self.root (tkinter.Frame): instance of main frame
         self.frames (dict): dictionary of frames that the root will control to navigate through pages
     """
     def __init__(self, *args, **kwargs):
@@ -41,10 +44,12 @@ class App(tk.Tk):
         self.show_frame(StartPage)
 
     def show_frame(self, cont):
+        """Shows the selected frame by bringing/raising it forward"""
         frame = self.frames[cont]
         frame.tkraise()
 
     def show_main_page(self, email=None):
+        """Shows the MainPage frame"""
         frame = MainPage(self.root, self, email)
         frame.grid(row=0, column=0, sticky="nsew")
         frame.tkraise()
@@ -55,8 +60,8 @@ class StartPage(tk.Frame):
     The class that displays the start page of the app
 
     Args:
-        parent (tk.Frame): the root interface that will controll this frame class
-        controller (tk.Tk): the App class
+        parent (tkinter.Frame): the root interface that will controll this frame class
+        controller (tkinter.Tk): the App class
     
     Attributes:
         logo (tk.PhotoImage): imports the app logo GIF file from assets folder
@@ -87,15 +92,16 @@ class SignUpPage(tk.Frame):
     The class that displays the sign up page of the App.
 
     Args:
-        parent (tk.Frame): the root interface that will controll this frame class
-        controller (tk.Tk): the App class
+        parent (tkinter.Frame): the root interface that will controll this frame class
+        controller (tkinter.Tk): the App class
     
     Attributes:
-        entry_firstname (tk.Entry): entry widget that receives the first name of the user.
-        entry_lastname (tk.Entry): entry widget that receives the last name of the user.
-        entry_email (tk.Entry): entry widget that receives the email of the user.
-        entry_passwd (tk.Entry): entry widget that receives the password created by the user.
-        entry_repasswd (tk.Entry): entry widget that receives the re-typed password created by the user.
+        entry_firstname (tkinter.Entry): entry widget that receives the first name of the user.
+        entry_lastname (tkinter.Entry): entry widget that receives the last name of the user.
+        entry_email (tkinter.Entry): entry widget that receives the email of the user.
+        entry_passwd (tkinter.Entry): entry widget that receives the password created by the user.
+        entry_repasswd (tkinter.Entry): entry widget that receives the re-typed password created by the user.
+        entry_boxes (list): list of all entry widgets
     """
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent, padx=170, pady=150, bg=BG_1)
@@ -174,12 +180,12 @@ class SignInPage(tk.Frame):
     The class that displays the sign in page of the App.
 
     Args:
-        parent (tk.Frame): the root interface that will controll this frame class
-        controller (tk.Tk): the App class
+        parent (tkinter.Frame): the root interface that will controll this frame class
+        controller (tkinter.Tk): the App class
     
     Attributes:
-        entry_email (tk.Entry): entry widget that receives the email of the user.
-        entry_passwd (tk.Entry): entry widget that receives the password created by the user.
+        entry_email (tkinter.Entry): entry widget that receives the email of the user.
+        entry_passwd (tkinter.Entry): entry widget that receives the password created by the user.
     """
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent, padx=170, pady=100, bg=BG_1)
@@ -226,6 +232,38 @@ class SignInPage(tk.Frame):
 
 
 class MainPage(tk.Frame):
+    """
+    The main page/frame where the main program interface is shown. It contains
+    the turtle race game, betting section, and deposit/withdraw sections.
+
+    Args:
+        parent (tkinter.Frame): the root interface that will controll this frame class
+        controller (tkinter.Tk): the App class
+        email (str): the email used in signing in
+
+    Attributes:
+        balance (int): the account balanced register in email, which is stored in user_data
+        email (str): the email matched with the argument `email`
+        canvas (tkinter.Canvas): canvas where the turtle interface puts in
+        turtle_section (turtle.TurtleScreen): the turtle interface
+        *turtle (turtle.RawTurtle): instance of a turtle class; creates the turtles for the race
+        turtles (list): list of all turtle instances with color string according to their name
+        turtle_ypos (list): list of y-coordinates (int) for setting turtles in starting line
+        total_bet (int): stores the total bet inputted by the user
+        total_bet_str (tkinter.StringVar): where label widget text for total bets is stored
+        balance_str (tkinter.StringVar): where label widget text for account balance is stored
+        input_bet_* (tkinter.StringVar): where entry widget value for bets are stored
+        entry_bet_* (tkinter.Entry): entry boxes for bets
+        bet_entries (list): list of input_bet_* and combinations (str) connected to them
+        bet_entry_boxes (list): list of all entry_bet_* widgets
+        bets_tally (dict): stores all the bet (values) for each combinations (keys)
+        btn_start (tkinter.Button): button to start turtle race along with tallying all the input bets
+        btn_reset_bet (tkinter.Button): button to set all the entry_bet_* to 0
+        btn_deposit (tkinter.Button): button to open deposit page/window
+        btn_withdraw (tkinter.Button): button to open withdraw page/window
+        btn_logout (tkinter.Button): button to exit MainPage and go to StartPage
+        buttons (tuple): list of all buttons
+    """
     def __init__(self, parent, controller, email):
         tk.Frame.__init__(self, parent, padx=20, pady=20, bg=BG_1)
 
@@ -491,6 +529,7 @@ class MainPage(tk.Frame):
                         self.btn_withdraw, self.btn_logout)
 
     def set_turtles(self) -> None:
+        """Position turtles in starting line"""
         for t in self.turtles:
             t[0].speed(0)
             t[0].clear()
@@ -503,6 +542,7 @@ class MainPage(tk.Frame):
             t[0].pendown()
 
     def set_title(self) -> None:
+        """Writes the title at top of the turtle interface"""
         title = "TURTLE RACE"
         t = turtle.RawTurtle(self.turtle_section)
         t.pencolor("white")
@@ -515,6 +555,7 @@ class MainPage(tk.Frame):
         t.hideturtle()
 
     def start_race(self) -> None:
+        """Move the turtles forward until finish line"""
         if self.compute_bets():
             winners = []
 
@@ -549,6 +590,7 @@ class MainPage(tk.Frame):
             self.disable_enable_entries()
 
     def compute_bets(self) -> int:
+        """Adds all the input bets and store in bets_tally"""
         for b in self.bet_entries:
             try:
                 bet = b[0].get()
@@ -575,6 +617,7 @@ class MainPage(tk.Frame):
             return False
     
     def compute_wins(self, winner) -> int:
+        """Update account balance based on game result"""
         self.balance = curr_balance(self.email)
 
         win_amount = self.bets_tally[winner]    
@@ -586,6 +629,7 @@ class MainPage(tk.Frame):
         self.balance_str.set(f"BAL: Php {curr_balance(self.email)}")
     
     def check_if_digits(self, action, value_if_allowed):
+        """Check if the entry input contains only digits"""
         if action != '1':
             return True
         try:
@@ -594,6 +638,7 @@ class MainPage(tk.Frame):
             return False
 
     def disable_enable_buttons(self) -> None:
+        """Disable buttons if state is normal, enable it otherwise"""
         for b in self.buttons:
             if b["state"] == "normal":
                 b["state"] = "disable"
@@ -601,6 +646,7 @@ class MainPage(tk.Frame):
                 b["state"] = "normal"
 
     def disable_enable_entries(self) -> None:
+        """Disable entry widget if state is normal, enable it otherwise"""
         for b in self.bet_entry_boxes:
             if b["state"] == "normal":
                 b["state"] = "disable"
@@ -608,23 +654,42 @@ class MainPage(tk.Frame):
                 b["state"] = "normal"
 
     def show_DepositPage(self):
+        """Open DepositPage window"""
         deposit_page = DepositPage(self.email,  self.balance_str)
         deposit_page.title("Deposit thru Paypal")
         deposit_page.resizable(width=False, height=False)
         deposit_page.mainloop()
 
     def show_WithdrawPage(self):
+        """Open WithdrawPage window"""
         withdraw_page = WithdrawPage(self.email, self.balance_str)
         withdraw_page.title("Withdraw")
         withdraw_page.resizable(width=False, height=False)
         withdraw_page.mainloop()
 
     def reset_bet(self):
+        """Set all entry_bet_* to 0"""
         for bet in self.bet_entries:
             bet[0].set(0)
 
 
 class DepositPage(tk.Toplevel):
+    """
+    The pop-up window that shows the deposit section of the App.
+
+    Args:
+        email (str): the email that is used by user to log in
+        balance_str (tkinter.StringVar): holds the text for balance label in MainPage
+    
+    Attributes:
+        email (str): the email that is used by the user to log in
+        balance_str (tkinter.StringVar): holds the text for balance label in MainPage
+        logo (tkinter.PhotoImage): imports the logo for payment method
+        lb_logo (tkinter.Label): label widget for displaying the logo
+        entry_amount (tkinter.Entry): entry widget for deposit amount
+        entry_paypal_email (tkinter.Entry): entry widget for paypal email
+        entry_paypal_pw (tkinter.Entry): entry widget for password associated with paypal email
+    """
     def __init__(self, email, balance_str, *args, **kwargs):
         tk.Toplevel.__init__(self, bg=BG_1 ,*args, **kwargs)
 
@@ -664,6 +729,7 @@ class DepositPage(tk.Toplevel):
 
 
     def confirm_deposit(self):
+        """Confirms the deposit if inputs are valid"""
         balance = curr_balance(self.email)
         entries = (self.entry_paypal_email.get(), self.entry_paypal_pw.get())
         entry_amount = int(self.entry_amount.get())
@@ -677,6 +743,22 @@ class DepositPage(tk.Toplevel):
 
 
 class WithdrawPage(tk.Toplevel):
+    """
+    The pop-up window that shows the withdraw section of the App.
+
+    Args:
+        email (str): the email that is used by user to log in
+        balance_str (tkinter.StringVar): holds the text for balance label in MainPage
+    
+    Attributes:
+        email (str): the email that is used by the user to log in
+        balance_str (tkinter.StringVar): holds the text for balance label in MainPage
+        logo (tkinter.PhotoImage): imports the logo for payment method
+        lb_logo (tkinter.Label): label widget for displaying the logo
+        entry_amount (tkinter.Entry): entry widget for deposit amount
+        entry_paypal_email (tkinter.Entry): entry widget for paypal email
+        entry_paypal_pw (tkinter.Entry): entry widget for password associated with paypal email
+    """
     def __init__(self, email, balance_str, *args, **kwargs):
         tk.Toplevel.__init__(self, bg=BG_1,*args, **kwargs)
 
@@ -715,6 +797,7 @@ class WithdrawPage(tk.Toplevel):
         btn_confirm.pack(padx=20, pady=(0, 20), fill="both")
     
     def confirm_withdraw(self):
+        """Confirms the withdrawal if inputs are valid"""
         balance = curr_balance(self.email)
         entries = (self.entry_paypal_email.get(), self.entry_paypal_pw.get())
         entry_amount = int(self.entry_amount.get())
