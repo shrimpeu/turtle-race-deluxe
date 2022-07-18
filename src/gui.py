@@ -73,7 +73,7 @@ class StartPage(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent, padx=120, pady=20, bg=BG_1)
 
-        self.logo = tk.PhotoImage(file="assets/logo.gif")
+        self.logo = tk.PhotoImage(file="assets/app_logo.gif")
         self.lb_logo = tk.Label(self, image=self.logo, bg=BG_1)
         self.lb_logo.pack(padx=100, pady=(30, 10))
 
