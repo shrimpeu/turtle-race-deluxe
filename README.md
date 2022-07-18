@@ -14,9 +14,11 @@ Before running the program, the required modules must be installed first:
 
 ```bash
 pip install -r requirements.txt
+```
 
-# If the above command is not working, try
+If the above command is not working, try
 
+```
 pip3 install -r requirements.txt
 ```
 ___
