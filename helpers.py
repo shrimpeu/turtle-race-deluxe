@@ -1,6 +1,7 @@
 import bcrypt
 import json
 import os
+import re
 
 from tkinter import messagebox
 
@@ -104,12 +105,24 @@ def curr_balance(email: str) -> int:
     return data[email]["balance"]
 
 
-def valid_passwd(passwd: str) -> bool:
-    return True if len(passwd) >= 8 else False
+def valid_passwd(root: type, passwd: str) -> bool:
+    if len(passwd) >= 8:
+        return True
+    messagebox.showwarning(
+        title="Invalid Input",
+        message="Password must be 8 characters long or more."
+    )
+    root.lift()
+    return False
 
 
-def valid_email(email: str) -> bool:
-    pass
+def valid_email(root:type , email: str) -> bool:
+    regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
+    if re.fullmatch(regex, email):
+        return True
+    messagebox.showwarning(title="Invalid Input", message="Invalid Email.")
+    root.lift()
+    return False
 
 
 def display_result(winners: str, bets_won: int) -> str:
