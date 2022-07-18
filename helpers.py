@@ -7,8 +7,20 @@ from tkinter import messagebox
 
 USER_DATA_FILE = f"{os.path.dirname(__file__)}/user_data.json"
 
-
+# Initiate user database
 if os.path.exists(USER_DATA_FILE):
+    with open(USER_DATA_FILE, "r") as data:
+        EXISTING_ACCOUNTS = json.load(data)
+else:
+    sample_account = {
+        "$2b$12$BcqOABIQYslBPyCE3c9l9ewjVjG39J/X.x3cfK6LNW/OJY0UlnY2C": {
+            "balance": 0,
+            "first_name": "Sample",
+            "last_name": "Account",
+            "pword": "$2b$12$VvNB/klBN8BOdYoTtoBIl.nb4.TMK6Pwnhlf7SwPM323diEcoSRx2"}
+    }
+    with open(USER_DATA_FILE, "w") as f:
+        json.dump(sample_account, f, indent=4, separators=(",", ": "), sort_keys=True)
     with open(USER_DATA_FILE, "r") as data:
         EXISTING_ACCOUNTS = json.load(data)
 
@@ -94,3 +106,7 @@ def curr_balance(email: str) -> int:
 
 def valid_passwd(passwd: str) -> bool:
     return True if len(passwd) >= 8 else False
+
+
+def display_result(winners: str, bets_won: int) -> str:
+    pass
