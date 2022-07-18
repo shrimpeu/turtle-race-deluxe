@@ -19,6 +19,10 @@ pip install -r requirements.txt
 
 pip3 install -r requirements.txt
 ```
+> **Note:**
+> If you're on Windows, you must install `windows-curses` module for `bcrypt` to work.
+> 
+> ```pip install windows-curses```
 
 To start the game, try these following commands:
 
