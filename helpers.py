@@ -108,5 +108,14 @@ def valid_passwd(passwd: str) -> bool:
     return True if len(passwd) >= 8 else False
 
 
-def display_result(winners: str, bets_won: int) -> str:
+def valid_email(email: str) -> bool:
     pass
+
+
+def display_result(winners: str, bets_won: int) -> str:
+    result = f"""
+    WINNER: {winners}
+    TOTAL WINS: Php {bets_won}
+    """
+
+    return result
