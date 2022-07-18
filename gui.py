@@ -27,8 +27,8 @@ class App(tk.Tk):
         self.root.grid_rowconfigure(0, weight=1)
         self.root.grid_columnconfigure(0, weight=1)
 
-        self.geometry("804x606")
-
+        self.geometry("970x617")
+# 
         self.frames = {}
 
         for F in {StartPage, SignInPage, SignUpPage}:
@@ -98,7 +98,7 @@ class SignUpPage(tk.Frame):
         entry_repasswd (tk.Entry): entry widget that receives the re-typed password created by the user.
     """
     def __init__(self, parent, controller):
-        tk.Frame.__init__(self, parent, padx=100, pady=120, bg=BG_1)
+        tk.Frame.__init__(self, parent, padx=170, pady=150, bg=BG_1)
 
         #----- Label widgets -----#
         lb_title = tk.Label(self, text="Sign up", width=20, height=1, font=SUBTITLE_FONT, bg=BG_1, fg=TITLE_FG, anchor="center",)
@@ -181,7 +181,7 @@ class SignInPage(tk.Frame):
         entry_passwd (tk.Entry): entry widget that receives the password created by the user.
     """
     def __init__(self, parent, controller):
-        tk.Frame.__init__(self, parent, padx=100, pady=100, bg=BG_1)
+        tk.Frame.__init__(self, parent, padx=170, pady=100, bg=BG_1)
 
         #----- Label widgets -----#
         lb_title = tk.Label(self, text="Sign in", width=20, height=2, font=SUBTITLE_FONT, bg=BG_1, fg=TITLE_FG, anchor="center",)
@@ -237,8 +237,8 @@ class MainPage(tk.Frame):
                 self.email = e
 
         # Set canvas for turtle section
-        self.canvas = tk.Canvas(self, width=760, height=400, bg="black")
-        self.canvas.grid(column=0, row=0, columnspan=8, pady=(0, 20))
+        self.canvas = tk.Canvas(self, width=850, height=400, bg="black")
+        self.canvas.grid(column=0, row=0, columnspan=13, pady=(0, 20))
 
         self.turtle_section = turtle.TurtleScreen(self.canvas)
         self.turtle_section.bgpic("assets/turtle_bg.gif")
@@ -256,196 +256,375 @@ class MainPage(tk.Frame):
 
         # Set turtles in their position
         self.set_turtles()
+        self.set_title()
 
         #----- Labels - Account info -----#
         self.total_bet = 0
         self.total_bet_str = tk.StringVar()
-        self.total_bet_str.set(f"Total Bet: {self.total_bet}")
+        self.total_bet_str.set(f"Bet: Php {self.total_bet}")
 
         lb_total_bet = tk.Label(self, textvariable=self.total_bet_str, height=1, font=NORMAL_FONT, anchor="w", relief=tk.SUNKEN, fg=TITLE_FG, bg=BUTTON_BG)
-        lb_total_bet.grid(column=6, row=1, padx=(5, 0), pady=(0, 5), sticky="NESW")
-
-        self.balance_str = tk.StringVar()
-        self.balance_str.set(f"Balance: Php {self.balance}")
-
-        lb_user_balance = tk.Label(self, textvariable=self.balance_str, height=1, font=NORMAL_FONT, anchor="center", relief=tk.SUNKEN, fg=TITLE_FG, bg=BUTTON_BG)
-        lb_user_balance.grid(column=6, row=2, columnspan=2, padx=(5, 0), pady=(0, 5), sticky="NESW")
+        lb_total_bet.grid(column=10, row=2, columnspan=2, padx=(5, 0), pady=(0, 5), sticky="NESW")
 
         lb_user_name = tk.Label(self, text=f"Name: {f_name[:30]}. {l_name[:1]}.", height=1, font=NORMAL_FONT, anchor="w", relief=tk.SUNKEN, fg=TITLE_FG, bg=BUTTON_BG)
-        lb_user_name.grid(column=7, row=1, padx=(5, 0), pady=(0, 5), sticky="NESW")
+        lb_user_name.grid(column=10, row=3, columnspan=2, padx=(5, 0), pady=(0, 5), sticky="NESW")
+
+        self.balance_str = tk.StringVar()
+        self.balance_str.set(f"BAL: Php {self.balance}")
+
+        lb_user_balance = tk.Label(self, textvariable=self.balance_str, height=1, font=NORMAL_FONT, anchor="w", relief=tk.SUNKEN, fg=TITLE_FG, bg=BUTTON_BG)
+        lb_user_balance.grid(column=10, row=4, columnspan=2, padx=(5, 0), pady=(0, 5), sticky="NESW")
 
         #----- 1st Column -----#
-        lb_RO = tk.Label(self, text=" R-O ", height=1, font=NORMAL_FONT, relief=tk.SUNKEN, fg=BUTTON_BG, bg=TITLE_FG)
-        lb_RO.grid(column=0, row=1, padx=(0, 5), pady=(0, 5), sticky="NESW")
+        lb_RG = tk.Label(self, text=" R-G ", height=1, font=NORMAL_FONT, relief=tk.SUNKEN, fg=BUTTON_BG, bg=TITLE_FG, width=3)
+        lb_RG.grid(column=0, row=1, padx=(0, 5), pady=(0, 5), sticky="NESW")
 
-        lb_GO = tk.Label(self, text=" G-O ", height=1, font=NORMAL_FONT, relief=tk.SUNKEN, fg=BUTTON_BG, bg=TITLE_FG)
-        lb_GO.grid(column=0, row=2, padx=(0, 5), pady=(0, 5), sticky="NESW")
+        lb_RB = tk.Label(self, text=" R-B ", height=1, font=NORMAL_FONT, relief=tk.SUNKEN, fg=BUTTON_BG, bg=TITLE_FG, width=3)
+        lb_RB.grid(column=0, row=2, padx=(0, 5), pady=(0, 5), sticky="NESW")
 
-        lb_BO = tk.Label(self, text=" B-O ", height=1, font=NORMAL_FONT, relief=tk.SUNKEN, fg=BUTTON_BG, bg=TITLE_FG)
-        lb_BO.grid(column=0, row=3, padx=(0, 5), pady=(0, 5), sticky="NESW")
+        lb_RY = tk.Label(self, text=" R-Y ", height=1, font=NORMAL_FONT, relief=tk.SUNKEN, fg=BUTTON_BG, bg=TITLE_FG, width=3)
+        lb_RY.grid(column=0, row=3, padx=(0, 5), pady=(0, 5), sticky="NESW")
 
-        lb_YO = tk.Label(self, text=" Y-O ", height=1, font=NORMAL_FONT, relief=tk.SUNKEN, fg=BUTTON_BG, bg=TITLE_FG)
-        lb_YO.grid(column=0, row=4, padx=(0, 5), sticky="NESW")
+        lb_RO = tk.Label(self, text=" R-O ", height=1, font=NORMAL_FONT, relief=tk.SUNKEN, fg=BUTTON_BG, bg=TITLE_FG, width=3)
+        lb_RO.grid(column=0, row=4, padx=(0, 5), sticky="NESW")
+        #----------------------#
 
         #----- 2nd column -----#
-        self.input_bet_RO = tk.IntVar()
-        self.input_bet_RO.set(0)
+        self.input_bet_RG = tk.IntVar()
+        self.input_bet_RG.set(0)
 
-        self.input_bet_GO = tk.IntVar()
-        self.input_bet_GO.set(0)
+        self.input_bet_RB = tk.IntVar()
+        self.input_bet_RB.set(0)
 
-        self.input_bet_BO = tk.IntVar()
-        self.input_bet_BO.set(0)
-
-        self.input_bet_YO = tk.IntVar()
-        self.input_bet_YO.set(0)
-
-        entry_bet_RO = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_RO,)
-        entry_bet_RO.grid(column=1, row=1, pady=(0, 5), sticky="NESW")
-
-        entry_bet_GO = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_GO,)
-        entry_bet_GO.grid(column=1, row=2, pady=(0, 5), sticky="NESW")
-
-        entry_bet_BO = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_BO,)
-        entry_bet_BO.grid(column=1, row=3, pady=(0, 5), sticky="NESW")
-
-        entry_bet_YO = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_YO,)
-        entry_bet_YO.grid(column=1, row=4, sticky="NESW")
-
-        #----- 3rd Column -----#
-        lb_RY = tk.Label(self, text=" R-Y ", height=1, font=NORMAL_FONT, relief=tk.SUNKEN, fg=BUTTON_BG, bg=TITLE_FG)
-        lb_RY.grid(column=2, row=1, padx=(5, 5), pady=(0, 5), sticky="NESW")
-
-        lb_GY = tk.Label(self, text=" G-Y ", height=1, font=NORMAL_FONT, relief=tk.SUNKEN, fg=BUTTON_BG, bg=TITLE_FG)
-        lb_GY.grid(column=2, row=2, padx=(5, 5), pady=(0, 5), sticky="NESW")
-
-        lb_BY = tk.Label(self, text=" B-Y ", height=1, font=NORMAL_FONT, relief=tk.SUNKEN, fg=BUTTON_BG, bg=TITLE_FG)
-        lb_BY.grid(column=2, row=3, padx=(5, 5), pady=(0, 5), sticky="NESW")
-
-        lb_GB = tk.Label(self, text=" G-B ", height=1, font=NORMAL_FONT, relief=tk.SUNKEN, fg=BUTTON_BG, bg=TITLE_FG)
-        lb_GB.grid(column=2, row=4, padx=(5, 5), sticky="NESW")
-
-        #----- 4th column -----#
         self.input_bet_RY = tk.IntVar()
         self.input_bet_RY.set(0)
 
-        self.input_bet_GY = tk.IntVar()
-        self.input_bet_GY.set(0)
+        self.input_bet_RO = tk.IntVar()
+        self.input_bet_RO.set(0)
 
-        self.input_bet_BY = tk.IntVar()
-        self.input_bet_BY.set(0)
+        self.entry_bet_RG = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_RG,)
+        self.entry_bet_RG.grid(column=1, row=1, pady=(0, 5), sticky="NESW")
+
+        self.entry_bet_RB = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_RB,)
+        self.entry_bet_RB.grid(column=1, row=2, pady=(0, 5), sticky="NESW")
+
+        self.entry_bet_RY = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_RY,)
+        self.entry_bet_RY.grid(column=1, row=3, pady=(0, 5), sticky="NESW")
+
+        self.entry_bet_RO = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_RO,)
+        self.entry_bet_RO.grid(column=1, row=4, sticky="NESW")
+        #----------------------#
+
+        #----- 3rd Column -----#
+        lb_GR = tk.Label(self, text=" G-R ", height=1, font=NORMAL_FONT, relief=tk.SUNKEN, fg=BUTTON_BG, bg=TITLE_FG, width=3)
+        lb_GR.grid(column=2, row=1, padx=(0, 5), pady=(0, 5), sticky="NESW")
+
+        lb_GB = tk.Label(self, text=" G-B ", height=1, font=NORMAL_FONT, relief=tk.SUNKEN, fg=BUTTON_BG, bg=TITLE_FG, width=3)
+        lb_GB.grid(column=2, row=2, padx=(0, 5), pady=(0, 5), sticky="NESW")
+
+        lb_GY = tk.Label(self, text=" G-Y ", height=1, font=NORMAL_FONT, relief=tk.SUNKEN, fg=BUTTON_BG, bg=TITLE_FG, width=3)
+        lb_GY.grid(column=2, row=3, padx=(0, 5), pady=(0, 5), sticky="NESW")
+
+        lb_GO = tk.Label(self, text=" G-O ", height=1, font=NORMAL_FONT, relief=tk.SUNKEN, fg=BUTTON_BG, bg=TITLE_FG, width=3)
+        lb_GO.grid(column=2, row=4, padx=(0, 5), sticky="NESW")
+        #----------------------#
+
+        #----- 4th column -----#
+        self.input_bet_GR = tk.IntVar()
+        self.input_bet_GR.set(0)
 
         self.input_bet_GB = tk.IntVar()
         self.input_bet_GB.set(0)
 
-        entry_bet_RY = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_RY,)
-        entry_bet_RY.grid(column=3, row=1, pady=(0, 5), sticky="NESW")
+        self.input_bet_GY = tk.IntVar()
+        self.input_bet_GY.set(0)
 
-        entry_bet_GY = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_GY,)
-        entry_bet_GY.grid(column=3, row=2, pady=(0, 5), sticky="NESW")
+        self.input_bet_GO = tk.IntVar()
+        self.input_bet_GO.set(0)
 
-        entry_bet_BY = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_BY,)
-        entry_bet_BY.grid(column=3, row=3, pady=(0, 5), sticky="NESW")
+        self.entry_bet_GR = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_GR,)
+        self.entry_bet_GR.grid(column=3, row=1, pady=(0, 5), sticky="NESW")
 
-        entry_bet_GB = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_GB,)
-        entry_bet_GB.grid(column=3, row=4, sticky="NESW")
+        self.entry_bet_GB = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_GB,)
+        self.entry_bet_GB.grid(column=3, row=2, pady=(0, 5), sticky="NESW")
+
+        self.entry_bet_GY = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_GY,)
+        self.entry_bet_GY.grid(column=3, row=3, pady=(0, 5), sticky="NESW")
+
+        self.entry_bet_GO = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_GO,)
+        self.entry_bet_GO.grid(column=3, row=4, sticky="NESW")
+        #----------------------#
 
         #----- 5th Column -----#
-        lb_RB = tk.Label(self, text=" R-B ", height=1, font=NORMAL_FONT, relief=tk.SUNKEN, fg=BUTTON_BG, bg=TITLE_FG)
-        lb_RB.grid(column=4, row=1, padx=(5, 5), pady=(0, 5), sticky="NESW")
+        lb_BR = tk.Label(self, text=" B-R ", height=1, font=NORMAL_FONT, relief=tk.SUNKEN, fg=BUTTON_BG, bg=TITLE_FG, width=3)
+        lb_BR.grid(column=4, row=1, padx=(0, 5), pady=(0, 5), sticky="NESW")
 
-        lb_RG = tk.Label(self, text=" R-G ", height=1, font=NORMAL_FONT, relief=tk.SUNKEN, fg=BUTTON_BG, bg=TITLE_FG)
-        lb_RG.grid(column=4, row=2, padx=(5, 5), pady=(0, 5), sticky="NESW")
+        lb_BG = tk.Label(self, text=" B-G ", height=1, font=NORMAL_FONT, relief=tk.SUNKEN, fg=BUTTON_BG, bg=TITLE_FG, width=3)
+        lb_BG.grid(column=4, row=2, padx=(0, 5), pady=(0, 5), sticky="NESW")
+
+        lb_BY = tk.Label(self, text=" B-Y ", height=1, font=NORMAL_FONT, relief=tk.SUNKEN, fg=BUTTON_BG, bg=TITLE_FG, width=3)
+        lb_BY.grid(column=4, row=3, padx=(0, 5), pady=(0, 5), sticky="NESW")
+
+        lb_BO = tk.Label(self, text=" B-O ", height=1, font=NORMAL_FONT, relief=tk.SUNKEN, fg=BUTTON_BG, bg=TITLE_FG, width=3)
+        lb_BO.grid(column=4, row=4, padx=(0, 5), sticky="NESW")
+        #----------------------#
 
         #----- 6th column -----#
-        self.input_bet_RB = tk.IntVar()
-        self.input_bet_RB.set(0)
+        self.input_bet_BR = tk.IntVar()
+        self.input_bet_BR.set(0)
 
-        self.input_bet_RG = tk.IntVar()
-        self.input_bet_RG.set(0)
+        self.input_bet_BG = tk.IntVar()
+        self.input_bet_BG.set(0)
 
-        entry_bet_RB = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_RB,)
-        entry_bet_RB.grid(column=5, row=1, pady=(0, 5), sticky="NESW")
+        self.input_bet_BY = tk.IntVar()
+        self.input_bet_BY.set(0)
 
-        entry_bet_RG = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_RG,)
-        entry_bet_RG.grid(column=5, row=2, pady=(0, 5), sticky="NESW")
+        self.input_bet_BO = tk.IntVar()
+        self.input_bet_BO.set(0)
+
+        self.entry_bet_BR = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_BR,)
+        self.entry_bet_BR.grid(column=5, row=1, pady=(0, 5), sticky="NESW")
+
+        self.entry_bet_BG = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_BG,)
+        self.entry_bet_BG.grid(column=5, row=2, pady=(0, 5), sticky="NESW")
+
+        self.entry_bet_BY = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_BY,)
+        self.entry_bet_BY.grid(column=5, row=3, pady=(0, 5), sticky="NESW")
+
+        self.entry_bet_BO = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_BO,)
+        self.entry_bet_BO.grid(column=5, row=4, sticky="NESW")
+        #----------------------#
+
+        #----- 7th Column -----#
+        lb_YR = tk.Label(self, text=" Y-R ", height=1, font=NORMAL_FONT, relief=tk.SUNKEN, fg=BUTTON_BG, bg=TITLE_FG, width=3)
+        lb_YR.grid(column=6, row=1, padx=(0, 5), pady=(0, 5), sticky="NESW")
+
+        lb_YG = tk.Label(self, text=" Y-G ", height=1, font=NORMAL_FONT, relief=tk.SUNKEN, fg=BUTTON_BG, bg=TITLE_FG, width=3)
+        lb_YG.grid(column=6, row=2, padx=(0, 5), pady=(0, 5), sticky="NESW")
+
+        lb_YB = tk.Label(self, text=" Y-B ", height=1, font=NORMAL_FONT, relief=tk.SUNKEN, fg=BUTTON_BG, bg=TITLE_FG, width=3)
+        lb_YB.grid(column=6, row=3, padx=(0, 5), pady=(0, 5), sticky="NESW")
+
+        lb_YO = tk.Label(self, text=" Y-O ", height=1, font=NORMAL_FONT, relief=tk.SUNKEN, fg=BUTTON_BG, bg=TITLE_FG, width=3)
+        lb_YO.grid(column=6, row=4, padx=(0, 5), sticky="NESW")
+        #----------------------#
+
+        #----- 8th column -----#
+        self.input_bet_YR = tk.IntVar()
+        self.input_bet_YR.set(0)
+
+        self.input_bet_YG = tk.IntVar()
+        self.input_bet_YG.set(0)
+
+        self.input_bet_YB = tk.IntVar()
+        self.input_bet_YB.set(0)
+
+        self.input_bet_YO = tk.IntVar()
+        self.input_bet_YO.set(0)
+
+        self.entry_bet_YR = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_YR,)
+        self.entry_bet_YR.grid(column=7, row=1, pady=(0, 5), sticky="NESW")
+
+        self.entry_bet_YG = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_YG,)
+        self.entry_bet_YG.grid(column=7, row=2, pady=(0, 5), sticky="NESW")
+
+        self.entry_bet_YB = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_YB,)
+        self.entry_bet_YB.grid(column=7, row=3, pady=(0, 5), sticky="NESW")
+
+        self.entry_bet_YO = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_YO,)
+        self.entry_bet_YO.grid(column=7, row=4, sticky="NESW")
+        #----------------------#
+
+        #----- 9th Column -----#
+        lb_OR = tk.Label(self, text=" O-R ", height=1, font=NORMAL_FONT, relief=tk.SUNKEN, fg=BUTTON_BG, bg=TITLE_FG, width=3)
+        lb_OR.grid(column=8, row=1, padx=(0, 5), pady=(0, 5), sticky="NESW")
+
+        lb_OG = tk.Label(self, text=" O-G ", height=1, font=NORMAL_FONT, relief=tk.SUNKEN, fg=BUTTON_BG, bg=TITLE_FG, width=3)
+        lb_OG.grid(column=8, row=2, padx=(0, 5), pady=(0, 5), sticky="NESW")
+
+        lb_OB = tk.Label(self, text=" O-B ", height=1, font=NORMAL_FONT, relief=tk.SUNKEN, fg=BUTTON_BG, bg=TITLE_FG, width=3)
+        lb_OB.grid(column=8, row=3, padx=(0, 5), pady=(0, 5), sticky="NESW")
+
+        lb_OY = tk.Label(self, text=" O-Y ", height=1, font=NORMAL_FONT, relief=tk.SUNKEN, fg=BUTTON_BG, bg=TITLE_FG, width=3)
+        lb_OY.grid(column=8, row=4, padx=(0, 5), sticky="NESW")
+        #----------------------#
+
+        #----- 10th column -----#
+        self.input_bet_OR = tk.IntVar()
+        self.input_bet_OR.set(0)
+
+        self.input_bet_OG = tk.IntVar()
+        self.input_bet_OG.set(0)
+
+        self.input_bet_OB = tk.IntVar()
+        self.input_bet_OB.set(0)
+
+        self.input_bet_OY = tk.IntVar()
+        self.input_bet_OY.set(0)
+
+        self.entry_bet_OR = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_OR,)
+        self.entry_bet_OR.grid(column=9, row=1, pady=(0, 5), sticky="NESW")
+
+        self.entry_bet_OG = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_OG,)
+        self.entry_bet_OG.grid(column=9, row=2, pady=(0, 5), sticky="NESW")
+
+        self.entry_bet_OB = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_OB,)
+        self.entry_bet_OB.grid(column=9, row=3, pady=(0, 5), sticky="NESW")
+
+        self.entry_bet_OY = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_OY,)
+        self.entry_bet_OY.grid(column=9, row=4, sticky="NESW")
+        #----------------------#
 
         #----- USER INPUT LIST -----#
         self.bet_entries = [
-            self.input_bet_RO, self.input_bet_GO, self.input_bet_BO, self.input_bet_YO,
-            self.input_bet_RY, self.input_bet_GY, self.input_bet_BY, self.input_bet_GB,
-            self.input_bet_RB, self.input_bet_RG]
+            [self.input_bet_RG, "R-G"],[self.input_bet_RB, "R-B"],[self.input_bet_RY, "R-Y"],
+            [self.input_bet_RO, "R-O"],[self.input_bet_GR, "G-R"],[self.input_bet_GB, "G-B"],
+            [self.input_bet_GY, "G-Y"],[self.input_bet_GO, "G-O"],[self.input_bet_BR, "B-R"],
+            [self.input_bet_BG, "B-G"],[self.input_bet_BY, "B-Y"],[self.input_bet_BO, "B-O"],
+            [self.input_bet_YR, "Y-R"],[self.input_bet_YG, "Y-G"],[self.input_bet_YB, "Y-B"],
+            [self.input_bet_YO, "Y-O"],[self.input_bet_OR, "O-R"],[self.input_bet_OG, "O-G"],
+            [self.input_bet_OB, "O-B"],[self.input_bet_OY, "OY"]
+        ]
+
+        self.bet_entry_boxes = (
+            self.entry_bet_RG, self.entry_bet_RB, self.entry_bet_RY, self.entry_bet_RO,
+            self.entry_bet_GR, self.entry_bet_GB, self.entry_bet_GY, self.entry_bet_GO,
+            self.entry_bet_BR, self.entry_bet_BG, self.entry_bet_BY, self.entry_bet_BO,
+            self.entry_bet_YR, self.entry_bet_YG, self.entry_bet_YB, self.entry_bet_YO,
+            self.entry_bet_OR, self.entry_bet_OG, self.entry_bet_OB, self.entry_bet_OY,
+        )
 
         self.bets_tally = {
-            "R-O": 0, "G-O": 0, "B-O": 0, "Y-O": 0, "R-Y": 0,
-            "G-Y": 0, "B-Y": 0, "G-B": 0, "R-B": 0, "R-G": 0
+            "R-G": 0, "G-R": 0, "B-R": 0, "Y-R": 0, "O-R": 0,
+            "R-B": 0, "G-B": 0, "B-G": 0, "Y-G": 0, "O-G": 0,
+            "R-Y": 0, "G-Y": 0, "B-Y": 0, "Y-B": 0, "O-B": 0,
+            "R-O": 0, "G-O": 0, "B-O": 0, "Y-O": 0, "O-Y": 0
         }
 
         #----- Buttons -----#
 
         # Game start button
-        btn_start = tk.Button(self, text="Start Game", font=NORMAL_FONT, command=self.start_race, height=1, fg=TITLE_FG, bg="white")
-        btn_start.grid(column=4, row=3, columnspan=2, padx=(5, 0), pady=(0, 5), sticky="NESW",)
+        self.btn_start = tk.Button(self, text="Start Game", font=NORMAL_FONT, command=self.start_race, height=1, fg=TITLE_FG, bg="white")
+        self.btn_start.grid(column=10, row=1, padx=(5, 0), pady=(0, 5), sticky="NESW",)
         # Reset bet button
-        btn_reset_bet = tk.Button(self, text="Reset Bet", font=NORMAL_FONT, command=self.reset_bet, height=1, fg=TITLE_FG, bg="white")
-        btn_reset_bet.grid(column=4, row=4, columnspan=2, padx=(5, 0), sticky="NESW")
+        self.btn_reset_bet = tk.Button(self, text="Reset Bet", font=NORMAL_FONT, command=self.reset_bet, height=1, fg=TITLE_FG, bg="white")
+        self.btn_reset_bet.grid(column=11, row=1, padx=(5, 0), pady=(0, 5), sticky="NESW")
         # Deposite Button
-        btn_deposit = tk.Button(self, text="Deposit", font=NORMAL_FONT, command=self.show_DepositPage, height=1, fg=TITLE_FG, bg="white")
-        btn_deposit.grid(column=6, row=3, columnspan=2, padx=(5, 0), pady=(0, 5), sticky="NESW",)
+        self.btn_deposit = tk.Button(self, text="Deposit", font=NORMAL_FONT, command=self.show_DepositPage, height=1, fg=TITLE_FG, bg="white")
+        self.btn_deposit.grid(column=12, row=1, rowspan=2, padx=(5, 0), pady=(0, 5), sticky="NESW",)
         # Withdraw Button
-        btn_withdraw = tk.Button(self, text="Withdraw", font=NORMAL_FONT, command=self.show_WithdrawPage, height=1, fg=TITLE_FG, bg="white")
-        btn_withdraw.grid(column=7, row=4, padx=(5, 0), sticky="NESW")
+        self.btn_withdraw = tk.Button(self, text="Withdraw", font=NORMAL_FONT, command=self.show_WithdrawPage, height=1, fg=TITLE_FG, bg="white")
+        self.btn_withdraw.grid(column=12, row=3, padx=(5, 0), pady=(0, 5), sticky="NESW")
         # Log out Button
-        btn_logout = tk.Button(self, text="Log out", font=NORMAL_FONT, command=lambda: controller.show_frame(StartPage), height=1, fg="red", bg="white")
-        btn_logout.grid(column=6, row=4, padx=(5, 0), sticky="NESW")
+        self.btn_logout = tk.Button(self, text="Log out", font=NORMAL_FONT, command=lambda: controller.show_frame(StartPage), height=1, fg="red", bg="white")
+        self.btn_logout.grid(column=12, row=4, padx=(5, 0), sticky="NESW")
+
+        self.buttons = (self.btn_start, self.btn_reset_bet, self.btn_deposit,
+                        self.btn_withdraw, self.btn_logout)
 
     def set_turtles(self) -> None:
         for t in self.turtles:
+            t[0].speed(0)
+            t[0].clear()
             self.turtle_section.addshape(f"assets/t_{t[1]}.gif")
             t[0].shape(f"assets/t_{t[1]}.gif")
             t[0].shapesize(2)
             t[0].pencolor(t[1])
             t[0].penup()
-            t[0].goto(x=-300, y=self.turtle_ypos[self.turtles.index(t)])
+            t[0].goto(x=-380, y=self.turtle_ypos[self.turtles.index(t)])
             t[0].pendown()
 
-    def start_race(self) -> None:
-        self.compute_bets()
-        turtles = self.turtles
+    def set_title(self) -> None:
+        title = "TURTLE RACE"
+        t = turtle.RawTurtle(self.turtle_section)
+        t.pencolor("white")
+        t.speed(0)
+        t.penup()
+        t.goto(x=0, y=140)
+        t.pendown()
+        t.write(title, align="center", font=SUBTITLE_FONT)
+        t.penup()
+        t.hideturtle()
 
-        if self.total_bet != 0:
-            winners = "-"
-            while len(winners) != 3:
-                for t in turtles:
-                    if t[0].xcor() >= 278:
-                        if len(winners) == 2:
-                            winners = winners + t[2]
-                        else:
-                            winners = t[2] + winners
-                        turtles.remove(t)
+    def start_race(self) -> None:
+        if self.compute_bets():
+            winners = []
+
+            self.disable_enable_entries()
+            self.disable_enable_buttons()
+            while len(winners) < 2:
+                for t in self.turtles:
+                    if t[2] in winners:
+                        continue
+                    if t[0].xcor() >= 380:
+                        winners.append(t[2])
                     else:
-                        t[0].forward(random.randint(1, 10))
-                
-            messagebox.showinfo(title="Game Result", message=f"WINNERS: {winners}")
+                        d = random.randint(3, 20)
+                        t[0].forward(random.randint(1, d))
+            
+            winners = "-".join(winners)
+
+            if len(winners) > 2:
+                winners = winners[:3]
+
+            win_amount = self.bets_tally[winners]
+            
+            messagebox.showinfo(title="Game Result", message=display_result(winners, win_amount))
+            
+            self.compute_wins(winners)
+
+            self.total_bet = 0
+            self.total_bet_str.set("Bet: Php 0")
+
+            self.set_turtles()
+            self.disable_enable_buttons()
+            self.disable_enable_entries()
 
     def compute_bets(self) -> int:
-        for bet in self.bet_entries:
-            bet = bet.get()
+        for b in self.bet_entries:
+            bet = b[0].get()
             if bet == "":
                 bet = 0
+            self.bets_tally[b[1]] = bet
             self.total_bet += bet
-
-        if self.total_bet > self.balance:
-            messagebox.showwarning(title="Invalid Input", message="Insufficient balance.")
-            self.total_bet = 0
-            return None
-        elif self.total_bet == 0:
+        
+        self.balance = curr_balance(self.email)
+        if self.total_bet == 0:
             messagebox.showwarning(title="Invalid Input", message="Hey, bet something!")
             self.total_bet = 0
-            return None
+            return False
+        elif self.total_bet == self.balance or self.total_bet < self.balance:
+            self.total_bet_str.set(f"Bet: Php {self.total_bet}")
+            return True
         else:
-            self.total_bet_str.set(f"Total Bet: Php {self.total_bet}")
-            self.reset_bet()
+            messagebox.showwarning(title="Invalid Input", message="Insufficient balance.")
+            self.total_bet = 0
+            return False
+    
+    def compute_wins(self, winner) -> int:
+        self.balance = curr_balance(self.email)
+
+        win_amount = self.bets_tally[winner]    
+        lose_amount = self.total_bet - win_amount
+        new_balance = self.balance + win_amount - lose_amount
+
+        update_balance(self.email, new_balance)
+
+        self.balance_str.set(f"BAL: Php {curr_balance(self.email)}")
+
+    def disable_enable_buttons(self) -> None:
+        for b in self.buttons:
+            if b["state"] == "normal":
+                b["state"] = "disable"
+            else:
+                b["state"] = "normal"
+
+    def disable_enable_entries(self) -> None:
+        for b in self.bet_entry_boxes:
+            if b["state"] == "normal":
+                b["state"] = "disable"
+            else:
+                b["state"] = "normal"
 
     def show_DepositPage(self):
         deposit_page = DepositPage(self.email,  self.balance_str)
@@ -461,7 +640,7 @@ class MainPage(tk.Frame):
 
     def reset_bet(self):
         for bet in self.bet_entries:
-            bet.set(0)
+            bet[0].set(0)
 
 
 class DepositPage(tk.Toplevel):
@@ -511,7 +690,7 @@ class DepositPage(tk.Toplevel):
             input_not_empty(self, entries):
             balance += entry_amount
             update_balance(self.email, balance)
-            self.balance_str.set(f"Balance: Php {balance}")
+            self.balance_str.set(f"BAL: Php {balance}")
             self.destroy()
 
 
@@ -561,5 +740,5 @@ class WithdrawPage(tk.Toplevel):
             input_not_empty(self, entries):
             balance -= entry_amount
             update_balance(self.email, balance)
-            self.balance_str.set(f"Balance: Php {balance}")
+            self.balance_str.set(f"BAL: Php {balance}")
             self.destroy()
