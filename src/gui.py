@@ -277,7 +277,7 @@ class MainPage(tk.Frame):
                 self.balance = EXISTING_ACCOUNTS[e]["balance"]
                 self.email = e
         
-        valid_entry = (self.register(self.check_if_digits), "%d", "%P")
+        self.valid_entry = (self.register(self.check_if_digits), "%d", "%P")
 
         # Set canvas for turtle section
         self.canvas = tk.Canvas(self, width=850, height=400, bg="black")
@@ -338,16 +338,16 @@ class MainPage(tk.Frame):
         self.input_bet_RY = tk.StringVar()
         self.input_bet_RO = tk.StringVar()
 
-        self.entry_bet_RG = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_RG, validate="key", validatecommand=valid_entry)
+        self.entry_bet_RG = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_RG, validate="key", validatecommand=self.valid_entry)
         self.entry_bet_RG.grid(column=1, row=1, pady=(0, 5), sticky="NESW")
 
-        self.entry_bet_RB = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_RB,)
+        self.entry_bet_RB = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_RB, validate="key", validatecommand=self.valid_entry)
         self.entry_bet_RB.grid(column=1, row=2, pady=(0, 5), sticky="NESW")
 
-        self.entry_bet_RY = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_RY,)
+        self.entry_bet_RY = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_RY, validate="key", validatecommand=self.valid_entry)
         self.entry_bet_RY.grid(column=1, row=3, pady=(0, 5), sticky="NESW")
 
-        self.entry_bet_RO = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_RO,)
+        self.entry_bet_RO = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_RO, validate="key", validatecommand=self.valid_entry)
         self.entry_bet_RO.grid(column=1, row=4, sticky="NESW")
         #----------------------#
 
@@ -371,16 +371,16 @@ class MainPage(tk.Frame):
         self.input_bet_GY = tk.StringVar()
         self.input_bet_GO = tk.StringVar()
 
-        self.entry_bet_GR = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_GR,)
+        self.entry_bet_GR = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_GR, validate="key", validatecommand=self.valid_entry)
         self.entry_bet_GR.grid(column=3, row=1, pady=(0, 5), sticky="NESW")
 
-        self.entry_bet_GB = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_GB,)
+        self.entry_bet_GB = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_GB, validate="key", validatecommand=self.valid_entry)
         self.entry_bet_GB.grid(column=3, row=2, pady=(0, 5), sticky="NESW")
 
-        self.entry_bet_GY = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_GY,)
+        self.entry_bet_GY = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_GY, validate="key", validatecommand=self.valid_entry)
         self.entry_bet_GY.grid(column=3, row=3, pady=(0, 5), sticky="NESW")
 
-        self.entry_bet_GO = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_GO,)
+        self.entry_bet_GO = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_GO, validate="key", validatecommand=self.valid_entry)
         self.entry_bet_GO.grid(column=3, row=4, sticky="NESW")
         #----------------------#
 
@@ -404,16 +404,16 @@ class MainPage(tk.Frame):
         self.input_bet_BY = tk.StringVar()
         self.input_bet_BO = tk.StringVar()
 
-        self.entry_bet_BR = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_BR,)
+        self.entry_bet_BR = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_BR, validate="key", validatecommand=self.valid_entry)
         self.entry_bet_BR.grid(column=5, row=1, pady=(0, 5), sticky="NESW")
 
-        self.entry_bet_BG = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_BG,)
+        self.entry_bet_BG = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_BG, validate="key", validatecommand=self.valid_entry)
         self.entry_bet_BG.grid(column=5, row=2, pady=(0, 5), sticky="NESW")
 
-        self.entry_bet_BY = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_BY,)
+        self.entry_bet_BY = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_BY, validate="key", validatecommand=self.valid_entry)
         self.entry_bet_BY.grid(column=5, row=3, pady=(0, 5), sticky="NESW")
 
-        self.entry_bet_BO = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_BO,)
+        self.entry_bet_BO = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_BO, validate="key", validatecommand=self.valid_entry)
         self.entry_bet_BO.grid(column=5, row=4, sticky="NESW")
         #----------------------#
 
@@ -437,16 +437,16 @@ class MainPage(tk.Frame):
         self.input_bet_YB = tk.StringVar()
         self.input_bet_YO = tk.StringVar()
 
-        self.entry_bet_YR = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_YR,)
+        self.entry_bet_YR = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_YR, validate="key", validatecommand=self.valid_entry)
         self.entry_bet_YR.grid(column=7, row=1, pady=(0, 5), sticky="NESW")
 
-        self.entry_bet_YG = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_YG,)
+        self.entry_bet_YG = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_YG, validate="key", validatecommand=self.valid_entry)
         self.entry_bet_YG.grid(column=7, row=2, pady=(0, 5), sticky="NESW")
 
-        self.entry_bet_YB = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_YB,)
+        self.entry_bet_YB = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_YB, validate="key", validatecommand=self.valid_entry)
         self.entry_bet_YB.grid(column=7, row=3, pady=(0, 5), sticky="NESW")
 
-        self.entry_bet_YO = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_YO,)
+        self.entry_bet_YO = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_YO, validate="key", validatecommand=self.valid_entry)
         self.entry_bet_YO.grid(column=7, row=4, sticky="NESW")
         #----------------------#
 
@@ -470,16 +470,16 @@ class MainPage(tk.Frame):
         self.input_bet_OB = tk.StringVar()
         self.input_bet_OY = tk.StringVar()
 
-        self.entry_bet_OR = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_OR,)
+        self.entry_bet_OR = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_OR, validate="key", validatecommand=self.valid_entry)
         self.entry_bet_OR.grid(column=9, row=1, pady=(0, 5), sticky="NESW")
 
-        self.entry_bet_OG = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_OG,)
+        self.entry_bet_OG = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_OG, validate="key", validatecommand=self.valid_entry)
         self.entry_bet_OG.grid(column=9, row=2, pady=(0, 5), sticky="NESW")
 
-        self.entry_bet_OB = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_OB,)
+        self.entry_bet_OB = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_OB, validate="key", validatecommand=self.valid_entry)
         self.entry_bet_OB.grid(column=9, row=3, pady=(0, 5), sticky="NESW")
 
-        self.entry_bet_OY = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_OY,)
+        self.entry_bet_OY = tk.Entry(self, width=5, font=NORMAL_FONT, textvariable=self.input_bet_OY, validate="key", validatecommand=self.valid_entry)
         self.entry_bet_OY.grid(column=9, row=4, sticky="NESW")
         #----------------------#
 
@@ -657,14 +657,14 @@ class MainPage(tk.Frame):
 
     def show_DepositPage(self) -> None:
         """Opens DepositPage window"""
-        deposit_page = DepositPage(self.email,  self.balance_str)
+        deposit_page = DepositPage(self.email,  self.balance_str, self.valid_entry)
         deposit_page.title("Deposit thru Paypal")
         deposit_page.resizable(width=False, height=False)
         deposit_page.mainloop()
 
     def show_WithdrawPage(self) -> None:
         """Opens WithdrawPage window"""
-        withdraw_page = WithdrawPage(self.email, self.balance_str)
+        withdraw_page = WithdrawPage(self.email, self.balance_str, self.valid_entry)
         withdraw_page.title("Withdraw")
         withdraw_page.resizable(width=False, height=False)
         withdraw_page.mainloop()
@@ -682,6 +682,7 @@ class DepositPage(tk.Toplevel):
     Args:
         email (str): the email that is used by user to log in
         balance_str (tkinter.StringVar): holds the text for balance label in MainPage
+        valid_entry (tkinter.register): inherited from MainPage for checking entries if it has only digits
     
     Attributes:
         email (str): the email that is used by the user to log in
@@ -692,7 +693,7 @@ class DepositPage(tk.Toplevel):
         entry_paypal_email (tkinter.Entry): entry widget for paypal email
         entry_paypal_pw (tkinter.Entry): entry widget for password associated with paypal email
     """
-    def __init__(self, email, balance_str, *args, **kwargs):
+    def __init__(self, email, balance_str, valid_entry, *args, **kwargs):
         tk.Toplevel.__init__(self, bg=BG_1 ,*args, **kwargs)
 
         self.email = email
@@ -708,7 +709,7 @@ class DepositPage(tk.Toplevel):
         lb_amount = tk.Label(self, text="Amount (min: Php 100)", font=NORMAL_FONT, anchor="center", bg=BG_1)
         lb_amount.pack(padx=20, pady=(0, 5))
 
-        self.entry_amount = tk.Entry(self, width=30, font=NORMAL_FONT, borderwidth=2, highlightthickness=2, highlightcolor=BORDER_FILL, highlightbackground=BORDER_FILL)
+        self.entry_amount = tk.Entry(self, width=30, font=NORMAL_FONT, borderwidth=2, highlightthickness=2, highlightcolor=BORDER_FILL, highlightbackground=BORDER_FILL, validate="key", validatecommand=valid_entry)
         self.entry_amount.pack(padx=20)
 
         lb_signinp_title = tk.Label(self, text="Sign in to Paypal", font=NORMAL_FONT, anchor="center", fg=TITLE_FG , bg=BG_1)
@@ -734,7 +735,7 @@ class DepositPage(tk.Toplevel):
         """Confirms the deposit if inputs are valid"""
         balance = curr_balance(self.email)
         entries = [self.entry_paypal_email.get(), self.entry_paypal_pw.get()]
-        entry_amount = int(self.entry_amount.get())
+        entry_amount = int(self.entry_amount.get().lstrip("0"))
         if valid_amount(self, "deposit", entry_amount, balance) and \
             input_not_empty(self, entries) and valid_email(self, self.entry_paypal_email.get()) and \
                 valid_passwd(self, self.entry_paypal_pw.get()):
@@ -751,6 +752,7 @@ class WithdrawPage(tk.Toplevel):
     Args:
         email (str): the email that is used by user to log in
         balance_str (tkinter.StringVar): holds the text for balance label in MainPage
+        valid_entry (tkinter.register): inherited from MainPage for checking entries if it has only digits
     
     Attributes:
         email (str): the email that is used by the user to log in
@@ -761,7 +763,7 @@ class WithdrawPage(tk.Toplevel):
         entry_paypal_email (tkinter.Entry): entry widget for paypal email
         entry_paypal_pw (tkinter.Entry): entry widget for password associated with paypal email
     """
-    def __init__(self, email, balance_str, *args, **kwargs):
+    def __init__(self, email, balance_str, valid_entry, *args, **kwargs):
         tk.Toplevel.__init__(self, bg=BG_1,*args, **kwargs)
 
         self.email = email
@@ -777,7 +779,7 @@ class WithdrawPage(tk.Toplevel):
         lb_amount = tk.Label(self, text="Amount (min: Php 300)", font=NORMAL_FONT, anchor="center", bg=BG_1)
         lb_amount.pack(padx=20, pady=(0, 5))
 
-        self.entry_amount = tk.Entry(self, width=30, font=NORMAL_FONT, borderwidth=2, highlightthickness=2, highlightcolor=BORDER_FILL, highlightbackground=BORDER_FILL)
+        self.entry_amount = tk.Entry(self, width=30, font=NORMAL_FONT, borderwidth=2, highlightthickness=2, highlightcolor=BORDER_FILL, highlightbackground=BORDER_FILL, validate="key", validatecommand=valid_entry)
         self.entry_amount.pack(padx=20)
 
         lb_signinp_title = tk.Label(self, text="Sign in to Paypal", font=NORMAL_FONT, anchor="center", fg=TITLE_FG , bg=BG_1)
@@ -802,7 +804,7 @@ class WithdrawPage(tk.Toplevel):
         """Confirms the withdrawal if inputs are valid"""
         balance = curr_balance(self.email)
         entries = [self.entry_paypal_email.get(), self.entry_paypal_pw.get()]
-        entry_amount = int(self.entry_amount.get())
+        entry_amount = int(self.entry_amount.get().lstrip("0"))
         if valid_amount(self, "withdraw", entry_amount, balance) and \
             input_not_empty(self, entries) and valid_email(self, self.entry_paypal_email.get()) and \
                 valid_passwd(self, self.entry_paypal_pw.get()):
