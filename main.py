@@ -1,5 +1,5 @@
 from gui import App
-# This is a sample push
+
 
 def main():
     app = App()
