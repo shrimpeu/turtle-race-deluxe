@@ -135,6 +135,9 @@ class SignUpPage(tk.Frame):
         self.entry_repasswd = tk.Entry(self, width=30, borderwidth=2, relief=tk.GROOVE, fg=ENTRY_FG, bg=ENTRY_BG, font=NORMAL_FONT, show="*", highlightthickness=2, highlightcolor=BORDER_FILL, highlightbackground=BORDER_FILL)
         self.entry_repasswd.grid(column=1, row=5, columnspan=2, pady=(0, 10))
 
+        self.entry_boxes = (self.entry_firstname, self.entry_lastname, self.entry_email,
+                   self.entry_passwd, self.entry_repasswd)
+
         #----- Create button widgets -----#
         btn_create_account = tk.Button(self, text="Create Account", font=NORMAL_FONT, fg=BUTTON_FG, bg=BUTTON_BG, command=lambda: controller.show_frame(StartPage) if self.valid_credentials() else None,)
         btn_create_account.grid(column=1, row=6, columnspan=2, pady=(10, 0), sticky="NESW")
@@ -144,41 +147,25 @@ class SignUpPage(tk.Frame):
 
     def valid_credentials(self) -> bool:
         """Check all user inputs if they are valid and stores them in user_data if True"""
-        entries = (self.entry_firstname, self.entry_lastname, self.entry_email,
-                   self.entry_passwd, self.entry_repasswd)
+        entries = [self.entry_firstname.get(), self.entry_lastname.get(), self.entry_email.get(),
+                   self.entry_passwd.get(), self.entry_repasswd.get()]
 
-        if self.input_not_empty():
-            input_firstname = self.entry_firstname.get()
-            input_lastname = self.entry_lastname.get()
+        if input_not_empty(self, entries):
             input_email = self.entry_email.get().encode("utf-8")
-            input_passwd = self.entry_passwd.get()
-            input_rpasswd = self.entry_repasswd.get()
 
             if email_taken(input_email):
                 messagebox.showwarning(title="Invalid Credentials", message="Email already in use.")
                 return False
             else:
                 input_email = hash_str(input_email)
-                if input_passwd == input_rpasswd:
-                    add_new_account(input_email, input_firstname, input_lastname, input_passwd)
-                    for e in entries:
+                if entries[3] == entries[4]:
+                    add_new_account(input_email, entries[0], entries[1], entries[3])
+                    for e in self.entry_boxes:
                         e.delete(0, tk.END)
                     return True
                 else:
                     messagebox.showwarning(title="Invalid Input", message="Password do not match.")
             return False
-        else:
-            messagebox.showwarning(title="Invalid Credentials", message="Empty input!")
-
-    def input_not_empty(self) -> bool:
-        """Checks all the entries if they are empty."""
-        entries = (self.entry_firstname.get(), self.entry_lastname.get(), self.entry_email.get(),
-                   self.entry_passwd.get(), self.entry_repasswd.get())
-
-        for e in entries:
-            if len(e) == 0:
-                return False
-        return True
 
 
 class SignInPage(tk.Frame):
@@ -229,6 +216,7 @@ class SignInPage(tk.Frame):
             input_email = get_existing_email(input_email)
             email_passwd = EXISTING_ACCOUNTS[input_email]["pword"].encode("utf-8")
             if bcrypt.checkpw(input_passwd, email_passwd):
+                self.entry_passwd.delete(0, tk.END)
                 return True
             else:
                 messagebox.showwarning(title="Invalid Credentials", message="Invalid password.")
@@ -383,10 +371,15 @@ class MainPage(tk.Frame):
         entry_bet_RG.grid(column=5, row=2, pady=(0, 5), sticky="NESW")
 
         #----- USER INPUT LIST -----#
-        self.all_bets = [
+        self.bet_entries = [
             self.input_bet_RO, self.input_bet_GO, self.input_bet_BO, self.input_bet_YO,
             self.input_bet_RY, self.input_bet_GY, self.input_bet_BY, self.input_bet_GB,
             self.input_bet_RB, self.input_bet_RG]
+
+        self.bets_tally = {
+            "R-O": 0, "G-O": 0, "B-O": 0, "Y-O": 0, "R-Y": 0,
+            "G-Y": 0, "B-Y": 0, "G-B": 0, "R-B": 0, "R-G": 0
+        }
 
         #----- Buttons -----#
 
@@ -431,12 +424,12 @@ class MainPage(tk.Frame):
                             winners = t[2] + winners
                         turtles.remove(t)
                     else:
-                        t[0].forward(random.randint(1, 5))
+                        t[0].forward(random.randint(1, 10))
                 
             messagebox.showinfo(title="Game Result", message=f"WINNERS: {winners}")
 
     def compute_bets(self) -> int:
-        for bet in self.all_bets:
+        for bet in self.bet_entries:
             bet = bet.get()
             if bet == "":
                 bet = 0
@@ -467,7 +460,7 @@ class MainPage(tk.Frame):
         withdraw_page.mainloop()
 
     def reset_bet(self):
-        for bet in self.all_bets:
+        for bet in self.bet_entries:
             bet.set(0)
 
 
