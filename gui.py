@@ -1,5 +1,6 @@
 import tkinter as tk
 import turtle
+import random
 
 from tkinter import messagebox
 
@@ -8,6 +9,13 @@ from helpers import *
 
 
 class App(tk.Tk):
+    """
+    The main root of the app interface. The class that controls the interface/pages.
+
+    Attributes:
+        self.root (tk.Frame): instance of main frame
+        self.frames (dict): dictionary of frames that the root will control to navigate through pages
+    """
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
 
@@ -43,6 +51,20 @@ class App(tk.Tk):
 
 
 class StartPage(tk.Frame):
+    """
+    The class that displays the start page of the app
+
+    Args:
+        parent (tk.Frame): the root interface that will controll this frame class
+        controller (tk.Tk): the App class
+    
+    Attributes:
+        logo (tk.PhotoImage): imports the app logo GIF file from assets folder
+        lb_logo (tk.Label): places the logo in frame as label widget
+        lb_title (tk.Label): places the title of the app as label widget
+        btn_signup (tk.Button): button widget to navigate SignUpPage frame
+        btn_signin (tk.Button): button widget to navigate SignInPage frame
+    """
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent, padx=120, pady=20, bg=BG_1)
 
@@ -50,19 +72,33 @@ class StartPage(tk.Frame):
         self.lb_logo = tk.Label(self, image=self.logo, bg=BG_1)
         self.lb_logo.pack(padx=100, pady=(30, 10))
 
-        lb_title = tk.Label(self, text=TITLE, font=SUBTITLE_FONT, fg=TITLE_FG, bg=BG_1)
-        lb_title.pack(padx=100, pady=30)
+        self.lb_title = tk.Label(self, text=TITLE, font=SUBTITLE_FONT, fg=TITLE_FG, bg=BG_1)
+        self.lb_title.pack(padx=100, pady=30)
 
-        btn_signup = tk.Button(self, text="Sign up", font=NORMAL_FONT, fg=BUTTON_FG, bg=BUTTON_BG, command=lambda: controller.show_frame(SignUpPage),)
-        btn_signup.pack(padx=40, pady=5, fill="both")
+        self.btn_signup = tk.Button(self, text="Sign up", font=NORMAL_FONT, fg=BUTTON_FG, bg=BUTTON_BG, command=lambda: controller.show_frame(SignUpPage),)
+        self.btn_signup.pack(padx=40, pady=5, fill="both")
 
-        btn_signin = tk.Button(self, text="Sign In", font=NORMAL_FONT, fg=BUTTON_FG, bg=BUTTON_BG, command=lambda: controller.show_frame(SignInPage),)
-        btn_signin.pack(padx=40, pady=5, fill="both")
+        self.btn_signin = tk.Button(self, text="Sign In", font=NORMAL_FONT, fg=BUTTON_FG, bg=BUTTON_BG, command=lambda: controller.show_frame(SignInPage),)
+        self.btn_signin.pack(padx=40, pady=5, fill="both")
 
 
 class SignUpPage(tk.Frame):
+    """
+    The class that displays the sign up page of the App.
+
+    Args:
+        parent (tk.Frame): the root interface that will controll this frame class
+        controller (tk.Tk): the App class
+    
+    Attributes:
+        entry_firstname (tk.Entry): entry widget that receives the first name of the user.
+        entry_lastname (tk.Entry): entry widget that receives the last name of the user.
+        entry_email (tk.Entry): entry widget that receives the email of the user.
+        entry_passwd (tk.Entry): entry widget that receives the password created by the user.
+        entry_repasswd (tk.Entry): entry widget that receives the re-typed password created by the user.
+    """
     def __init__(self, parent, controller):
-        tk.Frame.__init__(self, parent, padx=100, pady=120, bg=BG_1, relief=tk.SUNKEN)
+        tk.Frame.__init__(self, parent, padx=100, pady=120, bg=BG_1)
 
         #----- Label widgets -----#
         lb_title = tk.Label(self, text="Sign up", width=20, height=1, font=SUBTITLE_FONT, bg=BG_1, fg=TITLE_FG, anchor="center",)
@@ -99,9 +135,6 @@ class SignUpPage(tk.Frame):
         self.entry_repasswd = tk.Entry(self, width=30, borderwidth=2, relief=tk.GROOVE, fg=ENTRY_FG, bg=ENTRY_BG, font=NORMAL_FONT, show="*", highlightthickness=2, highlightcolor=BORDER_FILL, highlightbackground=BORDER_FILL)
         self.entry_repasswd.grid(column=1, row=5, columnspan=2, pady=(0, 10))
 
-        self.entries = (self.entry_firstname.get(), self.entry_lastname.get(), self.entry_email.get(),
-                   self.entry_passwd.get(), self.entry_repasswd.get())
-
         #----- Create button widgets -----#
         btn_create_account = tk.Button(self, text="Create Account", font=NORMAL_FONT, fg=BUTTON_FG, bg=BUTTON_BG, command=lambda: controller.show_frame(StartPage) if self.valid_credentials() else None,)
         btn_create_account.grid(column=1, row=6, columnspan=2, pady=(10, 0), sticky="NESW")
@@ -110,6 +143,7 @@ class SignUpPage(tk.Frame):
         btn_cancel.grid(column=0, row=6, pady=(10, 0), padx=(0, 5), sticky="NESW")
 
     def valid_credentials(self) -> bool:
+        """Check all user inputs if they are valid and stores them in user_data if True"""
         entries = (self.entry_firstname, self.entry_lastname, self.entry_email,
                    self.entry_passwd, self.entry_repasswd)
 
@@ -137,6 +171,7 @@ class SignUpPage(tk.Frame):
             messagebox.showwarning(title="Invalid Credentials", message="Empty input!")
 
     def input_not_empty(self) -> bool:
+        """Checks all the entries if they are empty."""
         entries = (self.entry_firstname.get(), self.entry_lastname.get(), self.entry_email.get(),
                    self.entry_passwd.get(), self.entry_repasswd.get())
 
@@ -147,10 +182,19 @@ class SignUpPage(tk.Frame):
 
 
 class SignInPage(tk.Frame):
-    def __init__(self, parent, controller):
-        tk.Frame.__init__(self, parent, padx=100, pady=100, bg=BG_1, relief=tk.SUNKEN)
+    """
+    The class that displays the sign in page of the App.
 
-        self.email = tk.StringVar()
+    Args:
+        parent (tk.Frame): the root interface that will controll this frame class
+        controller (tk.Tk): the App class
+    
+    Attributes:
+        entry_email (tk.Entry): entry widget that receives the email of the user.
+        entry_passwd (tk.Entry): entry widget that receives the password created by the user.
+    """
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent, padx=100, pady=100, bg=BG_1)
 
         #----- Label widgets -----#
         lb_title = tk.Label(self, text="Sign in", width=20, height=2, font=SUBTITLE_FONT, bg=BG_1, fg=TITLE_FG, anchor="center",)
@@ -163,20 +207,21 @@ class SignInPage(tk.Frame):
         lb_passwd.grid(column=0, row=2, pady=(0, 10), padx=(0, 5))
 
         #----- Entry widgets -----#
-        self.entry_email = tk.Entry(self, width=30, borderwidth=2, relief=tk.GROOVE, fg=ENTRY_FG, bg=ENTRY_BG, font=NORMAL_FONT, textvariable=self.email, highlightthickness=2, highlightcolor=BORDER_FILL, highlightbackground=BORDER_FILL)
+        self.entry_email = tk.Entry(self, width=30, borderwidth=2, relief=tk.GROOVE, fg=ENTRY_FG, bg=ENTRY_BG, font=NORMAL_FONT, highlightthickness=2, highlightcolor=BORDER_FILL, highlightbackground=BORDER_FILL)
         self.entry_email.grid(column=1, row=1, columnspan=2, pady=(0, 10))
 
         self.entry_passwd = tk.Entry(self, width=30, borderwidth=2, relief=tk.GROOVE, fg=ENTRY_FG, bg=ENTRY_BG, font=NORMAL_FONT, show="*", highlightthickness=2, highlightcolor=BORDER_FILL, highlightbackground=BORDER_FILL)
         self.entry_passwd.grid(column=1, row=2, columnspan=2, pady=(0, 10))
 
         #----- Button widgets -----#
-        btn_signin = tk.Button(self, text="Sign in", font=NORMAL_FONT, fg=BUTTON_FG, bg=BUTTON_BG, command=lambda: controller.show_main_page(self.email.get()) if self.valid_credentials() else None,)
+        btn_signin = tk.Button(self, text="Sign in", font=NORMAL_FONT, fg=BUTTON_FG, bg=BUTTON_BG, command=lambda: controller.show_main_page(self.entry_email.get()) if self.valid_credentials() else None,)
         btn_signin.grid(column=1, row=3, columnspan=2, pady=(10, 0), sticky="NESW")
 
         btn_cancel = tk.Button(self, text="Cancel", font=NORMAL_FONT, fg=BUTTON_FG, bg=BUTTON_BG, command=lambda: controller.show_frame(StartPage),)
         btn_cancel.grid(column=0, row=3, pady=(10, 0), padx=(0, 5), sticky="NESW")
 
     def valid_credentials(self) -> bool:
+        """Checks the entered email and password are correct by looking at user_data JSON file"""
         input_email = self.entry_email.get().encode("utf-8")
         input_passwd = self.entry_passwd.get().encode("utf-8")
 
@@ -361,20 +406,34 @@ class MainPage(tk.Frame):
         btn_logout = tk.Button(self, text="Log out", font=NORMAL_FONT, command=lambda: controller.show_frame(StartPage), height=1, fg="red", bg="white")
         btn_logout.grid(column=6, row=4, padx=(5, 0), sticky="NESW")
 
-    def set_turtles(self):
+    def set_turtles(self) -> None:
         for t in self.turtles:
             self.turtle_section.addshape(f"assets/t_{t[1]}.gif")
             t[0].shape(f"assets/t_{t[1]}.gif")
             t[0].shapesize(2)
+            t[0].pencolor(t[1])
             t[0].penup()
             t[0].goto(x=-300, y=self.turtle_ypos[self.turtles.index(t)])
             t[0].pendown()
 
-    def set_finish_line(self):
-        pass
-
-    def start_race(self):
+    def start_race(self) -> None:
         self.compute_bets()
+        turtles = self.turtles
+
+        if self.total_bet != 0:
+            winners = "-"
+            while len(winners) != 3:
+                for t in turtles:
+                    if t[0].xcor() >= 278:
+                        if len(winners) == 2:
+                            winners = winners + t[2]
+                        else:
+                            winners = t[2] + winners
+                        turtles.remove(t)
+                    else:
+                        t[0].forward(random.randint(1, 5))
+                
+            messagebox.showinfo(title="Game Result", message=f"WINNERS: {winners}")
 
     def compute_bets(self) -> int:
         for bet in self.all_bets:
