@@ -7,8 +7,8 @@ import random
 from tkinter import messagebox
 
 # Custom modules
-from config import *
-from helpers import *
+from src.config import *
+from src.helpers import *
 
 
 class App(tk.Tk):
