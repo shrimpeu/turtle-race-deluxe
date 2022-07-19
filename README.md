@@ -4,7 +4,13 @@
 
 ## Installation
 
-The whole source code of this program can be copied to your local machine by cloning the git repository:
+### With executable file
+
+You can just downlaod the `exe` file in the latest [releases](https://github.com/DatSudo/turtle-race-deluxe/releases) and enjoy the game!
+
+### With source code
+
+The whole source code of this program is also available in [releases](https://github.com/DatSudo/turtle-race-deluxe/releases) in `zip` file, or  clone the repository:
 
 ```bash
 git clone https://www.github.com/DatSudo/turtle-race-deluxe.git
