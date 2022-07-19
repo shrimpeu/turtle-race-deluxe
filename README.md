@@ -15,18 +15,20 @@ The whole source code of this program is also available in [releases](https://gi
 ```bash
 git clone https://www.github.com/DatSudo/turtle-race-deluxe.git
 ```
+#### Pre-requisites
 
-Before running the program, the required modules must be installed first:
+- Before running the program, the required modules must be installed first:
 
-```bash
-pip install -r requirements.txt
-```
+    ```bash
+    pip install -r requirements.txt
+    ```
 
-If the above command is not working, try
+- If the above command is not working, try
 
-```
-pip3 install -r requirements.txt
-```
+    ```
+    pip3 install -r requirements.txt
+    ```
+- Install `ArcadeClassic` font in [assets](https://github.com/DatSudo/turtle-race-deluxe/tree/main/assets/arcadeclassic) folder.
 ___
 **Note:**
 If you're on Windows, you must install `windows-curses` module for `bcrypt` to work.
@@ -34,6 +36,8 @@ If you're on Windows, you must install `windows-curses` module for `bcrypt` to w
 ```bash
 pip install windows-curses
 ```
+
+## Starting the program
 ___
 
 To start the game, try these following commands:
@@ -43,3 +47,11 @@ python -m main # or
 python3 -m main # or
 py -m main
 ```
+
+## Documentation
+
+You can access the documentation [here](https://datsudo.github.io/turtle-race-deluxe/).
+
+## License
+
+[GNU General Public License v3.0]()
