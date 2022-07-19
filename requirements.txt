@@ -1,3 +1,2 @@
-bcrypt==3.2.2
-Sphinx==5.0.2
-sphinx-rtd-theme==1.0.0
+pyglet==1.5.26
+bcrypt==0.3.2
