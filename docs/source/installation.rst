@@ -53,16 +53,16 @@ To start the game, try these following commands:
    python3 -m main # or
    py -m main
 
-Documentation
-=============
+.. Documentation
+.. =============
 
-You can access the documentation `here`_.
+.. You can access the documentation `here`_.
 
-.. _here: https://datsudo.github.io/turtle-race-deluxe/
+.. .. _here: https://datsudo.github.io/turtle-race-deluxe/
 
-License
-=======
+.. License
+.. =======
 
-`GNU General Public License v3.0`_
+.. `GNU General Public License v3.0`_
 
-.. _GNU General Public License v3.0: https://github.com/DatSudo/turtle-race-deluxe/blob/main/LICENSE
+.. .. _GNU General Public License v3.0: https://github.com/DatSudo/turtle-race-deluxe/blob/main/LICENSE
