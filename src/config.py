@@ -2,7 +2,6 @@ TITLE = """TURTLE   RACE
 (DELUXE)"""
 
 APP_LOGO = "assets/app_logo.ico"
-GRADIENT_BG_PATH = "assets/mainpage_bg.png"
 
 # Styles
 TITLE_FONT = ("ArcadeClassic", 44, "bold")
