@@ -27,3 +27,7 @@ python -m main # or
 python3 -m main # or
 py -m main
 ```
+
+## Documentation
+
+For documentation, you can access it on this [page](https://datsudo.github.io/turtle-race-deluxe/).
