@@ -39,7 +39,6 @@
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../installation.html#starting-the-program">Starting the program</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html#documentation">Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html#license">License</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../modules.html">Modules</a></li>
@@ -697,8 +696,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">balance</span> <span class="o">=</span> <span class="n">curr_balance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">email</span><span class="p">)</span>
 
         <span class="n">win_amount</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bets_tally</span><span class="p">[</span><span class="n">winner</span><span class="p">]</span>    
-        <span class="n">lose_amount</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">total_bet</span> <span class="o">-</span> <span class="n">win_amount</span>
-        <span class="n">new_balance</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">balance</span> <span class="o">+</span> <span class="n">win_amount</span> <span class="o">-</span> <span class="n">lose_amount</span>
+        <span class="n">new_balance</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">balance</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">total_bet</span> <span class="o">+</span> <span class="n">win_amount</span>
 
         <span class="n">update_balance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">email</span><span class="p">,</span> <span class="n">new_balance</span><span class="p">)</span>
 
