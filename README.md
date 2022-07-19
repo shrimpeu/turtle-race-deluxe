@@ -54,4 +54,4 @@ You can access the documentation [here](https://datsudo.github.io/turtle-race-de
 
 ## License
 
-[GNU General Public License v3.0]()
+[GNU General Public License v3.0](https://github.com/DatSudo/turtle-race-deluxe/blob/main/LICENSE)
