@@ -18,8 +18,10 @@ sys.path.insert(0, os.path.abspath('../../src'))
 # -- Project information -----------------------------------------------------
 
 project = 'Turtle Race (Deluxe)'
-copyright = '2022, Darylle Villanueva, Mark Francis Masadre, Mark Joseph Aquino, Nina Grace Famoso, Josephine Flores, Telisha Gonzales'
-author = 'Darylle Villanueva, Mark Francis Masadre, Mark Joseph Aquino, Nina Grace Famoso, Josephine Flores, Telisha Gonzales'
+# copyright = '2022, Darylle Villanueva, Mark Francis Masadre, Mark Joseph Aquino, Nina Grace Famoso, Josephine Flores, Telisha Gonzales'
+# author = 'Darylle Villanueva, Mark Francis Masadre, Mark Joseph Aquino, Nina Grace Famoso, Josephine Flores, Telisha Gonzales'
+copyright = '2022, Darylle Villanueva'
+author = 'Darylle Villanueva'
 
 
 # -- General configuration ---------------------------------------------------
