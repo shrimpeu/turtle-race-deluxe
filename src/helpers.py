@@ -6,7 +6,7 @@ import re
 from tkinter import messagebox
 
 
-USER_DATA_FILE = "user_data.json"
+USER_DATA_FILE = f"{os.path.dirname(__file__)}/user_data.json"
 
 # Initiate user database
 if os.path.exists(USER_DATA_FILE):
