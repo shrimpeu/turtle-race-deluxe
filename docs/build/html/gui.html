@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>gui module &mdash; Turtle Race (Deluxe)  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="helpers module" href="helpers.html" />
+    <link rel="prev" title="config module" href="config.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Turtle Race (Deluxe)
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">Modules</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="config.html">config module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">gui module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="helpers.html">helpers module</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Turtle Race (Deluxe)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="modules.html">Modules</a> &raquo;</li>
+      <li>gui module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/gui.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-gui">
+<span id="gui-module"></span><h1>gui module<a class="headerlink" href="#module-gui" title="Permalink to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="gui.App">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gui.</span></span><span class="sig-name descname"><span class="pre">App</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui.html#App"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gui.App" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Tk</span></code></p>
+<p>The main root of the app interface. The class that controls the interface/pages.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gui.App.root">
+<span class="sig-name descname"><span class="pre">root</span></span><a class="headerlink" href="#gui.App.root" title="Permalink to this definition"></a></dt>
+<dd><p>instance of main frame</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>tkinter.Frame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gui.App.frames">
+<span class="sig-name descname"><span class="pre">frames</span></span><a class="headerlink" href="#gui.App.frames" title="Permalink to this definition"></a></dt>
+<dd><p>dictionary of frames that the root will control to navigate through pages</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.App.show_frame">
+<span class="sig-name descname"><span class="pre">show_frame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cont</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui.html#App.show_frame"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gui.App.show_frame" title="Permalink to this definition"></a></dt>
+<dd><p>Shows the selected frame by bringing/raising it forward</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.App.show_main_page">
+<span class="sig-name descname"><span class="pre">show_main_page</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">email</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui.html#App.show_main_page"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gui.App.show_main_page" title="Permalink to this definition"></a></dt>
+<dd><p>Shows the MainPage frame</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gui.DepositPage">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gui.</span></span><span class="sig-name descname"><span class="pre">DepositPage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">email</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">balance_str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui.html#DepositPage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gui.DepositPage" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Toplevel</span></code></p>
+<p>The pop-up window that shows the deposit section of the App.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>email</strong> (<em>str</em>) – the email that is used by user to log in</p></li>
+<li><p><strong>balance_str</strong> (<em>tkinter.StringVar</em>) – holds the text for balance label in MainPage</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gui.DepositPage.email">
+<span class="sig-name descname"><span class="pre">email</span></span><a class="headerlink" href="#gui.DepositPage.email" title="Permalink to this definition"></a></dt>
+<dd><p>the email that is used by the user to log in</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gui.DepositPage.balance_str">
+<span class="sig-name descname"><span class="pre">balance_str</span></span><a class="headerlink" href="#gui.DepositPage.balance_str" title="Permalink to this definition"></a></dt>
+<dd><p>holds the text for balance label in MainPage</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>tkinter.StringVar</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gui.DepositPage.logo">
+<span class="sig-name descname"><span class="pre">logo</span></span><a class="headerlink" href="#gui.DepositPage.logo" title="Permalink to this definition"></a></dt>
+<dd><p>imports the logo for payment method</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>tkinter.PhotoImage</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gui.DepositPage.lb_logo">
+<span class="sig-name descname"><span class="pre">lb_logo</span></span><a class="headerlink" href="#gui.DepositPage.lb_logo" title="Permalink to this definition"></a></dt>
+<dd><p>label widget for displaying the logo</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>tkinter.Label</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gui.DepositPage.entry_amount">
+<span class="sig-name descname"><span class="pre">entry_amount</span></span><a class="headerlink" href="#gui.DepositPage.entry_amount" title="Permalink to this definition"></a></dt>
+<dd><p>entry widget for deposit amount</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>tkinter.Entry</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gui.DepositPage.entry_paypal_email">
+<span class="sig-name descname"><span class="pre">entry_paypal_email</span></span><a class="headerlink" href="#gui.DepositPage.entry_paypal_email" title="Permalink to this definition"></a></dt>
+<dd><p>entry widget for paypal email</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>tkinter.Entry</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gui.DepositPage.entry_paypal_pw">
+<span class="sig-name descname"><span class="pre">entry_paypal_pw</span></span><a class="headerlink" href="#gui.DepositPage.entry_paypal_pw" title="Permalink to this definition"></a></dt>
+<dd><p>entry widget for password associated with paypal email</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>tkinter.Entry</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.DepositPage.confirm_deposit">
+<span class="sig-name descname"><span class="pre">confirm_deposit</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui.html#DepositPage.confirm_deposit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gui.DepositPage.confirm_deposit" title="Permalink to this definition"></a></dt>
+<dd><p>Confirms the deposit if inputs are valid</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gui.MainPage">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gui.</span></span><span class="sig-name descname"><span class="pre">MainPage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">controller</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">email</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui.html#MainPage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gui.MainPage" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Frame</span></code></p>
+<p>The main page/frame where the main program interface is shown. It contains
+the turtle race game, betting section, and deposit/withdraw sections.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>parent</strong> (<em>tkinter.Frame</em>) – the root interface that will controll this frame class</p></li>
+<li><p><strong>controller</strong> (<em>tkinter.Tk</em>) – the App class</p></li>
+<li><p><strong>email</strong> (<em>str</em>) – the email used in signing in</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gui.MainPage.balance">
+<span class="sig-name descname"><span class="pre">balance</span></span><a class="headerlink" href="#gui.MainPage.balance" title="Permalink to this definition"></a></dt>
+<dd><p>the account balanced register in email, which is stored in user_data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gui.MainPage.email">
+<span class="sig-name descname"><span class="pre">email</span></span><a class="headerlink" href="#gui.MainPage.email" title="Permalink to this definition"></a></dt>
+<dd><p>the email matched with the argument email</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gui.MainPage.canvas">
+<span class="sig-name descname"><span class="pre">canvas</span></span><a class="headerlink" href="#gui.MainPage.canvas" title="Permalink to this definition"></a></dt>
+<dd><p>canvas where the turtle interface puts in</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>tkinter.Canvas</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gui.MainPage.turtle_section">
+<span class="sig-name descname"><span class="pre">turtle_section</span></span><a class="headerlink" href="#gui.MainPage.turtle_section" title="Permalink to this definition"></a></dt>
+<dd><p>the turtle interface</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>turtle.TurtleScreen</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">\*turtle</span></span></dt>
+<dd><p>instance of a turtle class; creates the turtles for the race</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>turtle.RawTurtle</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gui.MainPage.turtles">
+<span class="sig-name descname"><span class="pre">turtles</span></span><a class="headerlink" href="#gui.MainPage.turtles" title="Permalink to this definition"></a></dt>
+<dd><p>list of all turtle instances with color string according to their name</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gui.MainPage.turtle_ypos">
+<span class="sig-name descname"><span class="pre">turtle_ypos</span></span><a class="headerlink" href="#gui.MainPage.turtle_ypos" title="Permalink to this definition"></a></dt>
+<dd><p>list of y-coordinates (int) for setting turtles in starting line</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gui.MainPage.total_bet">
+<span class="sig-name descname"><span class="pre">total_bet</span></span><a class="headerlink" href="#gui.MainPage.total_bet" title="Permalink to this definition"></a></dt>
+<dd><p>stores the total bet inputted by the user</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gui.MainPage.total_bet_str">
+<span class="sig-name descname"><span class="pre">total_bet_str</span></span><a class="headerlink" href="#gui.MainPage.total_bet_str" title="Permalink to this definition"></a></dt>
+<dd><p>where label widget text for total bets is stored</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>tkinter.StringVar</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gui.MainPage.balance_str">
+<span class="sig-name descname"><span class="pre">balance_str</span></span><a class="headerlink" href="#gui.MainPage.balance_str" title="Permalink to this definition"></a></dt>
+<dd><p>where label widget text for account balance is stored</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>tkinter.StringVar</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">input_bet_*</span></span></dt>
+<dd><p>where entry widget value for bets are stored</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>tkinter.StringVar</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">entry_bet_*</span></span></dt>
+<dd><p>entry boxes for bets</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>tkinter.Entry</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gui.MainPage.bet_entries">
+<span class="sig-name descname"><span class="pre">bet_entries</span></span><a class="headerlink" href="#gui.MainPage.bet_entries" title="Permalink to this definition"></a></dt>
+<dd><p>list of input_bet_* and combinations (str) connected to them</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gui.MainPage.bet_entry_boxes">
+<span class="sig-name descname"><span class="pre">bet_entry_boxes</span></span><a class="headerlink" href="#gui.MainPage.bet_entry_boxes" title="Permalink to this definition"></a></dt>
+<dd><p>list of all entry_bet_* widgets</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gui.MainPage.bets_tally">
+<span class="sig-name descname"><span class="pre">bets_tally</span></span><a class="headerlink" href="#gui.MainPage.bets_tally" title="Permalink to this definition"></a></dt>
+<dd><p>stores all the bet (values) for each combinations (keys)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gui.MainPage.btn_start">
+<span class="sig-name descname"><span class="pre">btn_start</span></span><a class="headerlink" href="#gui.MainPage.btn_start" title="Permalink to this definition"></a></dt>
+<dd><p>button to start turtle race along with tallying all the input bets</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>tkinter.Button</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gui.MainPage.btn_reset_bet">
+<span class="sig-name descname"><span class="pre">btn_reset_bet</span></span><a class="headerlink" href="#gui.MainPage.btn_reset_bet" title="Permalink to this definition"></a></dt>
+<dd><p>button to set all the entry_bet_* to 0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>tkinter.Button</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gui.MainPage.btn_deposit">
+<span class="sig-name descname"><span class="pre">btn_deposit</span></span><a class="headerlink" href="#gui.MainPage.btn_deposit" title="Permalink to this definition"></a></dt>
+<dd><p>button to open deposit page/window</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>tkinter.Button</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gui.MainPage.btn_withdraw">
+<span class="sig-name descname"><span class="pre">btn_withdraw</span></span><a class="headerlink" href="#gui.MainPage.btn_withdraw" title="Permalink to this definition"></a></dt>
+<dd><p>button to open withdraw page/window</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>tkinter.Button</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gui.MainPage.btn_logout">
+<span class="sig-name descname"><span class="pre">btn_logout</span></span><a class="headerlink" href="#gui.MainPage.btn_logout" title="Permalink to this definition"></a></dt>
+<dd><p>button to exit MainPage and go to StartPage</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>tkinter.Button</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gui.MainPage.buttons">
+<span class="sig-name descname"><span class="pre">buttons</span></span><a class="headerlink" href="#gui.MainPage.buttons" title="Permalink to this definition"></a></dt>
+<dd><p>list of all buttons</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.MainPage.check_if_digits">
+<span class="sig-name descname"><span class="pre">check_if_digits</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">action</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value_if_allowed</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui.html#MainPage.check_if_digits"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gui.MainPage.check_if_digits" title="Permalink to this definition"></a></dt>
+<dd><p>Check if the entry input contains only digits</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.MainPage.compute_bets">
+<span class="sig-name descname"><span class="pre">compute_bets</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="_modules/gui.html#MainPage.compute_bets"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gui.MainPage.compute_bets" title="Permalink to this definition"></a></dt>
+<dd><p>Adds all the input bets and store in bets_tally</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.MainPage.compute_wins">
+<span class="sig-name descname"><span class="pre">compute_wins</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">winner</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/gui.html#MainPage.compute_wins"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gui.MainPage.compute_wins" title="Permalink to this definition"></a></dt>
+<dd><p>Update account balance based on game result</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.MainPage.disable_enable_buttons">
+<span class="sig-name descname"><span class="pre">disable_enable_buttons</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/gui.html#MainPage.disable_enable_buttons"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gui.MainPage.disable_enable_buttons" title="Permalink to this definition"></a></dt>
+<dd><p>Disable buttons if state is normal, enable it otherwise</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.MainPage.disable_enable_entries">
+<span class="sig-name descname"><span class="pre">disable_enable_entries</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/gui.html#MainPage.disable_enable_entries"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gui.MainPage.disable_enable_entries" title="Permalink to this definition"></a></dt>
+<dd><p>Disable entry widget if state is normal, enable it otherwise</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.MainPage.reset_bet">
+<span class="sig-name descname"><span class="pre">reset_bet</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/gui.html#MainPage.reset_bet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gui.MainPage.reset_bet" title="Permalink to this definition"></a></dt>
+<dd><p>Set all entry_bet_* to 0</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.MainPage.set_title">
+<span class="sig-name descname"><span class="pre">set_title</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/gui.html#MainPage.set_title"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gui.MainPage.set_title" title="Permalink to this definition"></a></dt>
+<dd><p>Writes the title at top of the turtle interface</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.MainPage.set_turtles">
+<span class="sig-name descname"><span class="pre">set_turtles</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/gui.html#MainPage.set_turtles"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gui.MainPage.set_turtles" title="Permalink to this definition"></a></dt>
+<dd><p>Positions turtles in starting line</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.MainPage.show_DepositPage">
+<span class="sig-name descname"><span class="pre">show_DepositPage</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/gui.html#MainPage.show_DepositPage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gui.MainPage.show_DepositPage" title="Permalink to this definition"></a></dt>
+<dd><p>Opens DepositPage window</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.MainPage.show_WithdrawPage">
+<span class="sig-name descname"><span class="pre">show_WithdrawPage</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/gui.html#MainPage.show_WithdrawPage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gui.MainPage.show_WithdrawPage" title="Permalink to this definition"></a></dt>
+<dd><p>Opens WithdrawPage window</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.MainPage.start_race">
+<span class="sig-name descname"><span class="pre">start_race</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/gui.html#MainPage.start_race"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gui.MainPage.start_race" title="Permalink to this definition"></a></dt>
+<dd><p>Move the turtles forward until finish line</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gui.SignInPage">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gui.</span></span><span class="sig-name descname"><span class="pre">SignInPage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">controller</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui.html#SignInPage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gui.SignInPage" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Frame</span></code></p>
+<p>The class that displays the sign in page of the App.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>parent</strong> (<em>tkinter.Frame</em>) – the root interface that will control this frame class</p></li>
+<li><p><strong>controller</strong> (<em>tkinter.Tk</em>) – the App class</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gui.SignInPage.entry_email">
+<span class="sig-name descname"><span class="pre">entry_email</span></span><a class="headerlink" href="#gui.SignInPage.entry_email" title="Permalink to this definition"></a></dt>
+<dd><p>entry widget that receives the email of the user.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>tkinter.Entry</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gui.SignInPage.entry_passwd">
+<span class="sig-name descname"><span class="pre">entry_passwd</span></span><a class="headerlink" href="#gui.SignInPage.entry_passwd" title="Permalink to this definition"></a></dt>
+<dd><p>entry widget that receives the password created by the user.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>tkinter.Entry</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.SignInPage.valid_credentials">
+<span class="sig-name descname"><span class="pre">valid_credentials</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/gui.html#SignInPage.valid_credentials"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gui.SignInPage.valid_credentials" title="Permalink to this definition"></a></dt>
+<dd><p>Checks the entered email and password are correct by looking at user_data JSON file</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gui.SignUpPage">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gui.</span></span><span class="sig-name descname"><span class="pre">SignUpPage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">controller</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui.html#SignUpPage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gui.SignUpPage" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Frame</span></code></p>
+<p>The class that displays the sign up page of the App.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>parent</strong> (<em>tkinter.Frame</em>) – the root interface that will control this frame class</p></li>
+<li><p><strong>controller</strong> (<em>tkinter.Tk</em>) – the App class</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gui.SignUpPage.entry_firstname">
+<span class="sig-name descname"><span class="pre">entry_firstname</span></span><a class="headerlink" href="#gui.SignUpPage.entry_firstname" title="Permalink to this definition"></a></dt>
+<dd><p>entry widget that receives the first name of the user.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>tkinter.Entry</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gui.SignUpPage.entry_lastname">
+<span class="sig-name descname"><span class="pre">entry_lastname</span></span><a class="headerlink" href="#gui.SignUpPage.entry_lastname" title="Permalink to this definition"></a></dt>
+<dd><p>entry widget that receives the last name of the user.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>tkinter.Entry</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gui.SignUpPage.entry_email">
+<span class="sig-name descname"><span class="pre">entry_email</span></span><a class="headerlink" href="#gui.SignUpPage.entry_email" title="Permalink to this definition"></a></dt>
+<dd><p>entry widget that receives the email of the user.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>tkinter.Entry</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gui.SignUpPage.entry_passwd">
+<span class="sig-name descname"><span class="pre">entry_passwd</span></span><a class="headerlink" href="#gui.SignUpPage.entry_passwd" title="Permalink to this definition"></a></dt>
+<dd><p>entry widget that receives the password created by the user.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>tkinter.Entry</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gui.SignUpPage.entry_repasswd">
+<span class="sig-name descname"><span class="pre">entry_repasswd</span></span><a class="headerlink" href="#gui.SignUpPage.entry_repasswd" title="Permalink to this definition"></a></dt>
+<dd><p>entry widget that receives the re-typed password created by the user.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>tkinter.Entry</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gui.SignUpPage.entry_boxes">
+<span class="sig-name descname"><span class="pre">entry_boxes</span></span><a class="headerlink" href="#gui.SignUpPage.entry_boxes" title="Permalink to this definition"></a></dt>
+<dd><p>list of all entry widgets</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.SignUpPage.valid_credentials">
+<span class="sig-name descname"><span class="pre">valid_credentials</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/gui.html#SignUpPage.valid_credentials"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gui.SignUpPage.valid_credentials" title="Permalink to this definition"></a></dt>
+<dd><p>Check all user inputs if they are valid and stores them in user_data if True</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gui.StartPage">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gui.</span></span><span class="sig-name descname"><span class="pre">StartPage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">controller</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui.html#StartPage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gui.StartPage" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Frame</span></code></p>
+<p>The class that displays the start page of the app</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>parent</strong> (<em>tkinter.Frame</em>) – the root interface that will control this frame class</p></li>
+<li><p><strong>controller</strong> (<em>tkinter.Tk</em>) – the App class</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gui.StartPage.logo">
+<span class="sig-name descname"><span class="pre">logo</span></span><a class="headerlink" href="#gui.StartPage.logo" title="Permalink to this definition"></a></dt>
+<dd><p>imports the app logo GIF file from assets folder</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>tk.PhotoImage</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gui.StartPage.lb_logo">
+<span class="sig-name descname"><span class="pre">lb_logo</span></span><a class="headerlink" href="#gui.StartPage.lb_logo" title="Permalink to this definition"></a></dt>
+<dd><p>places the logo in frame as label widget</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>tk.Label</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gui.StartPage.lb_title">
+<span class="sig-name descname"><span class="pre">lb_title</span></span><a class="headerlink" href="#gui.StartPage.lb_title" title="Permalink to this definition"></a></dt>
+<dd><p>places the title of the app as label widget</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>tk.Label</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gui.StartPage.btn_signup">
+<span class="sig-name descname"><span class="pre">btn_signup</span></span><a class="headerlink" href="#gui.StartPage.btn_signup" title="Permalink to this definition"></a></dt>
+<dd><p>button widget to navigate SignUpPage frame</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>tk.Button</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gui.StartPage.btn_signin">
+<span class="sig-name descname"><span class="pre">btn_signin</span></span><a class="headerlink" href="#gui.StartPage.btn_signin" title="Permalink to this definition"></a></dt>
+<dd><p>button widget to navigate SignInPage frame</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>tk.Button</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gui.WithdrawPage">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gui.</span></span><span class="sig-name descname"><span class="pre">WithdrawPage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">email</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">balance_str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui.html#WithdrawPage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gui.WithdrawPage" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Toplevel</span></code></p>
+<p>The pop-up window that shows the withdraw section of the App.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>email</strong> (<em>str</em>) – the email that is used by user to log in</p></li>
+<li><p><strong>balance_str</strong> (<em>tkinter.StringVar</em>) – holds the text for balance label in MainPage</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gui.WithdrawPage.email">
+<span class="sig-name descname"><span class="pre">email</span></span><a class="headerlink" href="#gui.WithdrawPage.email" title="Permalink to this definition"></a></dt>
+<dd><p>the email that is used by the user to log in</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gui.WithdrawPage.balance_str">
+<span class="sig-name descname"><span class="pre">balance_str</span></span><a class="headerlink" href="#gui.WithdrawPage.balance_str" title="Permalink to this definition"></a></dt>
+<dd><p>holds the text for balance label in MainPage</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>tkinter.StringVar</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gui.WithdrawPage.logo">
+<span class="sig-name descname"><span class="pre">logo</span></span><a class="headerlink" href="#gui.WithdrawPage.logo" title="Permalink to this definition"></a></dt>
+<dd><p>imports the logo for payment method</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>tkinter.PhotoImage</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gui.WithdrawPage.lb_logo">
+<span class="sig-name descname"><span class="pre">lb_logo</span></span><a class="headerlink" href="#gui.WithdrawPage.lb_logo" title="Permalink to this definition"></a></dt>
+<dd><p>label widget for displaying the logo</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>tkinter.Label</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gui.WithdrawPage.entry_amount">
+<span class="sig-name descname"><span class="pre">entry_amount</span></span><a class="headerlink" href="#gui.WithdrawPage.entry_amount" title="Permalink to this definition"></a></dt>
+<dd><p>entry widget for deposit amount</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>tkinter.Entry</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gui.WithdrawPage.entry_paypal_email">
+<span class="sig-name descname"><span class="pre">entry_paypal_email</span></span><a class="headerlink" href="#gui.WithdrawPage.entry_paypal_email" title="Permalink to this definition"></a></dt>
+<dd><p>entry widget for paypal email</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>tkinter.Entry</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gui.WithdrawPage.entry_paypal_pw">
+<span class="sig-name descname"><span class="pre">entry_paypal_pw</span></span><a class="headerlink" href="#gui.WithdrawPage.entry_paypal_pw" title="Permalink to this definition"></a></dt>
+<dd><p>entry widget for password associated with paypal email</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>tkinter.Entry</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.WithdrawPage.confirm_withdraw">
+<span class="sig-name descname"><span class="pre">confirm_withdraw</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui.html#WithdrawPage.confirm_withdraw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gui.WithdrawPage.confirm_withdraw" title="Permalink to this definition"></a></dt>
+<dd><p>Confirms the withdrawal if inputs are valid</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="config.html" class="btn btn-neutral float-left" title="config module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="helpers.html" class="btn btn-neutral float-right" title="helpers module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Darylle Villanueva, Mark Francis Masadre, Mark Joseph Aquino, Nina Grace Famoso, Josephine Flores, Telisha Gonzales.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
