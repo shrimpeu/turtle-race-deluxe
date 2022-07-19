@@ -2,6 +2,7 @@
 import tkinter as tk
 import turtle
 import random
+import os
 
 # Specific methods from built-in modules
 from tkinter import messagebox
@@ -22,7 +23,8 @@ class App(tk.Tk):
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
 
-        tk.Tk.iconbitmap(self, default=APP_LOGO)
+        if os.name == "nt":
+            tk.Tk.iconbitmap(self, default=APP_LOGO)
 
         self.root = tk.Frame(self)
         self.root.pack(side="top", fill="both", expand=True)
