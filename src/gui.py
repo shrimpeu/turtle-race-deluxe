@@ -625,8 +625,7 @@ class MainPage(tk.Frame):
         self.balance = curr_balance(self.email)
 
         win_amount = self.bets_tally[winner]    
-        lose_amount = self.total_bet - win_amount
-        new_balance = self.balance + win_amount - lose_amount
+        new_balance = self.balance - self.total_bet + win_amount
 
         update_balance(self.email, new_balance)
 

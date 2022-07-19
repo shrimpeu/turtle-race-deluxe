@@ -71,7 +71,7 @@ def add_new_account(email: str, first_name: str, last_name: str, passwd: str) ->
 
 def update_balance(email: str, new_balance: int) -> None:
     """Write to user database the new balance"""
-    with open("user_data.json", "r") as jsonFile:
+    with open(USER_DATA_FILE, "r") as jsonFile:
         data = json.load(jsonFile)
 
     data[email]["balance"] = new_balance
