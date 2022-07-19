@@ -28,7 +28,6 @@ git clone https://www.github.com/DatSudo/turtle-race-deluxe.git
     ```
     pip3 install -r requirements.txt
     ```
-- Install `ArcadeClassic` font in [assets](https://github.com/DatSudo/turtle-race-deluxe/tree/main/assets/arcadeclassic) folder.
 ___
 **Note:**
 If you're on Windows, you must install `windows-curses` module for `bcrypt` to work.
