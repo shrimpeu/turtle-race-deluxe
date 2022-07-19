@@ -36,9 +36,9 @@ If you're on Windows, you must install `windows-curses` module for `bcrypt` to w
 ```bash
 pip install windows-curses
 ```
+___
 
 ## Starting the program
-___
 
 To start the game, try these following commands:
 
