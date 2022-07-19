@@ -43,7 +43,7 @@ Pre-requisites
    pip install windows-curses
 
 Starting the program
-====================
+--------------------
 
 To start the game, try these following commands:
 

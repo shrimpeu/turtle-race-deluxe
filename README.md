@@ -38,7 +38,7 @@ pip install windows-curses
 ```
 ___
 
-## Starting the program
+#### Starting the program
 
 To start the game, try these following commands:
 
