@@ -1,7 +1,17 @@
 Installation
 ============
 
-The whole source code of this program can be copied to your local machine by cloning the git repository:
+With executable file
+--------------------
+
+You can just downlaod the :code:`exe` file in the latest `releases`_ and enjoy the game!
+
+With source code
+----------------
+
+The whole source code of this program is also available in `releases`_ in :code:`zip` file, or  clone the repository:
+
+.. _releases: https://github.com/DatSudo/turtle-race-deluxe/releases 
 
 .. code-block:: bash
 
@@ -32,5 +42,3 @@ To start the game, try these following commands:
    python -m main # or
    python3 -m main # or
    py -m main
-
-
