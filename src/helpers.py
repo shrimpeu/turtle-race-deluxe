@@ -26,8 +26,8 @@ else:
         EXISTING_ACCOUNTS = json.load(data)
 
 
-def hash_str(s: str) -> str:
-    """Encrypts the string with bcrypt"""
+def hash_str(s: bytes) -> str:
+    """Encrypts the string with `bcrypt` module"""
     return bcrypt.hashpw(s, bcrypt.gensalt()).decode("utf-8").replace("'", '"')
 
 
@@ -37,8 +37,8 @@ def write_json(data: dict) -> None:
         json.dump(data, f, indent=4, separators=(",", ": "), sort_keys=True)
 
 
-def email_taken(input_email: str) -> bool:
-    """Returns True if input_email is already in user database"""
+def email_taken(input_email: bytes) -> bool:
+    """Returns `True` if `input_email` is already in user database"""
     for existing_email in EXISTING_ACCOUNTS:
         existing_email = existing_email.encode("utf-8")
         if bcrypt.checkpw(input_email, existing_email):
@@ -46,8 +46,8 @@ def email_taken(input_email: str) -> bool:
     return False
 
 
-def get_existing_email(input_email: str) -> str:
-    """Returns the email from the user database that matched with input_email"""
+def get_existing_email(input_email: bytes) -> None:
+    """Returns the email from the user database that matched with `input_email`"""
     for existing_email in EXISTING_ACCOUNTS:
         existing_email = existing_email.encode("utf-8")
         if bcrypt.checkpw(input_email, existing_email):
@@ -79,8 +79,8 @@ def update_balance(email: str, new_balance: int) -> None:
     write_json(data)
 
 
-def input_not_empty(root: type, entries: tuple) -> bool:
-    """Returns True if elements in entries are not empty"""
+def input_not_empty(root, entries: list[str]) -> bool:
+    """Returns `True` if elements in entries are not empty"""
     for e in entries:
         if len(e) == 0:
             messagebox.showwarning(title="Invalid Input", message="Empty Input!")
@@ -89,8 +89,8 @@ def input_not_empty(root: type, entries: tuple) -> bool:
     return True
 
 
-def valid_amount(root: type, method: str, input_amount: int, current_bal: int) -> bool:
-    """Returns True if input_amount is valid based on method and current balance"""
+def valid_amount(root, method: str, input_amount: int, current_bal: int) -> bool:
+    """Returns `True` if `input_amount` is valid based on method and current balance"""
     if method == "withdraw":
         if input_amount >= 300 and current_bal >= 300:
             return True
@@ -114,8 +114,8 @@ def curr_balance(email: str) -> int:
     return data[email]["balance"]
 
 
-def valid_passwd(root: type, passwd: str) -> bool:
-    """Returns True if password length in 8 or more"""
+def valid_passwd(root, passwd: str) -> bool:
+    """Returns `True` if password length in 8 or more"""
     if len(passwd) >= 8:
         return True
     messagebox.showwarning(
@@ -126,8 +126,8 @@ def valid_passwd(root: type, passwd: str) -> bool:
     return False
 
 
-def valid_email(root:type , email: str) -> bool:
-    """Returns True if the email pattern is valid"""
+def valid_email(root, email: str) -> bool:
+    """Returns `True` if the email pattern is valid"""
     regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
     if re.fullmatch(regex, email):
         return True
