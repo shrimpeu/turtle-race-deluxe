@@ -1,3 +1,9 @@
+import pyglet
+
+
+pyglet.font.add_file("assets/arcadeclassic/ArcadeClassic.ttf")
+
+
 TITLE = """TURTLE   RACE
 (DELUXE)"""
 
