@@ -1,6 +1,7 @@
 import bcrypt
 import json
 import os
+import re
 
 from tkinter import messagebox
 
@@ -25,16 +26,19 @@ else:
         EXISTING_ACCOUNTS = json.load(data)
 
 
-def hash_str(s: str) -> str:
+def hash_str(s: bytes) -> str:
+    """Encrypts the string with `bcrypt` module"""
     return bcrypt.hashpw(s, bcrypt.gensalt()).decode("utf-8").replace("'", '"')
 
 
-def write_json(data) -> None:
+def write_json(data: dict) -> None:
+    """Writes the data in user database"""
     with open(USER_DATA_FILE, "w") as f:
         json.dump(data, f, indent=4, separators=(",", ": "), sort_keys=True)
 
 
-def email_taken(input_email: str) -> bool:
+def email_taken(input_email: bytes) -> bool:
+    """Returns `True` if `input_email` is already in user database"""
     for existing_email in EXISTING_ACCOUNTS:
         existing_email = existing_email.encode("utf-8")
         if bcrypt.checkpw(input_email, existing_email):
@@ -42,7 +46,8 @@ def email_taken(input_email: str) -> bool:
     return False
 
 
-def get_existing_email(input_email: str) -> str:
+def get_existing_email(input_email: bytes) -> None:
+    """Returns the email from the user database that matched with `input_email`"""
     for existing_email in EXISTING_ACCOUNTS:
         existing_email = existing_email.encode("utf-8")
         if bcrypt.checkpw(input_email, existing_email):
@@ -50,6 +55,7 @@ def get_existing_email(input_email: str) -> str:
 
 
 def add_new_account(email: str, first_name: str, last_name: str, passwd: str) -> None:
+    """Stores new account in user database"""
     passwd = hash_str(passwd.encode("utf-8"))
 
     EXISTING_ACCOUNTS[email] = {
@@ -64,7 +70,8 @@ def add_new_account(email: str, first_name: str, last_name: str, passwd: str) ->
 
 
 def update_balance(email: str, new_balance: int) -> None:
-    with open("user_data.json", "r") as jsonFile:
+    """Write to user database the new balance"""
+    with open(USER_DATA_FILE, "r") as jsonFile:
         data = json.load(jsonFile)
 
     data[email]["balance"] = new_balance
@@ -72,7 +79,8 @@ def update_balance(email: str, new_balance: int) -> None:
     write_json(data)
 
 
-def input_not_empty(root: type, entries: tuple) -> bool:
+def input_not_empty(root, entries: list[str]) -> bool:
+    """Returns `True` if elements in entries are not empty"""
     for e in entries:
         if len(e) == 0:
             messagebox.showwarning(title="Invalid Input", message="Empty Input!")
@@ -81,7 +89,8 @@ def input_not_empty(root: type, entries: tuple) -> bool:
     return True
 
 
-def valid_amount(root: type, method: str, input_amount: int, current_bal: int) -> bool:
+def valid_amount(root, method: str, input_amount: int, current_bal: int) -> bool:
+    """Returns `True` if `input_amount` is valid based on method and current balance"""
     if method == "withdraw":
         if input_amount >= 300 and current_bal >= 300:
             return True
@@ -99,20 +108,36 @@ def valid_amount(root: type, method: str, input_amount: int, current_bal: int) -
 
 
 def curr_balance(email: str) -> int:
+    """Returns the balance currently stored in user database"""
     with open(USER_DATA_FILE, "r") as f:
         data = json.load(f)
     return data[email]["balance"]
 
 
-def valid_passwd(passwd: str) -> bool:
-    return True if len(passwd) >= 8 else False
+def valid_passwd(root, passwd: str) -> bool:
+    """Returns `True` if password length in 8 or more"""
+    if len(passwd) >= 8:
+        return True
+    messagebox.showwarning(
+        title="Invalid Input",
+        message="Password must be 8 characters long or more."
+    )
+    root.lift()
+    return False
 
 
-def valid_email(email: str) -> bool:
-    pass
+def valid_email(root, email: str) -> bool:
+    """Returns `True` if the email pattern is valid"""
+    regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
+    if re.fullmatch(regex, email):
+        return True
+    messagebox.showwarning(title="Invalid Input", message="Invalid Email.")
+    root.lift()
+    return False
 
 
 def display_result(winners: str, bets_won: int) -> str:
+    """Returns the formatted string for displaying the game result"""
     result = f"""
     WINNER: {winners}
     TOTAL WINS: Php {bets_won}
