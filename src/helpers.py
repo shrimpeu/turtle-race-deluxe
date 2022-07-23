@@ -105,16 +105,21 @@ def valid_amount(root, method: str, input_amount: int, current_bal: int) -> bool
         if input_amount >= 300 and current_bal >= 300:
             return True
         else:
-            messagebox.showwarning(title="Invalid Input", message="Insufficient Balance / Amount input is below minimum.")
-            root.lift()
-            return False
+                messagebox.showwarning(title="Invalid Input", message="Insufficient Balance / Amount input is below minimum.")
+                root.lift()
+                return False
     else:
         if input_amount >= 100:
-            return True
+            if input_amount <= 999_999_999_999:
+                return True
+            else:
+                messagebox.showwarning(title="Invalid Input", message="Deposit limit exceeded.")
+                root.lift()
+                return False
         else:
-            messagebox.showwarning(title="Invalid Input", message="Insufficient Balance / Amount input is below minimum.")
-            root.lift()
-            return False
+                messagebox.showwarning(title="Invalid Input", message="Insufficient Balance / Amount input is below minimum.")
+                root.lift()
+                return False
 
 
 def curr_balance(email: str) -> int:
