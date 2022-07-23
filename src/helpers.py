@@ -1,12 +1,22 @@
 import bcrypt
 import json
+import getpass
 import os
 import re
 
 from tkinter import messagebox
 
+USER_NAME = getpass.getuser()
+if os.name == "nt":
+    USER_DATA_PATH = f"C:\\Users\\{USER_NAME}\\AppData\\Local\\TRDeluxe"
+    USER_DATA_FILE = f"{USER_DATA_PATH}\\user_data.json"
+else:
+    USER_DATA_PATH = f"/home/{USER_NAME}/.local/share/TRDeluxe"
+    USER_DATA_FILE = f"{USER_DATA_PATH}/user_data.json"
 
-USER_DATA_FILE = f"{os.path.dirname(__file__)}/user_data.json"
+if not os.path.exists(USER_DATA_PATH):
+    os.makedirs(USER_DATA_PATH)
+
 
 # Initiate user database
 if os.path.exists(USER_DATA_FILE):
