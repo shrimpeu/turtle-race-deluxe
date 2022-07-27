@@ -102,7 +102,7 @@ def input_not_empty(root, entries: list[str]) -> bool:
 def valid_amount(root, method: str, input_amount: int, current_bal: int) -> bool:
     """Returns `True` if `input_amount` is valid based on method and current balance"""
     if method == "withdraw":
-        if input_amount >= 300 and current_bal >= 300:
+        if input_amount >= 300 and current_bal >= input_amount:
             return True
         else:
                 messagebox.showwarning(title="Invalid Input", message="Insufficient Balance / Amount input is below minimum.")
