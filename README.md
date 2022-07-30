@@ -6,7 +6,7 @@
 
 ### With executable file
 
-You can just downlaod the `exe` file in the latest [releases](https://github.com/DatSudo/turtle-race-deluxe/releases) and enjoy the game!
+You can just download the `exe` file in the latest [releases](https://github.com/DatSudo/turtle-race-deluxe/releases) and enjoy the game!
 
 ### With source code
 
