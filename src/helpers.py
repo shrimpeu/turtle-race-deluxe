@@ -1,12 +1,22 @@
 import bcrypt
 import json
+import getpass
 import os
 import re
 
 from tkinter import messagebox
 
+USER_NAME = getpass.getuser()
+if os.name == "nt":
+    USER_DATA_PATH = f"C:\\Users\\{USER_NAME}\\AppData\\Local\\TRDeluxe"
+    USER_DATA_FILE = f"{USER_DATA_PATH}\\user_data.json"
+else:
+    USER_DATA_PATH = f"/home/{USER_NAME}/.local/share/TRDeluxe"
+    USER_DATA_FILE = f"{USER_DATA_PATH}/user_data.json"
 
-USER_DATA_FILE = f"{os.path.dirname(__file__)}/user_data.json"
+if not os.path.exists(USER_DATA_PATH):
+    os.makedirs(USER_DATA_PATH)
+
 
 # Initiate user database
 if os.path.exists(USER_DATA_FILE):
@@ -92,19 +102,24 @@ def input_not_empty(root, entries: list[str]) -> bool:
 def valid_amount(root, method: str, input_amount: int, current_bal: int) -> bool:
     """Returns `True` if `input_amount` is valid based on method and current balance"""
     if method == "withdraw":
-        if input_amount >= 300 and current_bal >= 300:
+        if input_amount >= 300 and current_bal >= input_amount:
             return True
         else:
-            messagebox.showwarning(title="Invalid Input", message="Insufficient Balance / Amount input is below minimum.")
-            root.lift()
-            return False
+                messagebox.showwarning(title="Invalid Input", message="Insufficient Balance / Amount input is below minimum.")
+                root.lift()
+                return False
     else:
         if input_amount >= 100:
-            return True
+            if input_amount <= 999_999_999_999:
+                return True
+            else:
+                messagebox.showwarning(title="Invalid Input", message="Deposit limit exceeded.")
+                root.lift()
+                return False
         else:
-            messagebox.showwarning(title="Invalid Input", message="Insufficient Balance / Amount input is below minimum.")
-            root.lift()
-            return False
+                messagebox.showwarning(title="Invalid Input", message="Insufficient Balance / Amount input is below minimum.")
+                root.lift()
+                return False
 
 
 def curr_balance(email: str) -> int:
